@@ -62,7 +62,7 @@
                 android:shadowDx="5"
                 android:shadowDy="10"
                 android:shadowRadius="25"
-                android:text="Button"
+                android:text="Login"
                 app:cornerRadius="0dp"
                 app:iconPadding="0dp" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/button15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Sign Up" />
         </LinearLayout>
     </ScrollView>
 
