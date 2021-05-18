@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mi Aplicación</string>
+    <string name="btnOpenPage" translatable="false">Abrir Página Web</string>
+    <string name="btnCall" translatable="false">Marcar Número</string>
+    <string name="btnMaps" translatable="false">Mapa de Google</string>
+    <string name="btnCamera" translatable="false">Cámara</string>
+    <string name="btnEmail" translatable="false">Enviar Correo</string>
+</resources>
