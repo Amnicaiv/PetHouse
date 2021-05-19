@@ -126,7 +126,7 @@
         android:layout_width="90dp"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
-        android:text="ver Foto"
+        android:text="Subir Foto"
         app:backgroundTint="#A38BC34A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
@@ -138,7 +138,7 @@
         android:layout_width="84dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="ver Foto"
+        android:text="Subir Foto"
         app:backgroundTint="#928BC34A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -150,7 +150,7 @@
         android:layout_width="89dp"
         android:layout_height="61dp"
         android:layout_marginTop="12dp"
-        android:text="ver Foto"
+        android:text="Subir Foto"
         app:backgroundTint="#9C8BC34A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.885"
@@ -162,14 +162,14 @@
         android:layout_width="195dp"
         android:layout_height="60dp"
         android:layout_marginTop="36dp"
-        android:text="Ver Carnet"
+        android:text="Subir Carnet"
         app:backgroundTint="#8A8BC34A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName17"
+        android:id="@+id/editTextTextPersonName32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -180,5 +180,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="76dp"
+        android:background="#8EC361"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Agregar Mascota"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
