@@ -13,7 +13,37 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dashboard);
 
+
         this.btnSearch.setOnClickListener(this);
+
+        actionBar?.hide()
+        supportActionBar?.hide()
+
+        this.btnSearch.setOnClickListener(this);
+
+
+
+        this.navView.setNavigationItemSelectedListener { item ->
+
+            when(item.itemId){
+                R.id.op1->{
+                    Log.i("OP1","Opcion 1")
+                }
+                R.id.op2->{
+                    Log.i("OP2","Opcion 2")
+                    val mismascActivity = Intent(applicationContext, MisMascotasActivity::class.java)
+                    startActivity(mismascActivity)
+                }
+                R.id.op3->{
+                    Log.i("OP3","Opcion 3")
+                }
+                R.id.op4->{
+                    Log.i("OP4","Opcion 4")
+                }
+            }
+            false
+        }
+
     }
 
     override fun onClick(v: View?) {
@@ -34,4 +64,5 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
         //searchUpActivityIntent.putExtra("data",this.tbEmailLogin.toString());
         startActivity(searchUpActivityIntent);
     }
+
 }

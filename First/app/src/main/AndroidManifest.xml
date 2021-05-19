@@ -23,8 +23,15 @@
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".SearchResultsActivity"></activity>
+
         <activity android:name=".Reservation"></activity>
         <activity android:name=".Ticket"></activity>
+
+        <activity android:name=".MisMascotasActivity"></activity>
+        <activity android:name=".PetInfiActivity"></activity>
+
+
+
     </application>
 
 </manifest>

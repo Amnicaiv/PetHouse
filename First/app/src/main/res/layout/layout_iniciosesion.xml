@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+
+
+
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="0dp"
@@ -15,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -72,6 +78,12 @@
                 android:layout_height="wrap_content"
                 android:text="Sign Up" />
         </LinearLayout>
+
+
+
     </ScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
