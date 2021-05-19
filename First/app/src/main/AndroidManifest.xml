@@ -23,6 +23,7 @@
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".SearchResultsActivity"></activity>
+        <activity android:name=".MisMascotasActivity"></activity>
 
 
     </application>

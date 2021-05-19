@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         this.button3.setOnClickListener(){
             Toast.makeText(this, "Validar informacion de usuario.", Toast.LENGTH_SHORT).show()
-            val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
+            val menuActivity = Intent(applicationContext, MisMascotasActivity::class.java)
             startActivity(menuActivity)
         }
 
