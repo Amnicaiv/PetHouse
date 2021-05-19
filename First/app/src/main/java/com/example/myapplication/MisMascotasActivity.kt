@@ -2,8 +2,6 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_pet.*
@@ -12,18 +10,6 @@ class MisMascotasActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_pet)
-
-       /* val arrayAdapter:ArrayAdapter<*>
-        val mascotas = mutableListOf("Wilson","Copito","Toby")
-        val MascotaLV = this.MascotaLV
-
-        arrayAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,mascotas)
-
-        MascotaLV.adapter=arrayAdapter
-
-        MascotaLV.setOnItemClickListener(){ parent,view,position,id->
-            Toast.makeText(this, parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show()
-        }*/
 
         val mascotaItem1= MascotaItem(nombre = "Wilson", raza = "Perro", foto =  1)
         val mascotaItem2= MascotaItem(nombre = "Copito", raza = "Gato", foto =  1)
@@ -37,8 +23,12 @@ class MisMascotasActivity : AppCompatActivity(){
         val listView = this.MascotaLV
 
         listView.setOnItemClickListener(){parent,view,position,id->
-            Toast.makeText(this, parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show()
+
+            val selectedObject = this.MascotaLV.getItemAtPosition(position) as MascotaItem
+            Toast.makeText(this, selectedObject.nombre, Toast.LENGTH_LONG).show()
+
             val mascotaInfo = Intent(applicationContext, MisMascotasActivity::class.java)
+
             startActivity(mascotaInfo)
         }
 
