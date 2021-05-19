@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_camera_layout.*
+import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_iniciosesion.*
 import kotlinx.android.synthetic.main.layout_login.*
 import java.io.ByteArrayOutputStream
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_iniciosesion);
+        actionBar?.hide()
+        supportActionBar?.hide()
 
         this.button3.setOnClickListener(){
             Toast.makeText(this, "Validar informacion de usuario.", Toast.LENGTH_SHORT).show()
@@ -32,6 +35,9 @@ class MainActivity : AppCompatActivity() {
             val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
             startActivity(registerActivity)
         }
+
+
+
 
 
     }

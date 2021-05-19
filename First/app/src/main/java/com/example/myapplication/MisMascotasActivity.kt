@@ -10,6 +10,8 @@ class MisMascotasActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_pet)
+        actionBar?.hide()
+        supportActionBar?.hide()
 
         val mascotaItem1= MascotaItem(nombre = "Wilson", raza = "Perro", foto =  1)
         val mascotaItem2= MascotaItem(nombre = "Copito", raza = "Gato", foto =  1)
@@ -27,7 +29,9 @@ class MisMascotasActivity : AppCompatActivity(){
             val selectedObject = this.MascotaLV.getItemAtPosition(position) as MascotaItem
             Toast.makeText(this, selectedObject.nombre, Toast.LENGTH_LONG).show()
 
-            val mascotaInfo = Intent(applicationContext, MisMascotasActivity::class.java)
+            val mascotaInfo = Intent(applicationContext, PetInfiActivity::class.java)
+            mascotaInfo.putExtra("nombre",selectedObject.nombre.toString())
+            mascotaInfo.putExtra("raza",selectedObject.raza.toString())
 
             startActivity(mascotaInfo)
         }
