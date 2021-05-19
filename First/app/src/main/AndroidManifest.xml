@@ -26,6 +26,7 @@
 
         <activity android:name=".Reservation"></activity>
         <activity android:name=".Ticket"></activity>
+        <activity android:name=".addPet"></activity>
 
         <activity android:name=".MisMascotasActivity"></activity>
         <activity android:name=".PetInfiActivity"></activity>

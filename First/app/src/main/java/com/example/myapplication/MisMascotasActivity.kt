@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_pet.*
+import kotlinx.android.synthetic.main.layout_reservacion_checkout.*
 
 class MisMascotasActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +13,14 @@ class MisMascotasActivity : AppCompatActivity(){
         setContentView(R.layout.layout_pet)
         actionBar?.hide()
         supportActionBar?.hide()
+
+
+        this.button2.setOnClickListener(){
+            Toast.makeText(this, "Crear mascota", Toast.LENGTH_SHORT).show()
+            val addPet = Intent(applicationContext, addPet::class.java)
+            startActivity(addPet)
+            }
+
 
         val mascotaItem1= MascotaItem(nombre = "Wilson", raza = "Perro", foto =  1)
         val mascotaItem2= MascotaItem(nombre = "Copito", raza = "Gato", foto =  1)
