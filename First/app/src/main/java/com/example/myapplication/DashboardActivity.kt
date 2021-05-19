@@ -36,6 +36,8 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
                 }
                 R.id.op3->{
                     Log.i("OP3","Opcion 3")
+                    val reservationActivity = Intent(applicationContext, MisReservacionesActivity::class.java)
+                    startActivity(reservationActivity)
                 }
                 R.id.op4->{
                     Log.i("OP4","Opcion 4")
