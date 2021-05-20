@@ -28,6 +28,8 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
             when(item.itemId){
                 R.id.op1->{
                     Log.i("OP1","Opcion 1")
+                    val userInfoActivity = Intent(applicationContext, InformacionUsuario::class.java)
+                    startActivity(userInfoActivity)
                 }
                 R.id.op2->{
                     Log.i("OP2","Opcion 2")
@@ -41,6 +43,8 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
                 }
                 R.id.op4->{
                     Log.i("OP4","Opcion 4")
+                    val estanciasActivity = Intent(applicationContext, MisEstancias::class.java)
+                    startActivity(estanciasActivity)
                 }
             }
             false

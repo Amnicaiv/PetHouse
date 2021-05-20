@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_pet.*
@@ -14,11 +15,23 @@ class MisMascotasActivity : AppCompatActivity(){
         actionBar?.hide()
         supportActionBar?.hide()
 
+        var mLastClickTime = 0.0
+
+        var doublePressPrev = false
+
+
 
         this.button2.setOnClickListener(){
-            Toast.makeText(this, "Crear mascota", Toast.LENGTH_SHORT).show()
-            val addPet = Intent(applicationContext, addPet::class.java)
-            startActivity(addPet)
+
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
+
+            if(!doublePressPrev){
+                val addPet = Intent(applicationContext, addPet::class.java)
+                startActivity(addPet)
+
+            }
+
             }
 
 
@@ -35,14 +48,22 @@ class MisMascotasActivity : AppCompatActivity(){
 
         listView.setOnItemClickListener(){parent,view,position,id->
 
-            val selectedObject = this.MascotaLV.getItemAtPosition(position) as MascotaItem
-            Toast.makeText(this, selectedObject.nombre, Toast.LENGTH_LONG).show()
 
-            val mascotaInfo = Intent(applicationContext, PetInfiActivity::class.java)
-            mascotaInfo.putExtra("nombre",selectedObject.nombre.toString())
-            mascotaInfo.putExtra("raza",selectedObject.raza.toString())
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
 
-            startActivity(mascotaInfo)
+
+            if(!doublePressPrev){
+                val selectedObject = this.MascotaLV.getItemAtPosition(position) as MascotaItem
+
+
+                val mascotaInfo = Intent(applicationContext, PetInfiActivity::class.java)
+                mascotaInfo.putExtra("nombre",selectedObject.nombre.toString())
+                mascotaInfo.putExtra("raza",selectedObject.raza.toString())
+
+                startActivity(mascotaInfo)
+            }
+
         }
 
         val adapter = MascotaAdapter(this, listaMascotas as ArrayList<MascotaItem>)

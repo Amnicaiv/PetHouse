@@ -24,6 +24,8 @@
         <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".SearchResultsActivity"></activity>
 
+        <activity android:name=".InformacionUsuario"></activity>
+
         <activity android:name=".Reservation"></activity>
         <activity android:name=".Ticket"></activity>
         <activity android:name=".addPet"></activity>
@@ -31,6 +33,8 @@
         <activity android:name=".MisMascotasActivity"></activity>
         <activity android:name=".PetInfiActivity"></activity>
         <activity android:name=".MisReservacionesActivity"></activity>
+
+        <activity android:name=".MisEstancias"></activity>
 
 
 

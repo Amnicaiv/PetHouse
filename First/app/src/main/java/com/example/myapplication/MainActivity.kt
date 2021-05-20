@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -27,17 +28,29 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
         supportActionBar?.hide()
 
+        var mLastClickTime = 0.0
+
+        var doublePressPrev = false
 
         this.button3.setOnClickListener(){
-            Toast.makeText(this, "Validar informacion de usuario.", Toast.LENGTH_SHORT).show()
-            val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
-            startActivity(menuActivity)
+
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
+
+            if(!doublePressPrev){
+                val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
+                startActivity(menuActivity)
+            }
         }
 
         this.button15.setOnClickListener(){
-            Toast.makeText(this, "Enviar a pantalla de registro", Toast.LENGTH_SHORT).show()
-            val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
-            startActivity(registerActivity)
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
+
+            if(!doublePressPrev) {
+                val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
+                startActivity(registerActivity)
+            }
         }
 
 

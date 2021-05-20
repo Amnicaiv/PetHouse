@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_iniciosesion.*
@@ -12,10 +13,18 @@ class MisEstancias : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_misestancias);
 
+        var mLastClickTime = 0.0
+
+        var doublePressPrev = false
+
         this.button9.setOnClickListener(){
-            Toast.makeText(this, "Regresar al menu principal.", Toast.LENGTH_SHORT).show()
-            val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
-            startActivity(menuActivity)
+
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble()
+            if(!doublePressPrev) {
+                val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
+                startActivity(menuActivity)
+            }
         }
     }
 

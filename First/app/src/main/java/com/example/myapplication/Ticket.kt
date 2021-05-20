@@ -13,9 +13,7 @@ class Ticket : AppCompatActivity(){
         setContentView(R.layout.layout_ticket);
 
         this.button17.setOnClickListener(){
-            Toast.makeText(this, "Regresar al menu principal", Toast.LENGTH_SHORT).show()
-            val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
-            startActivity(menuActivity)
+            finish()
         }
     }
 }
