@@ -35,6 +35,7 @@
         <activity android:name=".MisReservacionesActivity"></activity>
 
         <activity android:name=".MisEstancias"></activity>
+        <activity android:name=".EditarEstanciaActivity"></activity>
 
 
 

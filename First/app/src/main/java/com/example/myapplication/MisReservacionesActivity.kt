@@ -2,10 +2,8 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_misreservaciones.*
-import kotlinx.android.synthetic.main.layout_pet.*
 
 class MisReservacionesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +30,7 @@ class MisReservacionesActivity : AppCompatActivity() {
             startActivity(ticket)
         }
 
-        val adapter = MisReservacionesAdapter(this, listaReservaciones as ArrayList<MascotaItem>)
+        val adapter = MisReservacionesAdapter(this, listaReservaciones as ArrayList<ReservacionItem>)
         listView.adapter = adapter
 
         this.button7.setOnClickListener(){

@@ -8,9 +8,9 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class MisReservacionesAdapter(private val context: Context,
-                              private val dataSource: ArrayList<ReservacionItem>
-) : BaseAdapter() {
+class MisEstanciasAdapter(private val context: Context,
+                          private val dataSource: ArrayList<EstanciaItem>
+) : BaseAdapter()  {
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -29,30 +29,26 @@ class MisReservacionesAdapter(private val context: Context,
         return position.toLong()
     }
 
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Get view for row item
-        val rowView = inflater.inflate(R.layout.list_item_misreservaciones, parent, false)
+        val rowView = inflater.inflate(R.layout.list_item_miresidencia, parent, false)
 
         // Get title element
-        val titleTextView = rowView.findViewById(R.id.id_item_MRNombre) as TextView
+        val titleTextView = rowView.findViewById(R.id.id_item_MiResNombre) as TextView
 
         // Get subtitle element
-        val subIngresoTextView = rowView.findViewById(R.id.id_item_MRfechaingreso) as TextView
-
-        val subSalidaTextView = rowView.findViewById(R.id.id_item_MRfechasalida) as TextView
-
+        val subIngresoTextView = rowView.findViewById(R.id.id_item_MiResDireccion) as TextView
 
         // Get thumbnail element
-        val thumbnailImageView = rowView.findViewById(R.id.id_item_MRImg) as ImageView
+        val thumbnailImageView = rowView.findViewById(R.id.id_item_miResImg) as ImageView
 
         // 1
-        val reservacion = getItem(position) as ReservacionItem
+        val residencia = getItem(position) as EstanciaItem
 
 
-        titleTextView.text = reservacion.nombre
-        subIngresoTextView.text = reservacion.fechaEntrada
-        subSalidaTextView.text = reservacion.fechaSalida
-
+        titleTextView.text = residencia.nombre
+        subIngresoTextView.text = residencia.direccion
         thumbnailImageView.setImageResource(R.drawable.ic_baseline_person_24)
 
         /*   Picasso.with(context).load(recipe.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)*/
