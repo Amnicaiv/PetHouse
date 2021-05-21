@@ -29,7 +29,7 @@ class MisEstancias : AppCompatActivity() {
 
             val selectedObject = this.LV_MisEstancias.getItemAtPosition(position) as EstanciaItem
             val editarEstan = Intent(applicationContext, EditarEstanciaActivity::class.java)
-            startActivity(editarEstan)x`x`
+            startActivity(editarEstan)
         }
 
         val adapter = MisEstanciasAdapter(this, listaEstancias as ArrayList<EstanciaItem>)

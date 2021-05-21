@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             mLastClickTime = SystemClock.elapsedRealtime().toDouble();
 
             if(!doublePressPrev){
-                val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
+                val menuActivity = Intent(applicationContext, ApiTestActivity::class.java)
                 startActivity(menuActivity)
             }
         }
