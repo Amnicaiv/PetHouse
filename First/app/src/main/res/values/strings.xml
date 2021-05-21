@@ -1,0 +1,27 @@
+<resources>
+    <!-- Aqui van los labels -->
+    <string name="app_name">My Application</string>
+    <string name="txtNameText" translatable="false">My Name</string>
+    <string name="txtEmailText" translatable="false">My Email</string>
+    <string name="btnAddText" translatable="false">Add</string>
+    <string name="lblNombreText" translatable="false">Full Name</string>
+    <string name="lblEmailText" translatable="false">Domain Email</string>
+
+    <string name="btnOpenPage">Open Web Page</string>
+    <string name="btnCall">Call Number</string>
+    <string name="btnMaps">Google Maps</string>
+    <string name="btnCamera">Camera</string>
+    <string name="btnEmail">Email</string>
+
+    <!-- General -->
+    <string name="tv_errorLabel" translatable="false">Field required</string>
+
+    <!-- Sign up labels -->
+    <string name="tv_dataGroup_1" translatable="false">Email &amp; Password</string>
+    <string name="tb_templateEmail" translatable="false">your-email@gmail.com</string>
+    <string name="tb_templatePassword" translatable="false">enter your password...</string>
+    <string name="tb_templateConfirmPassword" translatable="false">confirm your password...</string>
+    <string name="tv_dataGroup_2" translatable="false">Personal Information</string>
+    <string name="btn_SignupText" translatable="false">Sign up</string>
+    <string name="profileimg">profileImg</string>
+</resources>
