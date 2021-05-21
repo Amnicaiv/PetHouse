@@ -32,28 +32,28 @@ class MisEstanciasAdapter(private val context: Context,
 
 */
 
-   /* override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        // Get view for row item
-        val rowView = inflater.inflate(R.layout.list_item_miresidencia, parent, false)
+/* override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+     // Get view for row item
+     val rowView = inflater.inflate(R.layout.list_item_miresidencia, parent, false)
 
-        // Get title element
-        val titleTextView = rowView.findViewById(R.id.id_item_MiResNombre) as TextView
+     // Get title element
+     val titleTextView = rowView.findViewById(R.id.id_item_MiResNombre) as TextView
 
-        // Get subtitle element
-        val subIngresoTextView = rowView.findViewById(R.id.id_item_MiResDireccion) as TextView
+     // Get subtitle element
+     val subIngresoTextView = rowView.findViewById(R.id.id_item_MiResDireccion) as TextView
 
-        // Get thumbnail element
-        val thumbnailImageView = rowView.findViewById(R.id.id_item_miResImg) as ImageView
+     // Get thumbnail element
+     val thumbnailImageView = rowView.findViewById(R.id.id_item_miResImg) as ImageView
 
-        // 1
-        val residencia = getItem(position) as EstanciaItem
+     // 1
+     val residencia = getItem(position) as EstanciaItem
 
 
-        titleTextView.text = residencia.nombre
-        subIngresoTextView.text = residencia.direccion
-        thumbnailImageView.setImageResource(R.drawable.ic_baseline_person_24)
+     titleTextView.text = residencia.nombre
+     subIngresoTextView.text = residencia.direccion
+     thumbnailImageView.setImageResource(R.drawable.ic_baseline_person_24)
 
-        *//*   Picasso.with(context).load(recipe.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)*//*
+     *//*   Picasso.with(context).load(recipe.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)*//*
 
 
 
