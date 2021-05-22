@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteDatabase
+import androidx.core.content.contentValuesOf
 
 class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -44,9 +45,6 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
 
     fun InsertLoggedUser(loggedUser:Persona):Long{
         val db = this.writableDatabase
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGGED_USER)
-        onCreate(db)
 
         val contentValues = ContentValues()
         contentValues.put(KEY_IDUSER, loggedUser.id)
@@ -115,6 +113,36 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
         return userList
 
         }
+
+    fun updateUser(persona :Persona): Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_NOMBRE, persona.nombre)
+        contentValues.put(KEY_APELLIDOP, persona.apellidoPaterno)
+        contentValues.put(KEY_APELLIDOM, persona.apellidoMaterno)
+        contentValues.put(KEY_CORREO, persona.correoElectronico)
+        contentValues.put(KEY_PASSWORD, persona.contrasena)
+        contentValues.put(KEY_TELEFONO, persona.numeroCelular)
+        contentValues.put(KEY_FOTO, persona.foto)
+
+        val succes = db.update(TABLE_LOGGED_USER, contentValues, KEY_IDUSER + "=" + persona.id, null)
+
+        db.close()
+
+        return succes
     }
 
-}
+    fun deletePerson(persona:Persona): Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_IDUSER, persona.id)
+
+        val success = db.delete(TABLE_LOGGED_USER, KEY_IDUSER + "=" + persona.id,null)
+
+        db.close()
+        return  success
+    }
+
+
+    }
+
