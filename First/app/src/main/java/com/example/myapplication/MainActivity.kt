@@ -32,13 +32,16 @@ class MainActivity : AppCompatActivity() {
 
         var doublePressPrev = false
 
+        val apiComm = ComunicacionApi()
+
         this.button3.setOnClickListener(){
 
+           /* apiComm.ConseguirUsuarioPorID(this,1)*/
             doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
             mLastClickTime = SystemClock.elapsedRealtime().toDouble();
 
             if(!doublePressPrev){
-                val menuActivity = Intent(applicationContext, ApiTestActivity::class.java)
+                val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
                 startActivity(menuActivity)
             }
         }

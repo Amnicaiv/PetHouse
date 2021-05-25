@@ -19,6 +19,8 @@ class ComunicacionApi {
 
         val url = "$urlApi/cliente/getfromid/$userId"
 
+        var comunicationSuccess = 0
+        var success = 0
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -26,12 +28,23 @@ class ComunicacionApi {
 
                 val gson = Gson()
                 val persona: Array<Persona> = gson.fromJson(response, Array<Persona>::class.java)
-                Toast.makeText(appContext, "Comunicacion Exitosa!", Toast.LENGTH_SHORT).show()
+                /*Toast.makeText(appContext, "Comunicacion Exitosa!", Toast.LENGTH_SHORT).show()*/
+                success = 1
+                comunicationSuccess =1
                 /*Quitar antes de la entrega el toast*/
             },
-            Response.ErrorListener { Toast.makeText(appContext, "No se pudo contactar al servidor. Intentar mas tarde.", Toast.LENGTH_SHORT).show() })
+            Response.ErrorListener {
+                Toast.makeText(appContext, "No se pudo contactar al servidor. Intentar mas tarde.", Toast.LENGTH_SHORT).show()
+                success = 0
+                comunicationSuccess=1
+            })
 
         queue.add(stringRequest)
+
+        if (comunicationSuccess == 1){
+            Toast.makeText(appContext, "Awaiting ", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 

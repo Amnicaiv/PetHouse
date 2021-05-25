@@ -21,12 +21,12 @@ class ApiTestActivity : AppCompatActivity() {
 
         this.btn_conectarApi.setOnClickListener(){
             apiCommunicator.ConseguirUsuarioPorID(this,1)
-            apiCommunicator.ConseguirHogarPorId(this,1)
+/*            apiCommunicator.ConseguirHogarPorId(this,1)
             apiCommunicator.ConseguirMascota(this,1)
             apiCommunicator.ConseguirCiudadPorId(this,1)
             apiCommunicator.ConseguirEstadoPorId(this,1)
             apiCommunicator.ConseguirReservacion(this,1)
-            apiCommunicator.ConseguirPais(this,1)
+            apiCommunicator.ConseguirPais(this,1)*/
         }
 
 
