@@ -32,18 +32,33 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/logo_largo"
                 tools:srcCompat="@mipmap/logo_largo" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/group"
+            <ImageView
+                android:id="@+id/imageView15"
                 android:layout_width="366dp"
                 android:layout_height="309dp"
                 android:layout_marginTop="24dp"
                 android:background="#DAD9D9"
-                app:constraint_referenced_ids="button3,textView18,editTextTextPassword,editTextTextPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                app:srcCompat="@android:drawable/divider_horizontal_dark"
+                tools:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <ImageView
+                android:id="@+id/imageView26"
+                android:layout_width="366dp"
+                android:layout_height="154dp"
+                android:layout_marginTop="32dp"
+                android:background="#DAD9D9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.488"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView15"
+                app:srcCompat="@android:drawable/divider_horizontal_dark"
+                tools:srcCompat="@android:drawable/divider_horizontal_dark" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -56,7 +71,7 @@
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/group" />
+                app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName"
@@ -98,16 +113,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/group2"
-                android:layout_width="366dp"
-                android:layout_height="154dp"
-                android:layout_marginTop="32dp"
-                android:background="#DAD9D9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/group" />
-
             <Button
                 android:id="@+id/button15"
                 android:layout_width="178dp"
@@ -124,14 +129,14 @@
                 android:id="@+id/textView20"
                 android:layout_width="299dp"
                 android:layout_height="54dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="¿No tienes cuenta?"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/group2" />
+                app:layout_constraintTop_toTopOf="@+id/imageView26" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
