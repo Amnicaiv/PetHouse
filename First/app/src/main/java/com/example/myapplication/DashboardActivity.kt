@@ -14,12 +14,12 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.layout_dashboard);
 
 
-        this.btnSearch.setOnClickListener(this);
+ /*       this.btnSearch.setOnClickListener(this);*/
 
         actionBar?.hide()
         supportActionBar?.hide()
 
-        this.btnSearch.setOnClickListener(this);
+/*        this.btnSearch.setOnClickListener(this);*/
 
 
 
@@ -56,10 +56,10 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
         Log.e("DA-btnSearch","Search Button pressed.");
         when(v!!.id)
         {
-            R.id.btnSearch ->{
+          /*  R.id.btnSearch ->{
                 Log.e("SRActivity","Search Results Activity Called");
                 this.onSearch();
-            }
+            }*/
         }
     }
 

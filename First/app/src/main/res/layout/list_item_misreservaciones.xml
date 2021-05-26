@@ -5,56 +5,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#5DC888">
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:background="#3C915E">
 
     <ImageView
         android:id="@+id/id_item_MRImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_baseline_person_24"
+        tools:srcCompat="@drawable/ic_baseline_person_24" />
 
     <TextView
         android:id="@+id/id_item_MRNombre"
-        android:layout_width="155dp"
+        android:layout_width="197dp"
         android:layout_height="34dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="28dp"
-        android:background="#FFFFFF"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:background="#728AED86"
+        android:gravity="center_vertical"
         android:text="Nombre"
+        android:textColor="#020202"
         app:layout_constraintStart_toEndOf="@+id/id_item_MRImg"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/id_item_MRImg" />
 
     <TextView
         android:id="@+id/id_item_MRfechaingreso"
-        android:layout_width="39dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
+        android:layout_width="45dp"
+        android:layout_height="42dp"
+        android:background="#728AED86"
+        android:gravity="center"
         android:text="3/17"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <TextView
         android:id="@+id/id_item_MRfechasalida"
         android:layout_width="39dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
+        android:layout_height="42dp"
+        android:background="#728AED86"
+        android:gravity="center"
         android:text="3/19"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/textView17"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="@+id/textView17" />
 
@@ -62,11 +64,12 @@
         android:id="@+id/textView16"
         android:layout_width="52dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#728AED86"
+        android:gravity="center_horizontal"
         android:text="Fecha Entrada"
-        app:layout_constraintStart_toEndOf="@+id/id_item_MRImg"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/id_item_MRNombre"
         app:layout_constraintTop_toBottomOf="@+id/id_item_MRNombre" />
 
     <TextView
@@ -75,8 +78,11 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#728AED86"
+        android:gravity="center_horizontal"
         android:text="Fecha Salida"
+        android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/id_item_MRfechaingreso"
         app:layout_constraintTop_toBottomOf="@+id/id_item_MRNombre" />
 

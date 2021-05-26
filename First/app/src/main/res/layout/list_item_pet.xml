@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:background="#70DA36">
 
     <ImageView
         android:id="@+id/id_item_PetImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_baseline_person_24"
+        tools:srcCompat="@drawable/ic_baseline_person_24" />
 
     <TextView
         android:id="@+id/id_item_PetNombre"
@@ -25,11 +24,12 @@
         android:layout_height="34dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:background="#FFFFFF"
+        android:background="#6D4CAF27"
+        android:gravity="center_vertical"
         android:text="Nombre"
+        android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/id_item_PetImg"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/id_item_PetImg" />
 
     <TextView
         android:id="@+id/id_item_PetRaza"
@@ -37,11 +37,11 @@
         android:layout_height="34dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="36dp"
-        android:background="#FFFFFF"
+        android:layout_marginTop="32dp"
+        android:background="#6D4CAF27"
+        android:gravity="center_vertical"
         android:text="Raza"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/id_item_PetImg"
         app:layout_constraintTop_toBottomOf="@+id/id_item_PetNombre" />
 

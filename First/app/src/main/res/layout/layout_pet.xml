@@ -5,72 +5,53 @@
     android:id="@+id/id_CL_misMascotas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor">
+    android:background="@color/white">
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="140dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/imageView6"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        app:layout_constraintTop_toTopOf="@+id/textView19"
+        app:srcCompat="@mipmap/logo_pequeno"
+        tools:srcCompat="@mipmap/logo_pequeno" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="215dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Mis Mascotas"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="409dp"
-        android:layout_height="405dp"
-        android:layout_marginTop="12dp"
-        android:background="#F8F6F8"
+        android:layout_width="374dp"
+        android:layout_height="420dp"
+        android:layout_marginTop="32dp"
+        android:background="#9A9A9A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
         app:srcCompat="@android:drawable/screen_background_light" />
 
     <ListView
         android:id="@+id/MascotaLV"
         android:layout_width="374dp"
-        android:layout_height="371dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="420dp"
+        android:background="#9FC6C6C6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView11" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="134dp"
-        android:layout_height="34dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:srcCompat="@android:drawable/button_onoff_indicator_on" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="casual"
-        android:text="Tus Mascotas"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <Button
         android:id="@+id/button2"
@@ -78,13 +59,16 @@
         android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="46dp"
-        android:text="Registrar Mascota"
-        app:backgroundTint="#A48BC34A"
+        android:layout_marginBottom="32dp"
+        android:text="Registrar nueva mascota"
+        android:textSize="18sp"
+        app:backgroundTint="#FF9500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
