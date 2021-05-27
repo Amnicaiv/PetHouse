@@ -1,15 +1,28 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Models.SignupModel
 import kotlinx.android.synthetic.main.layout_signup.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import java.io.IOException
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
 import java.util.*
 
 class SignUpActivity: AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_signup);
@@ -25,7 +38,8 @@ class SignUpActivity: AppCompatActivity() {
         val tbCiudad = findViewById<TextView>(R.id.txt_ciudad)
         val tbTelefono = findViewById<TextView>(R.id.txt_telefono)
         val tbNombreUsuario = findViewById<TextView>(R.id.txt_nombreUsuario)
-        val tbContrasena = findViewById<TextView>(R.id.txt_password)
+        val tbCorreoElectronico = findViewById<TextView>(R.id.txt_correoElectronico)
+        val tbContrasena = findViewById<TextView>(R.id.txt_contrasena)
         val tbConfirmacionContrasena = findViewById<TextView>(R.id.txt_confirmacionContrasena)
 
         val errorGeneral = findViewById<TextView>(R.id.txt_error_general)
@@ -38,6 +52,7 @@ class SignUpActivity: AppCompatActivity() {
         val errorCiudad = findViewById<TextView>(R.id.tv_error_ciudad)
         val errorTelefono = findViewById<TextView>(R.id.tv_error_telefono)
         val errorNombreUsuario = findViewById<TextView>(R.id.tv_error_nombreUsuario)
+        val errorCorreoElectronico = findViewById<TextView>(R.id.tv_error_correoElectronico)
         val errorContrasena = findViewById<TextView>(R.id.tv_error_contrasena)
         val errorConfirmacionContrasena = findViewById<TextView>(R.id.tv_error_confirmacionContrasena)
 
@@ -69,15 +84,125 @@ class SignUpActivity: AppCompatActivity() {
             }else if(errorApMaterno.visibility == TextView.VISIBLE)
                 errorApMaterno.visibility = TextView.INVISIBLE
 
-
-
-            if(error){
-                errorGeneral.text="Existen errores en la captura. Por favor verifique su información. 😅"
+            if(tbFechaNacimiento.text.isNullOrEmpty())
+            {
+                error=true
+                errorFechaNacimiento.text = "campo requerido"
+                errorFechaNacimiento.visibility = TextView.VISIBLE
+            }else{
+                val formatter:SimpleDateFormat = SimpleDateFormat("dd/MM/yyy")
+                val fechaNacimiento = formatter.parse(tbFechaNacimiento.text.toString())
+                println(fechaNacimiento)
             }
 
+            if(tbDireccion.text.isNullOrEmpty())
+            {
+                error =true;
+                errorDireccion.text="campo requerido"
+                errorDireccion.visibility = TextView.VISIBLE
+            }else if(errorDireccion.visibility == TextView.VISIBLE)
+                errorDireccion.visibility=TextView.INVISIBLE
 
+            if(tbCodigoPostal.text.isNullOrEmpty())
+            {
+                error=true
+                errorCodigoPostal.text = "campo requerido"
+                errorCodigoPostal.visibility = TextView.VISIBLE
+            }else if(errorCodigoPostal.visibility == TextView.VISIBLE)
+                errorCodigoPostal.visibility = TextView.INVISIBLE
+
+            if(tbCiudad.text.isNullOrEmpty())
+            {
+                error=true
+                errorCiudad.text = "campo requerido"
+                errorCiudad.visibility = TextView.VISIBLE
+            }else if(errorCiudad.visibility == TextView.VISIBLE)
+                errorCiudad.visibility = TextView.INVISIBLE
+
+            if(tbTelefono.text.isNullOrEmpty())
+            {
+                error=true
+                errorTelefono.text = "campo requerido"
+                errorTelefono.visibility = TextView.VISIBLE
+            }else if(errorTelefono.visibility == TextView.VISIBLE)
+                errorTelefono.visibility = TextView.INVISIBLE
+
+            if(tbNombreUsuario.text.isNullOrEmpty())
+            {
+                error=true
+                errorNombreUsuario.text = "campo requerido"
+                errorNombreUsuario.visibility = TextView.VISIBLE
+            }else {
+                //Validar que no exista el nombre de usuario
+            }
+
+            if(tbCorreoElectronico.text.isNullOrEmpty())
+            {
+                error=true
+                errorCorreoElectronico.text = "campo requerido"
+                errorCorreoElectronico.visibility = TextView.VISIBLE
+            }else {
+                //Validar existencia de correo electrónico
+            }
+
+            if(tbContrasena.text.isNullOrBlank())
+            {
+                error=true
+                errorContrasena.text = "campo requerido"
+                errorContrasena.visibility = TextView.VISIBLE
+            }else if(errorContrasena.visibility == TextView.VISIBLE)
+                errorContrasena.visibility = TextView.INVISIBLE
+
+            if(tbConfirmacionContrasena.text.isNullOrBlank())
+            {
+                error=true
+                errorConfirmacionContrasena.text = "las contraseñas no coinciden."
+                errorConfirmacionContrasena.visibility = TextView.VISIBLE
+            }
+
+            Log.d("error",error.toString());
+            if(error){
+                errorGeneral.text="Existen errores en la captura. Por favor verifique su información. 😅"
+            }else{
+                errorGeneral.visibility = TextView.INVISIBLE
+                var client = OkHttpClient()
+                var request = OkHttpRequest(client)
+
+                var fechaNac = "1980-05-26T18:12:43.724Z"//tbFechaNacimiento.text.toString().replace('/','-') + "T18:12:43.724Z"
+                val usuarioNuevo = SignupModel(
+                    tbNombre.text.toString(),
+                    tbApellidoPaterno.text.toString(),
+                    tbApellidoMaterno.text.toString(),
+                    fechaNac.toString(),
+                    tbDireccion.text.toString(),
+                    tbNoExterior.text.toString(),
+                    tbNoInterior.text.toString(),
+                    tbCodigoPostal.text.toString(),
+                    3,
+                    tbNombreUsuario.text.toString(),
+                    tbCorreoElectronico.text.toString(),
+                    tbTelefono.text.toString(),
+                    tbContrasena.text.toString()
+                )
+
+                val url ="https://patoparra.com/api/Security/CreateUser"
+
+                request.signup(url,usuarioNuevo, object:Callback{
+                    override fun onFailure(call: Call, e: IOException) {
+                        Log.d("onFailure",e.toString())
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseData = response.body()?.string()
+                        Log.d("onSuccess",responseData.toString())
+                        if(responseData == "Usuario creado correctamente")
+                        {
+                            val registerActivity = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(registerActivity)
+                        }
+                    }
+                })
+            }
         }
     }
-
-
 }
