@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor">
+    android:background="@color/white">
 
     <ScrollView
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,13 @@
                 android:id="@+id/imageView21"
                 android:layout_width="89dp"
                 android:layout_height="86dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/sym_def_app_icon" />
+                app:srcCompat="@mipmap/logo_pequeno"
+                tools:srcCompat="@mipmap/logo_pequeno" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName26"
@@ -61,7 +62,7 @@
                 android:layout_width="213dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="24dp"
-                android:text="Dejaré comida para mi mascota"
+                android:text="DejarÃ© comida para mi mascota"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName27" />
@@ -70,9 +71,9 @@
                 android:id="@+id/button8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text=" Selecciona tu mascota"
-                app:backgroundTint="#A68BC34A"
+                app:backgroundTint="#FF9800"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,22 +103,23 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView22"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-            <ImageButton
-                android:id="@+id/imageButton12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="342dp"
+                android:layout_height="356dp"
+                android:layout_marginTop="32dp"
+                android:background="#D5D2D2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button8"
+                app:srcCompat="@android:drawable/divider_horizontal_dark"
+                tools:srcCompat="@android:drawable/divider_horizontal_dark" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPersonName"
@@ -125,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button8" />
+                app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName27"
@@ -141,17 +143,16 @@
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="68dp"
-                android:layout_marginRight="68dp"
-                android:fontFamily="serif-monospace"
+                android:layout_width="152dp"
+                android:layout_height="66dp"
+                android:layout_marginTop="8dp"
+
+
+                android:gravity="center"
                 android:text="Confirmar Reservacion"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView21"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintStart_toEndOf="@+id/imageView21"
+                app:layout_constraintTop_toTopOf="@+id/imageView21" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName19"
@@ -178,14 +179,14 @@
                 android:id="@+id/button10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="32dp"
                 android:background="#948BC34A"
                 android:text="pago con tarjeta de debito/credito"
-                app:backgroundTint="#A88BC34A"
+                app:backgroundTint="#FF9800"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
             <Button
                 android:id="@+id/button14"
@@ -193,10 +194,22 @@
                 android:layout_height="wrap_content"
                 android:background="#948BC34A"
                 android:text="pago en estancia"
-                app:backgroundTint="#A88BC34A"
+                app:backgroundTint="#FF9800"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button10" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="365dp"
+                android:layout_height="350dp"
+                android:layout_marginTop="24dp"
+                android:background="#D5D2D2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button14"
+                app:srcCompat="@android:drawable/divider_horizontal_dark"
+                tools:srcCompat="@android:drawable/divider_horizontal_dark" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName28"
@@ -209,7 +222,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button14" />
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName29"
@@ -226,8 +239,8 @@
 
             <EditText
                 android:id="@+id/editTextTextPersonName30"
-                android:layout_width="135dp"
-                android:layout_height="54dp"
+                android:layout_width="127dp"
+                android:layout_height="58dp"
                 android:layout_marginTop="4dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -272,8 +285,8 @@
                 android:layout_width="444dp"
                 android:layout_height="71dp"
                 android:layout_marginTop="10dp"
-                android:text="Finalizar Reservación"
-                app:backgroundTint="#998BC34A"
+                android:text="Finalizar Reservacion"
+                app:backgroundTint="#FF9800"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
                 app:layout_constraintStart_toStartOf="parent"

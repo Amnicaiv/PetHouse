@@ -4,42 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_700">
-
-    <TextView
-        android:id="@+id/txtLogo4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="19dp"
-        android:text="LOGO"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="#FF9800">
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="32dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/imageView6"
+        android:layout_width="72dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/logo_pequeno"
+        tools:srcCompat="@mipmap/logo_pequeno" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="174dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:gravity="center"
+        android:text="Busqueda"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="35dp"
-        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <TextView
         android:id="@+id/textView7"
@@ -94,57 +92,40 @@
     </ScrollView>
 
     <ScrollView
+        android:id="@+id/scrollView7"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#DCDCDC"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView5">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <ListView
+                android:layout_width="331dp"
+                android:layout_height="442dp"
+                android:layout_marginTop="32dp"
+                android:background="#9CCDCDCD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="56dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="16dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_gite_24" />
-
-    <ImageButton
-        android:id="@+id/imageButton13"
-        android:layout_width="56dp"
-        android:layout_height="59dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
-        android:background="#00FFFFFF"
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:text="Regresar"
+        app:backgroundTint="#FF9800"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_gite_24" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="56dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton13"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:srcCompat="@drawable/ic_baseline_gite_24" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
