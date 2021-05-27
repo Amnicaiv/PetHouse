@@ -1,24 +1,25 @@
 package com.example.myapplication
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.activity_camera_layout.*
-
-import kotlinx.android.synthetic.main.layout_dashboard.*
+import com.example.myapplication.Models.loginModel
 
 import kotlinx.android.synthetic.main.layout_iniciosesion.*
-import kotlinx.android.synthetic.main.layout_login.*
-import java.io.ByteArrayOutputStream
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import org.json.JSONException
+import java.io.IOException
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,33 +29,109 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
         supportActionBar?.hide()
 
-        var mLastClickTime = 0.0
+        //Log in
+        val buttonLogin = findViewById<Button>(R.id.bLogin)
+        val etUsername = findViewById<EditText>(R.id.txt_username)
+        val etPassword = findViewById<EditText>(R.id.txt_password)
+        val errorUsername =  findViewById<TextView>(R.id.tv_error_username)
+        val errorPassword = findViewById<TextView>(R.id.tv_error_password)
 
-        var doublePressPrev = false
-
-        val apiComm = ComunicacionApi()
-
-        this.button3.setOnClickListener(){
-
-           /* apiComm.ConseguirUsuarioPorID(this,1)*/
-            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
-            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
-
-            if(!doublePressPrev){
-                val menuActivity = Intent(applicationContext, DashboardActivity::class.java)
-                startActivity(menuActivity)
-            }
+        //Signup
+        val lnkSignup = findViewById<TextView>(R.id.lnk_signup)
+        lnkSignup.setOnClickListener {
+            val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
+            startActivity(registerActivity)
         }
 
-        this.button15.setOnClickListener(){
-            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
-            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
 
-            if(!doublePressPrev) {
-                val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
-                startActivity(registerActivity)
+        buttonLogin.setOnClickListener(){
+
+            if(etUsername.text.isEmpty() || etPassword.text.isEmpty())
+            {
+                if(etUsername.text.isEmpty())
+                {
+                    errorUsername.text = "campo requerido"
+                    errorUsername.visibility = View.VISIBLE
+                }
+                else
+                    errorUsername.visibility = View.INVISIBLE
+                if(etPassword.text.isEmpty())
+                {
+                    errorPassword.text = "campo requerido"
+                    errorPassword.visibility = View.VISIBLE
+                }
+                else
+                    errorPassword.visibility=View.INVISIBLE
             }
+            else
+            {
+                if(!etUsername.text.isNullOrEmpty())
+                {
+                    errorUsername.text = ""
+                    errorUsername.visibility = View.INVISIBLE
+                }
+                if(!etPassword.text.isNullOrEmpty())
+                {
+                    errorPassword.text = ""
+                    errorPassword.visibility = View.INVISIBLE
+                }
+
+                var client = OkHttpClient()
+                var request = OkHttpRequest(client)
+
+                val credentials = loginModel(etUsername.text.toString(), etPassword.text.toString())
+                val url = "https://patoparra.com/api/security/login"
+
+                //Send POST Request to server
+                request.login(url,credentials, object: Callback{
+                    override fun onFailure(call: Call, e: IOException) {
+                        Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseData = response.body()?.string()
+                        runOnUiThread {
+                            try{
+                                var token = responseData.toString()
+                                println("Request Succesful")
+                                Log.d("token",token)
+
+                                when(token){
+                                    "Usuario no existe"->{
+                                        Log.d("response1","usuario no existe")
+                                    }
+                                    "Credenciales inválidas"->{
+                                        Log.d("response2","contraseña invalida")
+                                    }
+                                    else->{
+                                        val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
+                                        startActivity(registerActivity)
+                                    }
+                                }
+
+
+                            }catch(e:JSONException){
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+
+                })
+            }
+
+
+
+
         }
+        //------------------------------------------------------
+
+
+
+
+
+
+
+
 
 
 

@@ -2,10 +2,6 @@ package com.example.myapplication
 
 import android.content.Context
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.layout_prueba_comunicacion_webapi.*
 
@@ -13,7 +9,7 @@ class ComunicacionApi {
     val urlApi = "https://patoparra.com/api"
 
 
-
+/*
     fun ConseguirUsuarioPorID(appContext:Context, userId:Int) {
         val queue = Volley.newRequestQueue(appContext)
 
@@ -167,6 +163,6 @@ class ComunicacionApi {
 
         queue.add(stringRequest)
     }
-
+*/
 
 }

@@ -2,12 +2,14 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_misreservaciones.*
 
 class MisReservacionesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
+        val btnRegresar = findViewById<Button>(R.id.btn_back)
         setContentView(R.layout.layout_misreservaciones);
 
 
@@ -33,7 +35,7 @@ class MisReservacionesActivity : AppCompatActivity() {
         val adapter = MisReservacionesAdapter(this, listaReservaciones as ArrayList<ReservacionItem>)
         listView.adapter = adapter
 
-        this.button7.setOnClickListener(){
+        btnRegresar.setOnClickListener(){
             finish()
         }
 
