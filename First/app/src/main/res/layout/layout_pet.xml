@@ -1,74 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_CL_misMascotas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="75dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView19"
-        app:srcCompat="@mipmap/logo_pequeno"
-        tools:srcCompat="@mipmap/logo_pequeno" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="215dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="Mis Mascotas"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="374dp"
-        android:layout_height="420dp"
-        android:layout_marginTop="32dp"
-        android:background="#9A9A9A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        app:srcCompat="@android:drawable/screen_background_light" />
+    android:background="#29708C"
+    android:orientation="vertical">
 
     <ListView
-        android:id="@+id/MascotaLV"
-        android:layout_width="374dp"
-        android:layout_height="420dp"
-        android:background="#9FC6C6C6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView11" />
+        android:id="@+id/lista"
+        android:layout_width="match_parent"
+        android:layout_height="662dp" />
 
     <Button
-        android:id="@+id/btn_back"
-        android:layout_width="378dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="Registrar nueva mascota"
-        android:textSize="18sp"
-        app:backgroundTint="#FF9500"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:id="@+id/btn_registro_mascota"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:layout_weight="1"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Registrar mascota"
+        app:backgroundTint="@color/teal_700"
+        app:elevation="0dp"
+        app:iconPadding="0dp" />
+</LinearLayout>

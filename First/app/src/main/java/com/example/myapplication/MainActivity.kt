@@ -1,6 +1,9 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
@@ -80,12 +83,14 @@ class MainActivity : AppCompatActivity() {
                 var request = OkHttpRequest(client)
 
                 val credentials = loginModel(etUsername.text.toString(), etPassword.text.toString())
-                val url = "https://patoparra.com/api/security/login"
+                val url = "https://localhost:44337/api/security/login"
 
                 //Send POST Request to server
                 request.login(url,credentials, object: Callback{
                     override fun onFailure(call: Call, e: IOException) {
-                        Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                        runOnUiThread {
+                            Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                        }
                     }
 
                     override fun onResponse(call: Call, response: Response) {
@@ -104,6 +109,12 @@ class MainActivity : AppCompatActivity() {
                                         Log.d("response2","contraseña invalida")
                                     }
                                     else->{
+                                        //Save token on Shared Preferences
+                                        val sharedPref = this@MainActivity.getSharedPreferences("key",Context.MODE_PRIVATE) ?: return@runOnUiThread
+                                        with(sharedPref.edit()){
+                                            putString("token",token)
+                                            commit()
+                                        }
                                         val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
                                         startActivity(registerActivity)
                                     }

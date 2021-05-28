@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="#29708C">
 
     <ImageView
         android:id="@+id/imageView6"
@@ -64,8 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="Nombre"
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/imageView24"
                 app:layout_constraintStart_toStartOf="@+id/imageView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -76,8 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="Fecha de Nacimiento (dd/mm/aaaa)"
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/imageView24"
                 app:layout_constraintStart_toStartOf="@+id/imageView24"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
@@ -88,8 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="Raza"
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/imageView24"
                 app:layout_constraintStart_toStartOf="@+id/imageView24"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
@@ -100,8 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="Tamaño"
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/imageView24"
                 app:layout_constraintStart_toStartOf="@+id/imageView24"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName17" />
@@ -112,8 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="Sexo"
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/imageView24"
                 app:layout_constraintStart_toStartOf="@+id/imageView24"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />

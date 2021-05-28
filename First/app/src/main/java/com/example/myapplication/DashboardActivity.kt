@@ -1,9 +1,11 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_login.*
@@ -13,13 +15,27 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dashboard);
 
+        val sharedPref = applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)?: return
 
- /*       this.btnSearch.setOnClickListener(this);*/
+        val token = sharedPref.getString("token","")
+        Log.d("tokenBearer",token.toString())
+
+
+        val ivPets = findViewById<ImageView>(R.id.iv_pets)
+        ivPets.setOnClickListener{
+            val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
+            startActivity(registerActivity)
+        }
+
+        val ivHoteles = findViewById<ImageView>(R.id.iv_hotel)
+        ivHoteles.setOnClickListener{
+            val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
+            startActivity(registerActivity)
+        }
 
         actionBar?.hide()
         supportActionBar?.hide()
 
-/*        this.btnSearch.setOnClickListener(this);*/
 
 
 

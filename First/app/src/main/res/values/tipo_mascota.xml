@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipo_mascota_array">
+        <item>Perros</item>
+        <item>Gatos</item>
+        <item>Peces</item>
+        <item>Otros</item>
+    </string-array>
+</resources>

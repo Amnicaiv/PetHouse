@@ -185,7 +185,7 @@ class SignUpActivity: AppCompatActivity() {
                     tbContrasena.text.toString()
                 )
 
-                val url ="https://patoparra.com/api/Security/CreateUser"
+                val url ="https://localhost:44337/api/Security/CreateUser"
 
                 request.signup(url,usuarioNuevo, object:Callback{
                     override fun onFailure(call: Call, e: IOException) {
