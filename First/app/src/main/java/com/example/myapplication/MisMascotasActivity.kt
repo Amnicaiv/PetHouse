@@ -26,7 +26,7 @@ class MisMascotasActivity : AppCompatActivity(){
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
-        val url ="https://localhost:44337/api/cliente/getmascotas/1"
+        val url ="https://patoparra.com/api/cliente/getmascotas/1"
 
 
         request.getPets(url, object:Callback{

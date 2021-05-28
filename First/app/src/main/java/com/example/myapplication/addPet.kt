@@ -75,7 +75,7 @@ class addPet : AppCompatActivity(){
                     1,
                     tipoMascotaResult.toString().toInt())
 
-                var url="https://localhost:44337/api/mascota/create"
+                var url="https://patoparra.com/api/mascota/create"
 
                 request.setPet(url,mascotaNueva,object: Callback {
                     override fun onFailure(call: Call, e: IOException) {

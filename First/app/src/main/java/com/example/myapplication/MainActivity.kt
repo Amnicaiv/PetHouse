@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 var request = OkHttpRequest(client)
 
                 val credentials = loginModel(etUsername.text.toString(), etPassword.text.toString())
-                val url = "https://localhost:44337/api/security/login"
+                val url = "https://patoparra.com/api/security/login"
 
                 //Send POST Request to server
                 request.login(url,credentials, object: Callback{
