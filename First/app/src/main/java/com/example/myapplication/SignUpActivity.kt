@@ -3,7 +3,12 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.Selection
+import android.text.Spannable
+import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -16,10 +21,9 @@ import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.ZonedDateTime
 import java.util.*
+
 
 class SignUpActivity: AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -58,8 +62,24 @@ class SignUpActivity: AppCompatActivity() {
 
         val btnSignup = findViewById<Button>(R.id.btn_signup)
 
+
+
+        //tbFechaNacimiento.addTextChangedListener(textWatcher)
+
+
+
+
+
         btnSignup.setOnClickListener {
             var error=false
+
+
+
+            var datetext = this.txt_fechaNacimiento.text.toString()
+            datetext += "T18:12:43.724Z"
+
+
+
             if(tbNombre.text.isNullOrEmpty())
             {
                 error=true
@@ -90,9 +110,10 @@ class SignUpActivity: AppCompatActivity() {
                 errorFechaNacimiento.text = "campo requerido"
                 errorFechaNacimiento.visibility = TextView.VISIBLE
             }else{
-                val formatter:SimpleDateFormat = SimpleDateFormat("dd/MM/yyy")
-                val fechaNacimiento = formatter.parse(tbFechaNacimiento.text.toString())
-                println(fechaNacimiento)
+                errorFechaNacimiento.visibility = TextView.INVISIBLE
+                /* val formatter:SimpleDateFormat = SimpleDateFormat("dd/MM/yyy")
+                 val fechaNacimiento = formatter.parse(tbFechaNacimiento.text.toString())
+                 println(fechaNacimiento)*/
             }
 
             if(tbDireccion.text.isNullOrEmpty())
@@ -133,6 +154,8 @@ class SignUpActivity: AppCompatActivity() {
                 errorNombreUsuario.text = "campo requerido"
                 errorNombreUsuario.visibility = TextView.VISIBLE
             }else {
+                errorNombreUsuario.visibility = TextView.INVISIBLE
+
                 //Validar que no exista el nombre de usuario
             }
 
@@ -142,7 +165,15 @@ class SignUpActivity: AppCompatActivity() {
                 errorCorreoElectronico.text = "campo requerido"
                 errorCorreoElectronico.visibility = TextView.VISIBLE
             }else {
-                //Validar existencia de correo electrónico
+                errorCorreoElectronico.visibility = TextView.INVISIBLE
+                val isEmailInFormat = Patterns.EMAIL_ADDRESS.matcher(tbCorreoElectronico.text).matches()
+                if(!isEmailInFormat){
+                    error=true
+                    errorCorreoElectronico.text = "Correo no esta en formato correcto."
+                    errorCorreoElectronico.visibility = TextView.VISIBLE
+                }else{
+                    errorCorreoElectronico.visibility = TextView.INVISIBLE
+                }
             }
 
             if(tbContrasena.text.isNullOrBlank())
@@ -150,14 +181,25 @@ class SignUpActivity: AppCompatActivity() {
                 error=true
                 errorContrasena.text = "campo requerido"
                 errorContrasena.visibility = TextView.VISIBLE
-            }else if(errorContrasena.visibility == TextView.VISIBLE)
+            }else if(errorContrasena.visibility == TextView.VISIBLE){
                 errorContrasena.visibility = TextView.INVISIBLE
+                if( !checkPassWord(tbContrasena.text.toString())){
+                    error=true
+                    errorContrasena.text = "La contraseña debe incluir una Mayuscula, Minuscula, un numero y tener 8 characteres como minimo."
+                    errorContrasena.visibility = TextView.VISIBLE
+                }else{
+                    errorContrasena.visibility = TextView.INVISIBLE
+                }
+            }
 
-            if(tbConfirmacionContrasena.text.isNullOrBlank())
+
+            if(tbConfirmacionContrasena.text.toString() != tbContrasena.text.toString())
             {
                 error=true
                 errorConfirmacionContrasena.text = "las contraseñas no coinciden."
                 errorConfirmacionContrasena.visibility = TextView.VISIBLE
+            }else{
+                errorConfirmacionContrasena.visibility = TextView.INVISIBLE
             }
 
             Log.d("error",error.toString());
@@ -205,4 +247,62 @@ class SignUpActivity: AppCompatActivity() {
             }
         }
     }
+
+
+
+
+
+
+    private fun checkPassWord(str: String): Boolean {
+        var ch: Char
+        var capitalFlag = false
+        var lowerCaseFlag = false
+        var numberFlag = false
+        if(str.length>=8){
+            for (i in 0 until str.length) {
+                ch = str[i]
+                if (Character.isDigit(ch)) {
+                    numberFlag = true
+                } else if (Character.isUpperCase(ch)) {
+                    capitalFlag = true
+                } else if (Character.isLowerCase(ch)) {
+                    lowerCaseFlag = true
+                }
+                if (numberFlag && capitalFlag && lowerCaseFlag) return true
+            }
+        }
+        return false
+    }
+
+
+
+
+
+
+    /* private val textWatcher = object : TextWatcher {
+         private var current = ""
+         private val ddmmyyyy = "DDMMYYYY"
+         private val cal: Calendar = Calendar.getInstance()
+
+         override fun afterTextChanged(s: Editable?) {
+
+             if (s != null) {
+
+                 var datetxt = s.toString()
+                 current += datetxt
+
+                 Toast.makeText(applicationContext, current.length.toString(), Toast.LENGTH_LONG).show()
+                 Log.d("Debug", "Text is " + current.length.toString() + " characters long" )
+                 findViewById<TextView>(R.id.txt_fechaNacimiento).text = "lol"
+
+
+             }
+
+         }
+         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+         }
+         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+         }
+     }*/
 }

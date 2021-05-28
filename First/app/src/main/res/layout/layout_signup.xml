@@ -133,6 +133,7 @@
                 </LinearLayout>
             </ScrollView>
 
+
             <EditText
                 android:id="@+id/txt_fechaNacimiento"
                 android:layout_width="match_parent"

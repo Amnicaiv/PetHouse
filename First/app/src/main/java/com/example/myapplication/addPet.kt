@@ -1,6 +1,10 @@
 package com.example.myapplication
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -24,6 +28,8 @@ class addPet : AppCompatActivity(){
 
         val tbNombre = findViewById<TextView>(R.id.tv_nombre_mascota)
         val tbEdad = findViewById<TextView>(R.id.tv_edad_mascota)
+
+        val btnOpenCam =  findViewById<TextView>(R.id.btn_foto_mascota)
 
         ArrayAdapter.createFromResource(applicationContext,R.array.tipo_mascota_array,android.R.layout.simple_spinner_item).also {
             adapter ->
@@ -91,5 +97,25 @@ class addPet : AppCompatActivity(){
             }
         }
 
+        btnOpenCam.setOnClickListener{
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                startActivityForResult(takePictureIntent, 1)
+            } catch (e: ActivityNotFoundException) {
+                // display error state to the user
+            }
+            }
+
+
         }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            findViewById<ImageView>(R.id.imageView25).setImageBitmap(imageBitmap)
+        }
+    }
+
+
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_CL_misMascotas"
@@ -10,18 +10,26 @@
 
     <ListView
         android:id="@+id/lista"
-        android:layout_width="match_parent"
-        android:layout_height="662dp" />
+        android:layout_width="400dp"
+        android:layout_height="606dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_registro_mascota"
         android:layout_width="match_parent"
         android:layout_height="73dp"
+        android:layout_marginBottom="52dp"
         android:layout_weight="1"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="Registrar mascota"
         app:backgroundTint="@color/teal_700"
         app:elevation="0dp"
-        app:iconPadding="0dp" />
-</LinearLayout>
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lista" />
+</androidx.constraintlayout.widget.ConstraintLayout>
