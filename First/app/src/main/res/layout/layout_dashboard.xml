@@ -120,7 +120,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/imv_search"
                     android:layout_width="198dp"
                     android:layout_height="170dp"
                     android:layout_marginTop="40dp"
@@ -159,10 +159,10 @@
                     android:layout_marginTop="6dp"
                     android:text="Buscar hotel"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                    app:layout_constraintEnd_toEndOf="@+id/imv_search"
                     app:layout_constraintHorizontal_bias="0.491"
-                    app:layout_constraintStart_toStartOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                    app:layout_constraintStart_toStartOf="@+id/imv_search"
+                    app:layout_constraintTop_toBottomOf="@+id/imv_search" />
 
                 <TextView
                     android:id="@+id/textView2"

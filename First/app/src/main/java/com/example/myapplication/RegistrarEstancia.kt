@@ -24,7 +24,7 @@ class RegistrarEstancia :AppCompatActivity() {
             val idString = userToken.getString("id","No id found")
 
             val descripcion = this.editTextTextPersonName3.text.toString()
-            val costoxNoche = this.editTextNumber.text.toString().toInt()
+            val costoxNoche = this.editTextNumber.text.toString().toDouble()
             val capacidad = this.editTextTextPersonName7.text.toString().toInt()
             val cuentaMascotas = this.checkBox3.isChecked
 

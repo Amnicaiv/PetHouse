@@ -5,86 +5,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
-    android:background="#3C915E">
+    android:layout_margin="20dp"
+    android:background="#FF9800">
 
-    <ImageView
-        android:id="@+id/id_item_MRImg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Reservacion #"
+        android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_person_24"
-        tools:srcCompat="@drawable/ic_baseline_person_24" />
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/id_item_MRNombre"
-        android:layout_width="197dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:background="#728AED86"
-        android:gravity="center_vertical"
-        android:text="Nombre"
-        android:textColor="#020202"
-        app:layout_constraintStart_toEndOf="@+id/id_item_MRImg"
-        app:layout_constraintTop_toTopOf="@+id/id_item_MRImg" />
+        android:id="@+id/tv_reservacion_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/id_item_MRfechaingreso"
-        android:layout_width="45dp"
-        android:layout_height="42dp"
-        android:background="#728AED86"
-        android:gravity="center"
-        android:text="3/17"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="32dp"
+        android:text="Propietario: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/id_item_MRfechasalida"
-        android:layout_width="39dp"
-        android:layout_height="42dp"
-        android:background="#728AED86"
-        android:gravity="center"
-        android:text="3/19"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/textView17"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="@+id/textView17" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="52dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="8dp"
-        android:background="#728AED86"
-        android:gravity="center_horizontal"
-        android:text="Fecha Entrada"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/id_item_MRNombre"
-        app:layout_constraintTop_toBottomOf="@+id/id_item_MRNombre" />
+        android:id="@+id/tv_nombre_propietario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="nombreProp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reservacion_id" />
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="52dp"
-        android:layout_height="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="32dp"
+        android:text="monto pagado: $"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/tv_monto_total"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#728AED86"
-        android:gravity="center_horizontal"
-        android:text="Fecha Salida"
-        android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@+id/id_item_MRfechaingreso"
-        app:layout_constraintTop_toBottomOf="@+id/id_item_MRNombre" />
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="monto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_propietario" />
 
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Estatus"
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        tools:layout_editor_absoluteX="24dp" />
 
+    <TextView
+        android:id="@+id/tv_estatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView29"
+        app:layout_constraintTop_toBottomOf="@+id/tv_monto_total" />
 </androidx.constraintlayout.widget.ConstraintLayout>

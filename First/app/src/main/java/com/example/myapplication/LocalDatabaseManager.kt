@@ -247,10 +247,10 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
             val column5 = cursor.getString(cursor.getColumnIndex(KEY_PET_CATEGORY)).toInt()
             val column6 = cursor.getString(cursor.getColumnIndex(KEY_PET_FOTO))
             val column7 = cursor.getString(cursor.getColumnIndex(KEY_PET_CARNET))
-            val column8 = cursor.getString(cursor.getColumnIndex(KEY_PET_ALIMENTO))
+            //val column8 = cursor.getString(cursor.getColumnIndex(KEY_PET_ALIMENTO))
 
 
-            selectedPet.add(Mascota(column1,column2,column3,column4,column5,column6,column7,column8,""))
+            selectedPet.add(Mascota(column1,column2,column3,column4,column5,column6,column7,"",""))
         }
         cursor.close()
         db.close()

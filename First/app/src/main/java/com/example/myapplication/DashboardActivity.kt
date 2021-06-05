@@ -116,6 +116,11 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
             startActivity(userInfoActivity)
         }
 
+        this.imv_search.setOnClickListener(){
+            val hogaresDisponibles = Intent(applicationContext, HogaresDisponiblesActivity::class.java)
+            startActivity(hogaresDisponibles)
+        }
+
         actionBar?.hide()
         supportActionBar?.hide()
 

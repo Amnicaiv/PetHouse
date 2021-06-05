@@ -3,7 +3,7 @@ package com.example.myapplication.Models
 class HouseModel (
         val userId: String?,
         val descripcion: String,
-        val costoPorNoche: Int,
+        val costoPorNoche: Double,
         val capacidad: Int,
         val cuentaConMascotas: Boolean,
         val publicado: Boolean,
@@ -13,3 +13,5 @@ class HouseModel (
 )
 
 class listaHogarModel(val descripcion:String, val costoPorNoche: Double, val capacidad: Int)
+
+class listaHogaresDisponiblesModel(val id:Int, val descripcion:String, val costoPorNoche:Double, val capacidad:Int, val nombreDueno:String)

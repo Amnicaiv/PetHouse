@@ -25,3 +25,11 @@ class MiReservacionModel(
         val comentarios:String,
         val estatus:String
 )
+
+class ReservacionLista(
+        val id:Int,
+        val hogarNombre:String,
+        val propietariaNombre:String,
+        val montoTotal:Double,
+        val estatus:String
+)
