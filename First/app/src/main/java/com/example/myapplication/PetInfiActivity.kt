@@ -27,8 +27,13 @@ class PetInfiActivity : AppCompatActivity(){
         this.editTextTextPersonName7.setText(arrayList?.get(0)?.edad).toString()*/
 
         if (petSelected != null) {
-            Toast.makeText(applicationContext, petSelected.edad.toString(), Toast.LENGTH_SHORT).show()
-            this.editTextTextPersonName7.setText(petSelected.edad.toString())  
+            val encoder = ImageParser()
+            this.editTextTextPersonName6.setText(petSelected.nombre)
+            this.editTextTextPersonName7.setText(petSelected.edad.toString())
+            this.imageView7.setImageBitmap(petSelected.imagen?.let { encoder.convert(it) })
+            this.imageView10.setImageBitmap(petSelected.cartillaPdf?.let { encoder.convert(it) })
+
+
         }
 
 
