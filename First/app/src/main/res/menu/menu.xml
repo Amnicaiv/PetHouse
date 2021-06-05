@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Editar Mi Informacion"
-        android:icon="@drawable/ic_baseline_person_24"
+    <item
         android:id="@+id/op1"
-        ></item>
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Ver Mi Informacion"></item>
     <item android:title="Mis Mascotas"
         android:icon="@drawable/ic_baseline_pets_24"
         android:id="@+id/op2"></item>
