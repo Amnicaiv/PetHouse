@@ -3,24 +3,32 @@ package com.example.myapplication
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.Models.FullPetModel
+import androidx.core.graphics.drawable.toBitmap
+import com.example.myapplication.Models.Mascota
+import kotlinx.android.synthetic.main.layout_createpet.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
-import java.util.*
+
 
 class addPet : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_createpet);
+
+        val ldb = LocalDatabaseManager(this)
+
+        val pickImage = 100
+        var imageUri: Uri? = null
 
         val spinnerTipoMascotas = findViewById<Spinner>(R.id.spinner_tipo)
         val spinnerTamano = findViewById<Spinner>(R.id.spinner_tamano)
@@ -69,28 +77,64 @@ class addPet : AppCompatActivity(){
         }
 
         btnRegistrar.setOnClickListener {
+            val userToken = this.getSharedPreferences("key",0)
+            val idString = userToken.getString("id","No id found")
+
+            Toast.makeText(applicationContext, "Se esta subiendo a la nube su mascota, espere un momento...", Toast.LENGTH_SHORT).show()
+
             var error=false;
 
             if(!error){
+
+                val imagenPetIV = this.imageView25
+                val imagenCarnet = this.imageView31
+
+                imagenPetIV.invalidate()
+                var bitmap = imagenPetIV.drawable.toBitmap()
+
+                val encoder = ImageParser()
+
+                val imageString = encoder.convert(bitmap)
+
+                imagenCarnet.invalidate()
+                bitmap = imagenCarnet.drawable.toBitmap()
+                val imageString2 = encoder.convert(bitmap)
+
+
+
                 var client = OkHttpClient()
                 var request = OkHttpRequest(client)
-                val mascotaNueva = FullPetModel(
-                    1,
+                val mascotaNueva = Mascota(
+                    idString,
                     tbNombre.text.toString(),
                     tbEdad.text.toString().toInt(),
                     1,
-                    tipoMascotaResult.toString().toInt())
+                    tipoMascotaResult.toString().toInt(),
+                    imageString,
+                    imageString2,
+                    "2021-06-03T18:30:40.299Z")
+
 
                 var url="https://patoparra.com/api/mascota/create"
 
                 request.setPet(url,mascotaNueva,object: Callback {
                     override fun onFailure(call: Call, e: IOException) {
                         println("Failure to save pet")
+
+                        runOnUiThread {
+                            Toast.makeText(applicationContext,"Error al intentar subir su informacion, vuelva a intentar en un momento", Toast.LENGTH_LONG).show()
+                        }
                     }
 
                     override fun onResponse(call: Call, response: Response) {
                         val responseData = response.body()?.string()
                         Log.d("reqSuccess",responseData.toString())
+                        ldb.InsertPet(mascotaNueva,true)
+                        runOnUiThread {
+                            Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_LONG).show()
+                            finish()
+                        }
+
                     }
 
                 })
@@ -107,6 +151,13 @@ class addPet : AppCompatActivity(){
             }
 
 
+
+        btn_foto_carnet.setOnClickListener(){
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
+
+
         }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,6 +165,11 @@ class addPet : AppCompatActivity(){
         if (requestCode == 1 && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             findViewById<ImageView>(R.id.imageView25).setImageBitmap(imageBitmap)
+
+        }
+        if (resultCode == RESULT_OK && requestCode == 100) {
+            var imageUri: Uri? = data?.data
+            this.imageView31.setImageURI(imageUri)
         }
     }
 

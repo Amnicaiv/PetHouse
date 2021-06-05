@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.text.Editable
 import android.text.Selection
 import android.text.Spannable
@@ -30,6 +31,8 @@ class SignUpActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_signup);
+
+        val ldb = LocalDatabaseManager(this)
 
         val tbNombre = findViewById<TextView>(R.id.txt_nombre)
         val tbApellidoPaterno = findViewById<TextView>(R.id.txt_apPaterno)
@@ -227,11 +230,16 @@ class SignUpActivity: AppCompatActivity() {
                     tbContrasena.text.toString()
                 )
 
+                Toast.makeText(applicationContext, "Contactando a la nube, espere un momento...", Toast.LENGTH_SHORT).show()
+
                 val url ="https://patoparra.com/api/Security/CreateUser"
 
                 request.signup(url,usuarioNuevo, object:Callback{
                     override fun onFailure(call: Call, e: IOException) {
                         Log.d("onFailure",e.toString())
+                        runOnUiThread {
+                            Toast.makeText(applicationContext,"Hubo un error al intentar crear su cuenta. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                        }
                     }
 
                     override fun onResponse(call: Call, response: Response) {
@@ -239,7 +247,16 @@ class SignUpActivity: AppCompatActivity() {
                         Log.d("onSuccess",responseData.toString())
                         if(responseData == "Usuario creado correctamente")
                         {
-                            val registerActivity = Intent(applicationContext, MainActivity::class.java)
+
+
+                            var loggeduser = Persona(0,tbNombreUsuario.text.toString(), tbNombre.text.toString(),tbApellidoPaterno.text.toString(), tbApellidoMaterno.text.toString(),tbFechaNacimiento.text.toString(),tbCorreoElectronico.text.toString(),tbContrasena.text.toString(),tbTelefono.text.toString(),0)
+                            val success =ldb.InsertLoggedUser(loggeduser, true)
+
+                            runOnUiThread {
+                                Toast.makeText(applicationContext,"Se ha creado su cuenta, Bienvenido", Toast.LENGTH_LONG).show()
+                            }
+
+                            val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
                             startActivity(registerActivity)
                         }
                     }
@@ -276,33 +293,4 @@ class SignUpActivity: AppCompatActivity() {
 
 
 
-
-
-
-    /* private val textWatcher = object : TextWatcher {
-         private var current = ""
-         private val ddmmyyyy = "DDMMYYYY"
-         private val cal: Calendar = Calendar.getInstance()
-
-         override fun afterTextChanged(s: Editable?) {
-
-             if (s != null) {
-
-                 var datetxt = s.toString()
-                 current += datetxt
-
-                 Toast.makeText(applicationContext, current.length.toString(), Toast.LENGTH_LONG).show()
-                 Log.d("Debug", "Text is " + current.length.toString() + " characters long" )
-                 findViewById<TextView>(R.id.txt_fechaNacimiento).text = "lol"
-
-
-             }
-
-         }
-         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-         }
-         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-         }
-     }*/
 }

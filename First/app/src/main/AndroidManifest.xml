@@ -40,6 +40,8 @@
         <activity android:name=".EditarEstanciaActivity"></activity>
 
         <activity android:name=".ApiTestActivity"></activity>
+        <activity android:name=".RegistrarEstancia"></activity>
+        <activity android:name=".CheckOutActivity"></activity>
 
 
 

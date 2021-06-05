@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_iniciosesion);
 
+        val ldb = LocalDatabaseManager(this)
+        var loginPerson :Persona;
         actionBar?.hide()
         supportActionBar?.hide()
 
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        buttonLogin.setOnClickListener(){
+        buttonLogin.setOnClickListener {
 
             if(etUsername.text.isEmpty() || etPassword.text.isEmpty())
             {
@@ -82,6 +84,8 @@ class MainActivity : AppCompatActivity() {
                 var client = OkHttpClient()
                 var request = OkHttpRequest(client)
 
+                Toast.makeText(applicationContext, "Verificando su informacion, espere un momento...", Toast.LENGTH_SHORT).show()
+
                 val credentials = loginModel(etUsername.text.toString(), etPassword.text.toString())
                 val url = "https://patoparra.com/api/security/login"
 
@@ -104,16 +108,32 @@ class MainActivity : AppCompatActivity() {
                                 when(token){
                                     "Usuario no existe"->{
                                         Log.d("response1","usuario no existe")
+                                        runOnUiThread {
+                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verfique su informacion de login.", Toast.LENGTH_LONG).show()
+                                        }
                                     }
                                     "Credenciales inválidas"->{
                                         Log.d("response2","contraseña invalida")
+                                        runOnUiThread {
+                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verfique su informacion de login.", Toast.LENGTH_LONG).show()
+                                        }
                                     }
                                     else->{
                                         //Save token on Shared Preferences
+                                        if(ldb.GetLoggedUser().isNotEmpty()){
+                                            val persona = ldb.GetLoggedUser()
+                                            //ldb.deletePerson(persona[0].id)
+                                            val newuser = Persona(0,"", "","","","","", etPassword.text.toString(),"",0)
+                                            //ldb.InsertLoggedUser()
+                                        }
                                         val sharedPref = this@MainActivity.getSharedPreferences("key",Context.MODE_PRIVATE) ?: return@runOnUiThread
                                         with(sharedPref.edit()){
                                             putString("token",token)
+                                            putString("apodo",etUsername.text.toString())
                                             commit()
+                                        }
+                                        runOnUiThread {
+                                            Toast.makeText(applicationContext,"Bienvenido", Toast.LENGTH_LONG).show()
                                         }
                                         val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
                                         startActivity(registerActivity)
@@ -134,10 +154,6 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-        //------------------------------------------------------
-
-
-
 
 
 

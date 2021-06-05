@@ -18,91 +18,130 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView15"
-                    android:layout_width="207dp"
-                    android:layout_height="45dp"
-                    android:translationY="50dp"
+                    android:layout_width="300dp"
+                    android:layout_height="80dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5"
                     app:srcCompat="@mipmap/logo_largo2" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="67dp"
-                    android:layout_height="57dp"
-                    android:translationX="320dp"
-                    app:srcCompat="@drawable/ic_baseline_person_24" />
+                    android:id="@+id/imageView14"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="34dp"
-                    android:padding="10dp"
-                    android:text="Categorías"
-                    android:textSize="24sp" />
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#2A001D49"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_pets"
+                    app:srcCompat="@drawable/ic_baseline_insert_invitation_24" />
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="30dp">
+                <ImageView
+                    android:id="@+id/iv_pets"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    android:layout_marginStart="16dp"
 
-                        <ImageView
-                            android:id="@+id/imageView14"
-                            android:layout_width="184dp"
-                            android:layout_height="150dp"
-                            android:layout_margin="10dp"
-                            android:background="#2A001D49"
-                            app:srcCompat="@drawable/ic_baseline_insert_invitation_24" />
 
-                        <ImageView
-                            android:id="@+id/iv_pets"
-                            android:layout_width="88dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:background="#2A001D49"
-                            app:srcCompat="@drawable/ic_baseline_pets_24" />
-                    </LinearLayout>
-                </ScrollView>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_weight="1"
+                    android:background="#2A001D49"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView15"
+                    app:srcCompat="@drawable/ic_baseline_pets_24" />
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_hotel"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/iv_hotel"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:background="#2A001D49"
-                            app:srcCompat="@drawable/ic_baseline_house_24" />
-                    </LinearLayout>
-                </ScrollView>
+                    android:layout_marginTop="40dp"
+                    android:background="#2A001D49"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_pets"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/iv_pets"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:srcCompat="@drawable/ic_baseline_house_24" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="140dp"
                     android:padding="10dp"
                     android:text="version 1.0.0.0"
-                    android:textColor="#BDBDBD" />
+                    android:textColor="#BDBDBD"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Mis Mascotas"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_pets"
+                    app:layout_constraintStart_toStartOf="@+id/iv_pets"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_pets" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Mis reservaciones"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView14"
+                    app:layout_constraintStart_toStartOf="@+id/imageView14"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="40dp"
+                    android:background="#2A001D49"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView14"
+                    app:layout_constraintStart_toStartOf="@+id/imageView14"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18"
+                    app:srcCompat="@drawable/ic_baseline_search_24" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Mis Residencias"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_hotel"
+                    app:layout_constraintStart_toStartOf="@+id/iv_hotel"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_hotel" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Buscar hotel"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

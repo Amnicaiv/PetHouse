@@ -434,7 +434,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/btn_enviar_solicitud"
                 android:layout_width="255dp"
                 android:layout_height="82dp"
                 android:layout_marginTop="72dp"

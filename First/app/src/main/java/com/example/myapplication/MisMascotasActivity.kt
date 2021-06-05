@@ -24,9 +24,13 @@ class MisMascotasActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_pet)
 
+
+        val userToken = this.getSharedPreferences("key",0)
+        val idString = userToken.getString("id","No id found")
+
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
-        val url ="https://patoparra.com/api/cliente/getmascotas/1"
+        val url ="https://patoparra.com/api/cliente/getmascotas/?id=$idString"
 
 
         request.getPets(url, object:Callback{
@@ -62,7 +66,12 @@ class MisMascotasActivity : AppCompatActivity(){
                         lista.adapter = adaptador
 
                         lista.onItemClickListener = AdapterView.OnItemClickListener{parent, view,  position, id ->
-                            Toast.makeText(applicationContext,listaMascotas.get(id.toInt()).toString(),Toast.LENGTH_LONG).show()
+
+                            Toast.makeText(applicationContext,listaMascotas.get(id.toInt()).nombre ,Toast.LENGTH_LONG).show()
+                            val registerActivity = Intent(applicationContext, PetInfiActivity::class.java)
+                            registerActivity.putExtra("PET_NAME", listaMascotas[id.toInt()].nombre)
+                            startActivity(registerActivity)
+                            //intent.putExtra("EXTRA_SESSION_ID", sessionId);
                         }
 
                     }catch (e:Exception){

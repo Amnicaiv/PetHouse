@@ -11,6 +11,22 @@ class MisEstancias : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_misestancias);
+
+
+
+        var mLastClickTime = 0.0
+
+        var doublePressPrev = false
+
+        this.btn_registrar_casa.setOnClickListener(){
+
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble()
+            if(!doublePressPrev) {
+                val estancias = Intent(applicationContext, RegistrarEstancia::class.java)
+                startActivity(estancias)
+            }
+        }
 /*
 
 
@@ -38,18 +54,7 @@ class MisEstancias : AppCompatActivity() {
 
 
 
-        var mLastClickTime = 0.0
 
-        var doublePressPrev = false
-
-        this.BTN_Regresar_ME.setOnClickListener(){
-
-            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
-            mLastClickTime = SystemClock.elapsedRealtime().toDouble()
-            if(!doublePressPrev) {
-               finish()
-            }
-        }
 */
 
     }
