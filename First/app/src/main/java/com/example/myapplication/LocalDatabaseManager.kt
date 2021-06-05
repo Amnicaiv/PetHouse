@@ -39,6 +39,7 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
         private const val KEY_PET_CATEGORY = "categoriaMascotaId"
         private const val KEY_PET_FOTO = "imagen"
         private const val KEY_PET_CARNET = "cartillaPdf"
+        private const val KEY_PET_ALIMENTO = "alimento"
 
         private const val KEY_CHANGE_UPLOADED = "isUpdated"
 
@@ -176,6 +177,7 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
         contentValues.put(KEY_PET_CATEGORY, model.categoriaMascotaId)
         contentValues.put(KEY_PET_FOTO, model.imagen)
         contentValues.put(KEY_PET_CARNET, model.cartillaPdf)
+        contentValues.put(KEY_PET_ALIMENTO,model.alimento)
 
 
 
@@ -205,9 +207,10 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
                         val column5 = cursor.getString(cursor.getColumnIndex(KEY_PET_CATEGORY)).toInt()
                         val column6 = cursor.getString(cursor.getColumnIndex(KEY_PET_FOTO))
                         val column7 = cursor.getString(cursor.getColumnIndex(KEY_PET_CARNET))
+                        val column8 = cursor.getString(cursor.getColumnIndex(KEY_PET_ALIMENTO))
 
                         //you could add additional columns here..
-                        list.add(Mascota(column1,column2,column3,column4,column5,column6,column7,""))
+                        list.add(Mascota(column1,column2,column3,column4,column5,column6,column7,column8,""))
                     } while (cursor.moveToNext())
                 }
             } finally {
@@ -244,9 +247,10 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
             val column5 = cursor.getString(cursor.getColumnIndex(KEY_PET_CATEGORY)).toInt()
             val column6 = cursor.getString(cursor.getColumnIndex(KEY_PET_FOTO))
             val column7 = cursor.getString(cursor.getColumnIndex(KEY_PET_CARNET))
+            val column8 = cursor.getString(cursor.getColumnIndex(KEY_PET_ALIMENTO))
 
 
-            selectedPet.add(Mascota(column1,column2,column3,column4,column5,column6,column7,""))
+            selectedPet.add(Mascota(column1,column2,column3,column4,column5,column6,column7,column8,""))
         }
         cursor.close()
         db.close()
