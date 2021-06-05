@@ -3,59 +3,100 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.View
+import android.widget.Button
+import android.widget.ListView
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Adapters.MisEstanciasAdapter
+import com.example.myapplication.Models.HouseModel
+import com.example.myapplication.Models.listaHogarModel
 import kotlinx.android.synthetic.main.layout_misestancias.*
 import kotlinx.android.synthetic.main.layout_misreservaciones.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 
 class MisEstancias : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_misestancias);
 
+        val pbLoad = findViewById<ProgressBar>(R.id.pb_load)
+        pbLoad.visibility=View.VISIBLE
 
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+        val url = "https://patoparra.com/api/Cliente/GetHogares?clienteId="+prefs.getString("id","")
+        println(url)
+        var client = OkHttpClient()
+        var request = OkHttpRequest(client)
 
-        var mLastClickTime = 0.0
-
-        var doublePressPrev = false
-
-        this.btn_registrar_casa.setOnClickListener(){
-
-            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
-            mLastClickTime = SystemClock.elapsedRealtime().toDouble()
-            if(!doublePressPrev) {
-                val estancias = Intent(applicationContext, RegistrarEstancia::class.java)
-                startActivity(estancias)
+        request.getHogares(url,object:Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    Toast.makeText(applicationContext,"Error al conectar a la bd",Toast.LENGTH_SHORT).show()
+                }
             }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body()?.string()
+                var listaHogares = ArrayList<listaHogarModel>()
+                runOnUiThread {
+                    try{
+                        val json = JSONObject(responseData)
+                        println(json)
+                        val hogaresJson = json.getJSONArray("hogares")
+                        var index=0
+                        for(i in 0..hogaresJson.length()-1){
+                            val descripcion = hogaresJson.getJSONObject(i).getString("descripcion")
+                            val costoPorNoche = hogaresJson.getJSONObject(i).getDouble("costoPorNoche")
+                            val capacidad = hogaresJson.getJSONObject(i).getInt("capacidad")
+
+                            val hogar = listaHogarModel(descripcion, costoPorNoche, capacidad)
+                            listaHogares.add(hogar)
+                        }
+
+                        val lista = findViewById<ListView>(R.id.LV_MisEstancias)
+                        val adaptador = MisEstanciasAdapter(applicationContext, listaHogares)
+                        lista.adapter = adaptador
+                    }catch(e:Exception)
+                    {
+                        e.printStackTrace()
+                    }
+                    pbLoad.visibility=View.GONE
+                }
+            }
+
+        })
+
+
+        val btnRegistrarEstancia = findViewById<Button>(R.id.btn_registrar_casa)
+        btnRegistrarEstancia.setOnClickListener(){
+            val estancias = Intent(applicationContext, RegistrarEstancia::class.java)
+            startActivity(estancias)
         }
-/*
 
 
-        val estanciaItem1= EstanciaItem(nombre = "Asilashon",          direccion  = "Calle falsa123, Col. Benito Tampico,TAMPS", img1 = 1, descripcion = null, tiposMascotas = null, tamaños = null, img2 = null, img3 = null, comprobante = null, servicioComida = null, servicioBaño = null, costoNoche = null)
-        val estanciaItem2= EstanciaItem(nombre = "La granja",          direccion  = "Calle falsa123, Col. Benito Tampico,TAMPS", img1 = 1, descripcion = null, tiposMascotas = null, tamaños = null, img2 = null, img3 = null, comprobante = null, servicioComida = null, servicioBaño = null, costoNoche = null)
-        val estanciaItem3= EstanciaItem(nombre = "Taquerias Pipe",     direccion  = "Calle falsa123, Col. Benito Tampico,TAMPS", img1 = 1, descripcion = null, tiposMascotas = null, tamaños = null, img2 = null, img3 = null, comprobante = null, servicioComida = null, servicioBaño = null, costoNoche = null)
-        val estanciaItem4= EstanciaItem(nombre = "Casa perrito sano",  direccion  = "Calle falsa123, Col. Benito Tampico,TAMPS", img1 = 1, descripcion = null, tiposMascotas = null, tamaños = null, img2 = null, img3 = null, comprobante = null, servicioComida = null, servicioBaño = null, costoNoche = null)
-        val estanciaItem5= EstanciaItem(nombre = "Casa de don Segura", direccion  = "Calle falsa123, Col. Benito Tampico,TAMPS", img1 = 1, descripcion = null, tiposMascotas = null, tamaños = null, img2 = null, img3 = null, comprobante = null, servicioComida = null, servicioBaño = null, costoNoche = null)
-        val estanciaItem6= EstanciaItem(nombre = "Cielo de canes",     direccion  = "Calle falsa123, Col. Benito Tampico,TAMPS", img1 = 1, descripcion = null, tiposMascotas = null, tamaños = null, img2 = null, img3 = null, comprobante = null, servicioComida = null, servicioBaño = null, costoNoche = null)
-
-        val listaEstancias = mutableListOf(estanciaItem1, estanciaItem2, estanciaItem3,
-            estanciaItem4, estanciaItem5, estanciaItem6)
 
         val listView = this.LV_MisEstancias
 
         listView.setOnItemClickListener  (){parent,view,position,id->
 
-            val selectedObject = this.LV_MisEstancias.getItemAtPosition(position) as EstanciaItem
+            val selectedObject = this.LV_MisEstancias.getItemAtPosition(position) as listaHogarModel
             val editarEstan = Intent(applicationContext, EditarEstanciaActivity::class.java)
             startActivity(editarEstan)
         }
 
-        val adapter = MisEstanciasAdapter(this, listaEstancias as ArrayList<EstanciaItem>)
-        listView.adapter = adapter
 
 
 
 
-*/
+
+
 
     }
 

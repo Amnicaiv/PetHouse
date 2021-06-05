@@ -159,4 +159,14 @@ class OkHttpRequest(client:OkHttpClient) {
         return call
     }
 
+    fun getHogares(url:String,callback: Callback):Call{
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        val call = client.newCall(request)
+        call.enqueue(callback)
+        return call
+    }
+
 }

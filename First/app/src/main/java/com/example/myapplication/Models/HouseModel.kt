@@ -11,3 +11,5 @@ class HouseModel (
         val pausado: Boolean,
         val fechaAlta: String
 )
+
+class listaHogarModel(val descripcion:String, val costoPorNoche: Double, val capacidad: Int)
