@@ -54,14 +54,14 @@ class PetInfiActivity : AppCompatActivity(){
 
 
 
-        this.button11.setOnClickListener(){
+/*        this.button11.setOnClickListener(){
             doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 1000
             mLastClickTime = SystemClock.elapsedRealtime().toDouble()
 
             if(!doublePressPrev){
                 finish()
             }
-        }
+        }*/
 
 
     }

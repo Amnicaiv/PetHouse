@@ -92,7 +92,7 @@
                 android:id="@+id/bLogin"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginTop="260dp"
+                android:layout_marginTop="180dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="Iniciar sesión"

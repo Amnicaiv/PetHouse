@@ -111,6 +111,11 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
             startActivity(check)
         }
 
+        this.imageView17.setOnClickListener(){
+            val userInfoActivity = Intent(applicationContext, InformacionUsuario::class.java)
+            startActivity(userInfoActivity)
+        }
+
         actionBar?.hide()
         supportActionBar?.hide()
 

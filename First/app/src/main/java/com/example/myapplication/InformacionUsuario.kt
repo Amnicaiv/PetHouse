@@ -72,5 +72,9 @@ class InformacionUsuario : AppCompatActivity() {
             }
 
         })
+
+        this.btnCancel.setOnClickListener(){
+            finish()
+        }
     }
 }

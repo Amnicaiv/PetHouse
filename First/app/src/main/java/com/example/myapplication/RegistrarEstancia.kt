@@ -17,16 +17,6 @@ class RegistrarEstancia :AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_registroresidencia)
 
-       /* "userId": "string",
-        "descripcion": "string",
-        "costoPorNoche": 0,
-        "capacidad": 0,
-        "cuentaConMascotas": true,
-        "publicado": true,
-        "disponible": true,
-        "pausado": true,
-        "fechaAlta": "2021-06-04T15:26:27.083Z"*/
-
 
         this.btn_enviar_solicitud.setOnClickListener(){
 
@@ -35,9 +25,10 @@ class RegistrarEstancia :AppCompatActivity() {
 
             val descripcion = this.editTextTextPersonName3.text.toString()
             val costoxNoche = this.editTextNumber.text.toString().toInt()
-            val capacidad = this.editTextTextPersonName2.text.toString().toInt()
+            val capacidad = this.editTextTextPersonName7.text.toString().toInt()
+            val cuentaMascotas = this.checkBox3.isChecked
 
-            val casaNueva = HouseModel(idString,descripcion,costoxNoche,capacidad,true,true,true,true,"2021-06-04T15:26:27.083Z")
+            val casaNueva = HouseModel(idString,descripcion,costoxNoche,capacidad,cuentaMascotas,true,true,true,"2021-06-04T15:26:27.083Z")
 
             var client = OkHttpClient()
             var request = OkHttpRequest(client)

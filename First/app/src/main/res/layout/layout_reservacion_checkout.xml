@@ -29,22 +29,8 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/logo_pequeno"
-                tools:srcCompat="@mipmap/logo_pequeno" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Hora llegada"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName19" />
+                app:srcCompat="@mipmap/logo_largo2"
+                tools:srcCompat="@mipmap/logo_largo2" />
 
             <ImageView
                 android:id="@+id/imageView22"
@@ -55,29 +41,8 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12"
-                app:srcCompat="@drawable/ic_baseline_gite_24" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="213dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="24dp"
-                android:text="DejarÃ© comida para mi mascota"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName27" />
-
-            <Button
-                android:id="@+id/btn_enviar_solicitud"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text=" Selecciona tu mascota"
-                app:backgroundTint="#FF9800"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName16" />
+                app:srcCompat="@drawable/ic_baseline_person_24"
+                tools:srcCompat="@drawable/ic_baseline_person_24" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -86,7 +51,7 @@
                 android:layout_marginStart="44dp"
                 android:layout_marginLeft="44dp"
                 android:layout_marginTop="32dp"
-                android:text="Estancia Seleccionada"
+                android:text="Propietario de la estancia"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -103,43 +68,57 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView22"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
+
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="342dp"
-                android:layout_height="356dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="340dp"
+                android:layout_height="484dp"
+                android:layout_marginTop="76dp"
                 android:background="#D5D2D2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_enviar_solicitud"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName16"
                 app:srcCompat="@android:drawable/divider_horizontal_dark"
                 tools:srcCompat="@android:drawable/divider_horizontal_dark" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName18"
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Fecha entrada"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Fecha Entrada"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName27"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Hora salida(opcional)"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName26" />
+            <Spinner
+                android:id="@+id/spinner_dia"
+                android:layout_width="120dp"
+                android:layout_height="41dp"
+                android:layout_weight="1"
+                android:entries="@array/dias_array"
+                app:layout_constraintStart_toEndOf="@+id/spinner_mes"
+                app:layout_constraintTop_toTopOf="@+id/spinner_mes" />
+
+            <Spinner
+                android:id="@+id/spinner_mes"
+                android:layout_width="110dp"
+                android:layout_height="41dp"
+                android:layout_weight="0"
+                android:entries="@array/meses"
+                app:layout_constraintStart_toEndOf="@+id/spinner_anio"
+                app:layout_constraintTop_toTopOf="@+id/spinner_anio" />
+
+            <Spinner
+                android:id="@+id/spinner_anio"
+                android:layout_width="110dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="16dp"
+                android:entries="@array/Anios"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -154,60 +133,94 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView21"
                 app:layout_constraintTop_toTopOf="@+id/imageView21" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName19"
+            <TextView
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="32dp"
+                android:text="Fecha Salida"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_anio" />
+
+            <Spinner
+                android:id="@+id/spinner_dia2"
+                android:layout_width="120dp"
+                android:layout_height="41dp"
+                android:layout_weight="1"
+                android:entries="@array/dias_array"
+                app:layout_constraintStart_toEndOf="@+id/spinner_mes"
+                app:layout_constraintTop_toTopOf="@+id/spinner_mes2" />
+
+            <Spinner
+                android:id="@+id/spinner_mes2"
+                android:layout_width="110dp"
+                android:layout_height="41dp"
+                android:layout_weight="0"
+                android:entries="@array/meses"
+                app:layout_constraintStart_toEndOf="@+id/spinner_anio2"
+                app:layout_constraintTop_toTopOf="@+id/spinner_anio2" />
+
+            <Spinner
+                android:id="@+id/spinner_anio2"
+                android:layout_width="110dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="24dp"
+                android:entries="@array/Anios"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="226dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Fecha salida"
+                android:gravity="top|left"
+                android:hint="Especificaciones de alimentacion"
+                android:inputType="textMultiLine|textPersonName"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName18" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName4"
+                android:layout_width="226dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:gravity="top|left"
+                android:hint="Descripcion del alimento (Marca)"
+                android:inputType="textMultiLine|textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
             <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="220dp"
                 android:layout_height="34dp"
-                android:text="Mi mascota no puede dormir afuera "
+                android:layout_marginTop="75dp"
+                android:text="Voy a dejar mi propio alimento "
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="#948BC34A"
-                android:text="pago con tarjeta de debito/credito"
-                app:backgroundTint="#FF9800"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-            <Button
-                android:id="@+id/button14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#948BC34A"
-                android:text="pago en estancia"
-                app:backgroundTint="#FF9800"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button10" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_mes2" />
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="365dp"
+                android:layout_width="336dp"
                 android:layout_height="350dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="100dp"
                 android:background="#D5D2D2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button14"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
                 app:srcCompat="@android:drawable/divider_horizontal_dark"
                 tools:srcCompat="@android:drawable/divider_horizontal_dark" />
 
@@ -284,9 +297,11 @@
                 android:id="@+id/button16"
                 android:layout_width="444dp"
                 android:layout_height="71dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="75dp"
                 android:text="Finalizar Reservacion"
                 app:backgroundTint="#FF9800"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
                 app:layout_constraintStart_toStartOf="parent"

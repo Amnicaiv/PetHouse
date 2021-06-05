@@ -10,39 +10,23 @@
         android:id="@+id/btnCancel"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="28dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Cancelar"
+        android:text="Regresar"
         android:textSize="24sp"
         app:backgroundTint="#FF6161"
         app:cornerRadius="0dp"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Guardar"
-        android:textSize="24sp"
-        app:backgroundTint="#7DD676"
-        app:cornerRadius="0dp"
-        app:elevation="0dp"
-        app:layout_constraintStart_toEndOf="@+id/btnCancel"
-        app:layout_constraintTop_toTopOf="@+id/btnCancel" />
 
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="600dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -59,7 +43,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/logo_largo" />
+                app:srcCompat="@mipmap/logo_largo2" />
 
             <ImageView
                 android:id="@+id/imageView16"
