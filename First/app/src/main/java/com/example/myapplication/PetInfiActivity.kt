@@ -33,7 +33,7 @@ class PetInfiActivity : AppCompatActivity(){
             this.editTextTextPersonName7.setText(petSelected.edad.toString())
             this.imageView7.setImageBitmap(petSelected.imagen?.let { encoder.convert(it) })
             this.imageView10.setImageBitmap(petSelected.cartillaPdf?.let { encoder.convert(it) })
-            this.imgalimento.setImageBitmap(petSelected.alimento?.let{encoder.convert(it) })
+            this.imageView12.setImageBitmap(petSelected.alimento?.let{encoder.convert(it) })
 
 
         }
