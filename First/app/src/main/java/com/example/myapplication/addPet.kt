@@ -38,6 +38,7 @@ class addPet : AppCompatActivity(){
         val tbEdad = findViewById<TextView>(R.id.tv_edad_mascota)
 
         val btnOpenCam =  findViewById<TextView>(R.id.btn_foto_mascota)
+        val btnOpenCamAlimento = findViewById<Button>(R.id.btn_foto_alimento)
 
         ArrayAdapter.createFromResource(applicationContext,R.array.tipo_mascota_array,android.R.layout.simple_spinner_item).also {
             adapter ->
@@ -88,6 +89,7 @@ class addPet : AppCompatActivity(){
 
                 val imagenPetIV = this.imageView25
                 val imagenCarnet = this.imageView31
+                val imagenAlimento = this.imgalimento
 
                 imagenPetIV.invalidate()
                 var bitmap = imagenPetIV.drawable.toBitmap()
@@ -99,6 +101,10 @@ class addPet : AppCompatActivity(){
                 imagenCarnet.invalidate()
                 bitmap = imagenCarnet.drawable.toBitmap()
                 val imageString2 = encoder.convert(bitmap)
+
+                imagenAlimento.invalidate()
+                bitmap = imagenAlimento.drawable.toBitmap()
+                val imgAlimento = encoder.convert(bitmap)
 
 
 
@@ -112,6 +118,7 @@ class addPet : AppCompatActivity(){
                     tipoMascotaResult.toString().toInt(),
                     imageString,
                     imageString2,
+                    imgAlimento,
                     "2021-06-03T18:30:40.299Z")
 
 
@@ -132,8 +139,9 @@ class addPet : AppCompatActivity(){
                         ldb.InsertPet(mascotaNueva,true)
                         runOnUiThread {
                             Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_LONG).show()
-                            finish()
                         }
+                        val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
+                        startActivity(registerActivity)
 
                     }
 
@@ -150,6 +158,14 @@ class addPet : AppCompatActivity(){
             }
             }
 
+        btnOpenCamAlimento.setOnClickListener {
+            val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                startActivityForResult(takePicture,3)
+            }catch (e:ActivityNotFoundException){
+
+            }
+        }
 
 
         btn_foto_carnet.setOnClickListener(){
@@ -170,6 +186,10 @@ class addPet : AppCompatActivity(){
         if (resultCode == RESULT_OK && requestCode == 100) {
             var imageUri: Uri? = data?.data
             this.imageView31.setImageURI(imageUri)
+        }
+        if(requestCode == 3 && resultCode  == RESULT_OK){
+            val imgbm = data?.extras?.get("data") as Bitmap
+            findViewById<ImageView>(R.id.imgalimento).setImageBitmap(imgbm)
         }
     }
 

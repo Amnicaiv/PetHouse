@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Adapters.CustomAdapter
@@ -29,6 +30,8 @@ class MisMascotasActivity : AppCompatActivity(){
 
         val userToken = this.getSharedPreferences("key",0)
         val idString = userToken.getString("id","No id found")
+        val loadinSpinner = findViewById<ProgressBar>(R.id.progressBar_mismascotas)
+        loadinSpinner.visibility = View.VISIBLE
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
@@ -38,6 +41,7 @@ class MisMascotasActivity : AppCompatActivity(){
         request.getPets(url, object:Callback{
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
+
                     //Toast.makeText(applicationContext,"no se pudo obtener informacion de las mascotas",Toast.LENGTH_LONG).show()
                     val petsList = ldb.GetUserPets()
                     var listaMascotas = ArrayList<PetModel>()
@@ -50,8 +54,8 @@ class MisMascotasActivity : AppCompatActivity(){
 
                         val tipo = petsList[i].tipoMascotaId.toString()
                         val tamano = petsList[i].categoriaMascotaId.toString()
-
-                        val mascota = PetModel(nombre,tipo,tamano, R.drawable.dog_dos)
+                        val img = petsList[i].imagen.toString()
+                        val mascota = PetModel(nombre,tipo,tamano, img)
 
                         listaMascotas.add(mascota)
                     }
@@ -89,8 +93,8 @@ class MisMascotasActivity : AppCompatActivity(){
                             val nombre = mascotasJson.getJSONObject(i).getString("nombre")
                             val tipo = mascotasJson.getJSONObject(i).getString("tipo")
                             val tamano = mascotasJson.getJSONObject(i).getString("tamano")
-
-                            val mascota = PetModel(nombre,tipo,tamano, R.drawable.dog_dos)
+                            val img = mascotasJson.getJSONObject(i).getString("imagen")
+                            val mascota = PetModel(nombre,tipo,tamano, img)
 
                             listaMascotas.add(mascota)
 
@@ -113,6 +117,7 @@ class MisMascotasActivity : AppCompatActivity(){
                     }catch (e:Exception){
                         e.printStackTrace()
                     }
+                    loadinSpinner.visibility=View.GONE
                 }
             }
 

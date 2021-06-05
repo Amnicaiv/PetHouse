@@ -6,6 +6,7 @@ import android.os.SystemClock
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Models.FullPetModel
+import kotlinx.android.synthetic.main.layout_createpet.*
 import kotlinx.android.synthetic.main.layout_petinfo.*
 
 class PetInfiActivity : AppCompatActivity(){
@@ -32,6 +33,7 @@ class PetInfiActivity : AppCompatActivity(){
             this.editTextTextPersonName7.setText(petSelected.edad.toString())
             this.imageView7.setImageBitmap(petSelected.imagen?.let { encoder.convert(it) })
             this.imageView10.setImageBitmap(petSelected.cartillaPdf?.let { encoder.convert(it) })
+            this.imgalimento.setImageBitmap(petSelected.alimento?.let{encoder.convert(it) })
 
 
         }

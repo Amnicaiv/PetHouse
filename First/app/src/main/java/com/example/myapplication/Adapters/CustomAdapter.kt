@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.myapplication.ImageParser
 import com.example.myapplication.Models.PetModel
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.layout_petinfo.*
 import kotlinx.android.synthetic.main.list_template.view.*
 import org.w3c.dom.Text
 
@@ -49,7 +51,9 @@ class CustomAdapter(var context:Context, items:ArrayList<PetModel>) : BaseAdapte
         holder?.nombre?.text = item.nombre
         holder?.tipo?.text = item.tipo
         holder?.tamano?.text = item.tamano
-        holder?.imagen?.setImageResource(item.imagen!!)
+        val encoder = ImageParser()
+        val img = item.imagen?.let { encoder.convert(it) }
+        holder?.imagen?.setImageBitmap(img)
 
         return vista!!
     }
