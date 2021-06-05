@@ -9,11 +9,10 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import com.example.myapplication.Models.UserModel
 import com.example.myapplication.Models.loginModel
+import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.layout_iniciosesion.*
 import okhttp3.Call
@@ -28,6 +27,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_iniciosesion);
+
+        val loadingSpinnerLogin = findViewById<ProgressBar>(R.id.progressBar_login)
+        loadingSpinnerLogin.visibility=View.GONE
+
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
         val ldb = LocalDatabaseManager(this)
         var loginPerson :Persona;
@@ -81,6 +85,8 @@ class MainActivity : AppCompatActivity() {
                     errorPassword.visibility = View.INVISIBLE
                 }
 
+                loadingSpinnerLogin.visibility=View.VISIBLE
+
                 var client = OkHttpClient()
                 var request = OkHttpRequest(client)
 
@@ -93,6 +99,7 @@ class MainActivity : AppCompatActivity() {
                 request.login(url,credentials, object: Callback{
                     override fun onFailure(call: Call, e: IOException) {
                         runOnUiThread {
+                            loadingSpinnerLogin.visibility=View.GONE
                             Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -100,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onResponse(call: Call, response: Response) {
                         val responseData = response.body()?.string()
                         runOnUiThread {
+                            loadingSpinnerLogin.visibility=View.GONE
                             try{
                                 var token = responseData.toString()
                                 println("Request Succesful")
@@ -107,36 +115,54 @@ class MainActivity : AppCompatActivity() {
 
                                 when(token){
                                     "Usuario no existe"->{
-                                        Log.d("response1","usuario no existe")
                                         runOnUiThread {
-                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verfique su informacion de login.", Toast.LENGTH_LONG).show()
+                                            Toast.makeText(applicationContext,"Usuario no existe",Toast.LENGTH_SHORT).show()
+                                            val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
+                                            startActivity(registerActivity)
                                         }
                                     }
                                     "Credenciales inválidas"->{
-                                        Log.d("response2","contraseña invalida")
                                         runOnUiThread {
-                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verfique su informacion de login.", Toast.LENGTH_LONG).show()
+                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verfique su información", Toast.LENGTH_LONG).show()
                                         }
                                     }
                                     else->{
-                                        //Save token on Shared Preferences
-                                        if(ldb.GetLoggedUser().isNotEmpty()){
-                                            val persona = ldb.GetLoggedUser()
-                                            //ldb.deletePerson(persona[0].id)
-                                            val newuser = Persona(0,"", "","","","","", etPassword.text.toString(),"",0)
-                                            //ldb.InsertLoggedUser()
-                                        }
-                                        val sharedPref = this@MainActivity.getSharedPreferences("key",Context.MODE_PRIVATE) ?: return@runOnUiThread
-                                        with(sharedPref.edit()){
-                                            putString("token",token)
-                                            putString("apodo",etUsername.text.toString())
-                                            commit()
-                                        }
-                                        runOnUiThread {
-                                            Toast.makeText(applicationContext,"Bienvenido", Toast.LENGTH_LONG).show()
-                                        }
-                                        val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
-                                        startActivity(registerActivity)
+                                        //Send request to get id
+                                        val urlGetUserByUsername="https://patoparra.com/api/cliente/getfromusername?username=" + credentials.username.toString()
+                                        request.getUser(urlGetUserByUsername,object:Callback{
+                                            override fun onFailure(call: Call, e: IOException) {
+                                                runOnUiThread {
+                                                    Toast.makeText(applicationContext, "No se pudo obtener información del usuario. verifique su conexión",Toast.LENGTH_LONG).show()
+                                                }
+                                            }
+
+                                            override fun onResponse(call: Call,response: Response) {
+                                                val responseData =  response.body()?.string()
+                                                val user = Gson().fromJson<UserModel>(responseData, UserModel::class.java)
+                                                println(token)
+                                                println(user.id)
+                                                println(user.name)
+                                                //Actualizar prefs
+                                                prefs.edit().putString("access_token",token).commit()
+                                                prefs.edit().putString("id",user.id).commit()
+                                                prefs.edit().putString("name",user.name).commit()
+
+                                                //Save token on Shared Preferences
+                                                if(ldb.GetLoggedUser().isNotEmpty()){
+                                                    val persona = ldb.GetLoggedUser()
+                                                    //ldb.deletePerson(persona[0].id)
+                                                    val newuser = Persona(0,"", "","","","","", etPassword.text.toString(),"",0)
+                                                    //ldb.InsertLoggedUser()
+                                                }
+
+                                                runOnUiThread {
+                                                    Toast.makeText(applicationContext,"Bienvenido", Toast.LENGTH_LONG).show()
+                                                }
+                                                val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
+                                                startActivity(registerActivity)
+                                            }
+
+                                        })
                                     }
                                 }
 

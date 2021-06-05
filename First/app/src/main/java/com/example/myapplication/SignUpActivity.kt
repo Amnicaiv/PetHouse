@@ -10,9 +10,8 @@ import android.text.Spannable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Models.SignupModel
@@ -37,17 +36,20 @@ class SignUpActivity: AppCompatActivity() {
         val tbNombre = findViewById<TextView>(R.id.txt_nombre)
         val tbApellidoPaterno = findViewById<TextView>(R.id.txt_apPaterno)
         val tbApellidoMaterno = findViewById<TextView>(R.id.txt_apMaterno)
-        val tbFechaNacimiento = findViewById<TextView>(R.id.txt_fechaNacimiento)
         val tbDireccion =  findViewById<TextView>(R.id.txt_direccion)
         val tbNoExterior = findViewById<TextView>(R.id.txt_noExt)
         val tbNoInterior = findViewById<TextView>(R.id.txt_noInt)
         val tbCodigoPostal = findViewById<TextView>(R.id.txt_codigoPostal)
-        val tbCiudad = findViewById<TextView>(R.id.txt_ciudad)
         val tbTelefono = findViewById<TextView>(R.id.txt_telefono)
         val tbNombreUsuario = findViewById<TextView>(R.id.txt_nombreUsuario)
         val tbCorreoElectronico = findViewById<TextView>(R.id.txt_correoElectronico)
         val tbContrasena = findViewById<TextView>(R.id.txt_contrasena)
         val tbConfirmacionContrasena = findViewById<TextView>(R.id.txt_confirmacionContrasena)
+
+        val spinnerDiaFechaNacimiento = findViewById<Spinner>(R.id.spinner_dia)
+        val spinnerMesFechaNacimiento = findViewById<Spinner>(R.id.spinner_mes)
+        val spinnerAnioFechaNacimiento = findViewById<Spinner>(R.id.spinner_anio)
+        val spinnerCiudad = findViewById<Spinner>(R.id.spinner_ciudad)
 
         val errorGeneral = findViewById<TextView>(R.id.txt_error_general)
         val errorNombre = findViewById<TextView>(R.id.tv_error_nombre)
@@ -63,26 +65,114 @@ class SignUpActivity: AppCompatActivity() {
         val errorContrasena = findViewById<TextView>(R.id.tv_error_contrasena)
         val errorConfirmacionContrasena = findViewById<TextView>(R.id.tv_error_confirmacionContrasena)
 
+        val loadingSpinner = findViewById<ProgressBar>(R.id.progressBar)
+        loadingSpinner.visibility = View.GONE
+
         val btnSignup = findViewById<Button>(R.id.btn_signup)
 
 
 
-        //tbFechaNacimiento.addTextChangedListener(textWatcher)
+        var dia:String=""
+        var mes:String=""
+        var anio:String=""
+        var ciudad:Int=0
 
+        spinnerDiaFechaNacimiento.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val diaP = parent?.getItemAtPosition(position)
+                dia = diaP.toString()
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                runOnUiThread {
+                    Toast.makeText(applicationContext,"Seleccione un día",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        spinnerMesFechaNacimiento.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val mesP = parent?.getItemAtPosition(position)
+                if(mesP.toString() == "Enero")
+                    mes =  "01"
+                else if(mesP.toString() == "Febrero")
+                    mes =  "02"
+                else if(mesP.toString() == "Marzo")
+                    mes =  "03"
+                else if(mesP.toString() == "Abril")
+                    mes =  "04"
+                else if(mesP.toString() == "Mayo")
+                    mes =  "05"
+                else if(mesP.toString() == "Junio")
+                    mes =  "06"
+                else if(mesP.toString() == "Julio")
+                    mes =  "07"
+                else if(mesP.toString() == "Agosto")
+                    mes =  "08"
+                else if(mesP.toString() == "Septiembre")
+                    mes =  "09"
+                else if(mesP.toString() == "Octubre")
+                    mes =  "10"
+                else if(mesP.toString() == "Noviembre")
+                    mes =  "11"
+                else if(mesP.toString() == "Diciembre")
+                    mes =  "12"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                runOnUiThread {
+                    Toast.makeText(applicationContext,"Seleccione un mes",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        spinnerAnioFechaNacimiento.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val anioP = parent?.getItemAtPosition(position)
+                anio = anioP.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                runOnUiThread {
+                    Toast.makeText(applicationContext,"Seleccione un año", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
+        spinner_ciudad.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val ciudadP = parent?.getItemAtPosition(position)
+                if(ciudadP.toString() == "Monterrey")
+                    ciudad = 948
+                else if(ciudadP.toString() == "Santa Catarina")
+                    ciudad = 969
+                else if(ciudadP.toString() == "San Pedro Garza García")
+                    ciudad = 970
+                else if(ciudadP.toString() == "San Nicolás de los Garza")
+                    ciudad = 971
+                else if(ciudadP.toString() == "Apodaca")
+                    ciudad = 973
+                else if(ciudadP.toString() == "Guadalupe")
+                    ciudad = 983
+                else if(ciudadP.toString() == "Escobedo")
+                    ciudad = 968
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                runOnUiThread {
+                    Toast.makeText(applicationContext,"Seleccione una ciudad",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
 
 
 
         btnSignup.setOnClickListener {
             var error=false
-
-
-
-            var datetext = this.txt_fechaNacimiento.text.toString()
-            datetext += "T18:12:43.724Z"
-
-
-
+            loadingSpinner.visibility = View.VISIBLE
+            var fechaNacT:String="";
             if(tbNombre.text.isNullOrEmpty())
             {
                 error=true
@@ -107,17 +197,13 @@ class SignUpActivity: AppCompatActivity() {
             }else if(errorApMaterno.visibility == TextView.VISIBLE)
                 errorApMaterno.visibility = TextView.INVISIBLE
 
-            if(tbFechaNacimiento.text.isNullOrEmpty())
+
+            if(!anio.toString().isNullOrEmpty() && !mes.toString().isNullOrEmpty() && !dia.toString().isNullOrEmpty())
             {
-                error=true
-                errorFechaNacimiento.text = "campo requerido"
-                errorFechaNacimiento.visibility = TextView.VISIBLE
-            }else{
-                errorFechaNacimiento.visibility = TextView.INVISIBLE
-                /* val formatter:SimpleDateFormat = SimpleDateFormat("dd/MM/yyy")
-                 val fechaNacimiento = formatter.parse(tbFechaNacimiento.text.toString())
-                 println(fechaNacimiento)*/
+                fechaNacT = anio.toString()+"-"+mes.toString()+"-"+dia.toString()+"T00:00:00.000Z"
             }
+            else
+                error=true;
 
             if(tbDireccion.text.isNullOrEmpty())
             {
@@ -134,14 +220,6 @@ class SignUpActivity: AppCompatActivity() {
                 errorCodigoPostal.visibility = TextView.VISIBLE
             }else if(errorCodigoPostal.visibility == TextView.VISIBLE)
                 errorCodigoPostal.visibility = TextView.INVISIBLE
-
-            if(tbCiudad.text.isNullOrEmpty())
-            {
-                error=true
-                errorCiudad.text = "campo requerido"
-                errorCiudad.visibility = TextView.VISIBLE
-            }else if(errorCiudad.visibility == TextView.VISIBLE)
-                errorCiudad.visibility = TextView.INVISIBLE
 
             if(tbTelefono.text.isNullOrEmpty())
             {
@@ -207,13 +285,14 @@ class SignUpActivity: AppCompatActivity() {
 
             Log.d("error",error.toString());
             if(error){
+                loadingSpinner.visibility = View.GONE
                 errorGeneral.text="Existen errores en la captura. Por favor verifique su información. 😅"
             }else{
                 errorGeneral.visibility = TextView.INVISIBLE
                 var client = OkHttpClient()
                 var request = OkHttpRequest(client)
 
-                var fechaNac = "1980-05-26T18:12:43.724Z"//tbFechaNacimiento.text.toString().replace('/','-') + "T18:12:43.724Z"
+                var fechaNac = fechaNacT
                 val usuarioNuevo = SignupModel(
                     tbNombre.text.toString(),
                     tbApellidoPaterno.text.toString(),
@@ -223,7 +302,7 @@ class SignUpActivity: AppCompatActivity() {
                     tbNoExterior.text.toString(),
                     tbNoInterior.text.toString(),
                     tbCodigoPostal.text.toString(),
-                    3,
+                    ciudad,
                     tbNombreUsuario.text.toString(),
                     tbCorreoElectronico.text.toString(),
                     tbTelefono.text.toString(),
@@ -238,6 +317,7 @@ class SignUpActivity: AppCompatActivity() {
                     override fun onFailure(call: Call, e: IOException) {
                         Log.d("onFailure",e.toString())
                         runOnUiThread {
+                            loadingSpinner.visibility = View.GONE
                             Toast.makeText(applicationContext,"Hubo un error al intentar crear su cuenta. Intente mas tarde.", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -249,15 +329,22 @@ class SignUpActivity: AppCompatActivity() {
                         {
 
 
-                            var loggeduser = Persona(0,tbNombreUsuario.text.toString(), tbNombre.text.toString(),tbApellidoPaterno.text.toString(), tbApellidoMaterno.text.toString(),tbFechaNacimiento.text.toString(),tbCorreoElectronico.text.toString(),tbContrasena.text.toString(),tbTelefono.text.toString(),0)
+                            var loggeduser = Persona(0,tbNombreUsuario.text.toString(), tbNombre.text.toString(),tbApellidoPaterno.text.toString(), tbApellidoMaterno.text.toString(),fechaNac,tbCorreoElectronico.text.toString(),tbContrasena.text.toString(),tbTelefono.text.toString(),0)
                             val success =ldb.InsertLoggedUser(loggeduser, true)
 
                             runOnUiThread {
+                                loadingSpinner.visibility = View.GONE
                                 Toast.makeText(applicationContext,"Se ha creado su cuenta, Bienvenido", Toast.LENGTH_LONG).show()
                             }
 
-                            val registerActivity = Intent(applicationContext, DashboardActivity::class.java)
+                            val registerActivity = Intent(applicationContext, MainActivity::class.java)
                             startActivity(registerActivity)
+                        }else
+                        {
+                            runOnUiThread {
+                                Toast.makeText(applicationContext, responseData.toString(),Toast.LENGTH_SHORT).show()
+                            }
+
                         }
                     }
                 })

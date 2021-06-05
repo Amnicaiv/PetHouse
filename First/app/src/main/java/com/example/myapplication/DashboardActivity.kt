@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Models.GetUserDataModel
@@ -26,9 +27,14 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dashboard);
 
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
         val userToken = this.getSharedPreferences("key",0)
         val tokenString = userToken.getString("token","No token found")
+
+        val msjBienvenida = findViewById<TextView>(R.id.tv_mensaje_bienvenida)
+
+        msjBienvenida.setText("Bienvenido, " + prefs.getString("name","Unknkown"))
 
 
        // val ldb = LocalDatabaseManager(this)

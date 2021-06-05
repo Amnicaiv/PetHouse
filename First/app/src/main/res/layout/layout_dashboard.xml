@@ -33,41 +33,53 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView5"
                     app:srcCompat="@mipmap/logo_largo2" />
 
+                <TextView
+                    android:id="@+id/tv_mensaje_bienvenida"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:padding="10dp"
+                    android:text="Bienvenido, User"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
                 <ImageView
                     android:id="@+id/imageView14"
-                    android:layout_width="180dp"
-                    android:layout_height="150dp"
+                    android:layout_width="198dp"
+                    android:layout_height="170dp"
 
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:background="#2A001D49"
+                    android:background="#FF9800"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/iv_pets"
-                    app:srcCompat="@drawable/ic_baseline_insert_invitation_24" />
+                    app:srcCompat="@drawable/ic_baseline_sticky_note_2_24" />
 
                 <ImageView
                     android:id="@+id/iv_pets"
-                    android:layout_width="180dp"
-                    android:layout_height="150dp"
+                    android:layout_width="198dp"
+                    android:layout_height="170dp"
 
                     android:layout_marginStart="16dp"
 
 
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="64dp"
                     android:layout_weight="1"
-                    android:background="#2A001D49"
+                    android:background="#FF9800"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView15"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_mensaje_bienvenida"
                     app:srcCompat="@drawable/ic_baseline_pets_24" />
 
                 <ImageView
                     android:id="@+id/iv_hotel"
-                    android:layout_width="180dp"
-                    android:layout_height="150dp"
+                    android:layout_width="198dp"
+                    android:layout_height="170dp"
 
                     android:layout_marginTop="40dp"
-                    android:background="#2A001D49"
+                    android:background="#FF9800"
                     app:layout_constraintEnd_toEndOf="@+id/iv_pets"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/iv_pets"
@@ -109,10 +121,10 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="180dp"
-                    android:layout_height="150dp"
+                    android:layout_width="198dp"
+                    android:layout_height="170dp"
                     android:layout_marginTop="40dp"
-                    android:background="#2A001D49"
+                    android:background="#FF9800"
                     app:layout_constraintEnd_toEndOf="@+id/imageView14"
                     app:layout_constraintStart_toStartOf="@+id/imageView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView18"
@@ -143,6 +155,20 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/positivessl_trust_seal_md_167x42" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

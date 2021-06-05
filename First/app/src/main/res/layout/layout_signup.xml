@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     android:background="#29708C">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="799dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -134,19 +143,40 @@
             </ScrollView>
 
 
-            <EditText
-                android:id="@+id/txt_fechaNacimiento"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10pt"
-                android:layout_marginLeft="10pt"
-                android:layout_marginTop="20pt"
-                android:layout_marginEnd="10pt"
-                android:layout_marginRight="10pt"
-                android:ems="10"
-                android:hint="Fecha de nacimiento (1900-01-30)"
-                android:inputType="date"
-                android:textSize="24sp" />
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/spinner_dia"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:entries="@array/dias_array" />
+
+                    <Spinner
+                        android:id="@+id/spinner_mes"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:entries="@array/meses" />
+
+                    <Spinner
+                        android:id="@+id/spinner_anio"
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:entries="@array/anios" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
             <TextView
                 android:id="@+id/tv_error_fechaNacimiento"
@@ -245,19 +275,13 @@
                 android:textColor="#F44336"
                 tools:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/txt_ciudad"
+            <Spinner
+                android:id="@+id/spinner_ciudad"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10pt"
-                android:layout_marginLeft="10pt"
-                android:layout_marginTop="10pt"
-                android:layout_marginEnd="10pt"
-                android:layout_marginRight="10pt"
-                android:ems="10"
-                android:hint="Ciudad"
-                android:inputType="textPersonName"
-                android:textSize="24sp" />
+                android:layout_height="63dp"
+                android:layout_margin="20dp"
+                android:entries="@array/ciudades"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:id="@+id/tv_error_ciudad"
