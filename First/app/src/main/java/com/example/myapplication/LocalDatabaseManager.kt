@@ -185,6 +185,47 @@ class LocalDatabaseManager (context:Context) :SQLiteOpenHelper(context, DATABASE
         return success
     }
 
+    fun GetUserPets(): ArrayList<Mascota> {
+        val list: ArrayList<Mascota> = ArrayList<Mascota>()
+        val selectQuery = "SELECT  * FROM $TABLE_USER_PETS"
+
+        val db = this.readableDatabase
+        try {
+            val cursor = db.rawQuery(selectQuery, null)
+            try {
+
+                // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+
+                        val column1 = cursor.getString(cursor.getColumnIndex(KEY_PET_OWNERID))
+                        val column2 = cursor.getString(cursor.getColumnIndex(KEY_PET_NAME))
+                        val column3 = cursor.getString(cursor.getColumnIndex(KEY_PET_AGE)).toInt()
+                        val column4 = cursor.getString(cursor.getColumnIndex(KEY_PET_TYPE)).toInt()
+                        val column5 = cursor.getString(cursor.getColumnIndex(KEY_PET_CATEGORY)).toInt()
+                        val column6 = cursor.getString(cursor.getColumnIndex(KEY_PET_FOTO))
+                        val column7 = cursor.getString(cursor.getColumnIndex(KEY_PET_CARNET))
+
+                        //you could add additional columns here..
+                        list.add(Mascota(column1,column2,column3,column4,column5,column6,column7,""))
+                    } while (cursor.moveToNext())
+                }
+            } finally {
+                try {
+                    cursor.close()
+                } catch (ignore: Exception) {
+                }
+            }
+        } finally {
+            try {
+                db.close()
+            } catch (ignore: Exception) {
+            }
+        }
+
+        return list
+    }
+
     fun GetPetInfo (petName:String): ArrayList<Mascota> {
         val select = "SELECT * FROM $TABLE_USER_PETS WHERE $KEY_NOMBRE = '$petName'"
         val db = this.readableDatabase

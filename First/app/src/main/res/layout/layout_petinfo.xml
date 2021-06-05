@@ -34,7 +34,7 @@
     <ScrollView
         android:id="@+id/scrollView6"
         android:layout_width="410dp"
-        android:layout_height="533dp"
+        android:layout_height="480dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
