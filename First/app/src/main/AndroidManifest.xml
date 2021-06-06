@@ -39,7 +39,6 @@
         <activity android:name=".MisEstancias"></activity>
         <activity android:name=".EditarEstanciaActivity"></activity>
 
-        <activity android:name=".ApiTestActivity"></activity>
         <activity android:name=".RegistrarEstancia"></activity>
         <activity android:name=".CheckOutActivity"></activity>
         <activity android:name=".HogaresDisponiblesActivity"></activity>
