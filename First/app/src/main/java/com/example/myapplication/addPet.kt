@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -30,20 +31,17 @@ class addPet : AppCompatActivity(){
         val pickImage = 100
         var imageUri: Uri? = null
 
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+
         val spinnerTipoMascotas = findViewById<Spinner>(R.id.spinner_tipo)
         val spinnerTamano = findViewById<Spinner>(R.id.spinner_tamano)
         val btnRegistrar = findViewById<Button>(R.id.btn_registrar_mascota)
-        val btnRegresar = findViewById<ImageView>(R.id.btn_addpet_regresar)
 
         val tbNombre = findViewById<TextView>(R.id.tv_nombre_mascota)
         val tbEdad = findViewById<TextView>(R.id.tv_edad_mascota)
 
         val btnOpenCam =  findViewById<TextView>(R.id.btn_foto_mascota)
         val btnOpenCamAlimento = findViewById<Button>(R.id.btn_foto_alimento)
-
-        btnRegresar.setOnClickListener {
-            this.finish()
-        }
 
         ArrayAdapter.createFromResource(applicationContext,R.array.tipo_mascota_array,android.R.layout.simple_spinner_item).also {
             adapter ->
@@ -82,75 +80,89 @@ class addPet : AppCompatActivity(){
 
         }
 
+        var mLastClickTime = 0.0
+
+        var doublePressPrev = false
+
         btnRegistrar.setOnClickListener {
-            val userToken = this.getSharedPreferences("key",0)
-            val idString = userToken.getString("id","No id found")
-
-            Toast.makeText(applicationContext, "Se esta subiendo a la nube su mascota, espere un momento...", Toast.LENGTH_SHORT).show()
-
-            var error=false;
-
-            if(!error){
-
-                val imagenPetIV = this.imageView25
-                val imagenCarnet = this.imageView31
-                val imagenAlimento = this.imgalimento
-
-                imagenPetIV.invalidate()
-                var bitmap = imagenPetIV.drawable.toBitmap()
-
-                val encoder = ImageParser()
-
-                val imageString = encoder.convert(bitmap)
-
-                imagenCarnet.invalidate()
-                bitmap = imagenCarnet.drawable.toBitmap()
-                val imageString2 = encoder.convert(bitmap)
-
-                imagenAlimento.invalidate()
-                bitmap = imagenAlimento.drawable.toBitmap()
-                val imgAlimento = encoder.convert(bitmap)
 
 
-
-                var client = OkHttpClient()
-                var request = OkHttpRequest(client)
-                val mascotaNueva = Mascota(
-                    idString,
-                    tbNombre.text.toString(),
-                    tbEdad.text.toString().toInt(),
-                    1,
-                    tipoMascotaResult.toString().toInt(),
-                    imageString,
-                    imageString2,
-                    imgAlimento,
-                    "2021-06-03T18:30:40.299Z")
+            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 5000
+            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
 
 
-                var url="https://patoparra.com/api/mascota/create"
+            if(!doublePressPrev){
 
-                request.setPet(url,mascotaNueva,object: Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                        println("Failure to save pet")
+                val userToken = this.getSharedPreferences("key",0)
+                val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+                val idString = prefs.getString("id","Unkown")
 
-                        runOnUiThread {
-                            Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Se esta subiendo a la nube su mascota, espere un momento...", Toast.LENGTH_SHORT).show()
+
+                var error=false;
+
+                if(!error){
+
+                    val imagenPetIV = this.imageView25
+                    val imagenCarnet = this.imageView31
+                    val imagenAlimento = this.imgalimento
+
+                    imagenPetIV.invalidate()
+                    var bitmap = imagenPetIV.drawable.toBitmap()
+
+                    val encoder = ImageParser()
+
+                    val imageString = encoder.convert(bitmap)
+
+                    imagenCarnet.invalidate()
+                    bitmap = imagenCarnet.drawable.toBitmap()
+                    val imageString2 = encoder.convert(bitmap)
+
+                    imagenAlimento.invalidate()
+                    bitmap = imagenAlimento.drawable.toBitmap()
+                    val imgAlimento = encoder.convert(bitmap)
+
+
+
+                    var client = OkHttpClient()
+                    var request = OkHttpRequest(client)
+                    val mascotaNueva = Mascota(
+                        idString,
+                        tbNombre.text.toString(),
+                        tbEdad.text.toString().toInt(),
+                        1,
+                        tipoMascotaResult.toString().toInt(),
+                        imageString,
+                        imageString2,
+                        imgAlimento,
+                        "2021-06-03T18:30:40.299Z")
+
+
+                    var url="https://patoparra.com/api/mascota/create"
+
+                    request.setPet(url,mascotaNueva,object: Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            println("Failure to save pet")
+
+                            runOnUiThread {
+                                Toast.makeText(applicationContext,e.toString(), Toast.LENGTH_LONG).show()
+                            }
                         }
-                    }
 
-                    override fun onResponse(call: Call, response: Response) {
-                        val responseData = response.body()?.string()
-                        Log.d("reqSuccess",responseData.toString())
-                        ldb.InsertPet(mascotaNueva,true)
-                        runOnUiThread {
-                            Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_LONG).show()
+                        override fun onResponse(call: Call, response: Response) {
+                            val responseData = response.body()?.string()
+                            Log.d("reqSuccess",responseData.toString())
+                            ldb.InsertPet(mascotaNueva,true)
+                            runOnUiThread {
+                                Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_LONG).show()
+                            }
+                            val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
+                            startActivity(registerActivity)
+
                         }
-                        val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
-                        startActivity(registerActivity)
 
-                    }
-
-                })
+                    })
+                }
             }
         }
 
