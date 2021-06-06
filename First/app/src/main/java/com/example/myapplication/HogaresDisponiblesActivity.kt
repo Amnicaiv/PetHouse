@@ -71,9 +71,9 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
 
                         lista.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
 
-                           // Toast.makeText(applicationContext,listaHogares.get(id.toInt()).id ,Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, listaHogares[id.toInt()].id.toString() ,Toast.LENGTH_LONG).show()
                             val registerActivity = Intent(applicationContext, CheckOutActivity::class.java)
-                            registerActivity.putExtra("HOUSE_ID", listaHogares[id.toInt()].id)
+                            registerActivity.putExtra("HOUSE_ID", listaHogares[id.toInt()].id.toString())
                             startActivity(registerActivity)
                             //intent.putExtra("EXTRA_SESSION_ID", sessionId);
                         }

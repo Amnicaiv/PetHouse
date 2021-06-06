@@ -170,9 +170,8 @@ class CheckOutActivity :AppCompatActivity() {
 
         }
 
-
-        val userToken = this.getSharedPreferences("key",0)
-        val idString = userToken.getString("id","No id found")
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+        val idString = prefs.getString("id","No id found")
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
