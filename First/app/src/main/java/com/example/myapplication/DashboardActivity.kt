@@ -36,6 +36,8 @@ class DashboardActivity: AppCompatActivity(), View.OnClickListener {
 
         msjBienvenida.setText("Bienvenido, " + prefs.getString("name","Unknkown"))
 
+        Toast.makeText(this, prefs.getString("access_token","Unknkown"), Toast.LENGTH_SHORT).show()
+
 
        // val ldb = LocalDatabaseManager(this)
         val nick = userToken.getString("apodo","No nickname found")

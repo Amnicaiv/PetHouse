@@ -1,7 +1,9 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -66,6 +68,15 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
                         val lista = findViewById<ListView>(R.id.lv_hogaresdispo)
                         val adapter = HogaresDisponiblesAdapter(applicationContext,listaHogares)
                         lista.adapter  = adapter
+
+                        lista.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
+
+                           // Toast.makeText(applicationContext,listaHogares.get(id.toInt()).id ,Toast.LENGTH_LONG).show()
+                            val registerActivity = Intent(applicationContext, CheckOutActivity::class.java)
+                            registerActivity.putExtra("HOUSE_ID", listaHogares[id.toInt()].id)
+                            startActivity(registerActivity)
+                            //intent.putExtra("EXTRA_SESSION_ID", sessionId);
+                        }
                         spinnerHogares.visibility=View.GONE
                     }catch(e:Exception)
                     {

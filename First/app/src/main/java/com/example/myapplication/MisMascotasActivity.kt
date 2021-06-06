@@ -25,11 +25,12 @@ class MisMascotasActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_pet)
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
         val ldb = LocalDatabaseManager(applicationContext)
 
         val userToken = this.getSharedPreferences("key",0)
-        val idString = userToken.getString("id","No id found")
+        val idString =  prefs.getString("id","Unknkown")
         val loadinSpinner = findViewById<ProgressBar>(R.id.progressBar_mismascotas)
         loadinSpinner.visibility = View.VISIBLE
 
