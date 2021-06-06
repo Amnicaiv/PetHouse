@@ -33,12 +33,17 @@ class addPet : AppCompatActivity(){
         val spinnerTipoMascotas = findViewById<Spinner>(R.id.spinner_tipo)
         val spinnerTamano = findViewById<Spinner>(R.id.spinner_tamano)
         val btnRegistrar = findViewById<Button>(R.id.btn_registrar_mascota)
+        val btnRegresar = findViewById<ImageView>(R.id.btn_addpet_regresar)
 
         val tbNombre = findViewById<TextView>(R.id.tv_nombre_mascota)
         val tbEdad = findViewById<TextView>(R.id.tv_edad_mascota)
 
         val btnOpenCam =  findViewById<TextView>(R.id.btn_foto_mascota)
         val btnOpenCamAlimento = findViewById<Button>(R.id.btn_foto_alimento)
+
+        btnRegresar.setOnClickListener {
+            this.finish()
+        }
 
         ArrayAdapter.createFromResource(applicationContext,R.array.tipo_mascota_array,android.R.layout.simple_spinner_item).also {
             adapter ->
@@ -129,7 +134,7 @@ class addPet : AppCompatActivity(){
                         println("Failure to save pet")
 
                         runOnUiThread {
-                            Toast.makeText(applicationContext,"Error al intentar subir su informacion, vuelva a intentar en un momento", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
                         }
                     }
 
