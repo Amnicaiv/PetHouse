@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         val errorUsername =  findViewById<TextView>(R.id.tv_error_username)
         val errorPassword = findViewById<TextView>(R.id.tv_error_password)
 
+
+
         //Signup
         val lnkSignup = findViewById<TextView>(R.id.lnk_signup)
         lnkSignup.setOnClickListener {
@@ -86,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 loadingSpinnerLogin.visibility=View.VISIBLE
+                buttonLogin.isEnabled = false;
 
                 var client = OkHttpClient()
                 var request = OkHttpRequest(client)
@@ -116,6 +119,7 @@ class MainActivity : AppCompatActivity() {
                                 when(token){
                                     "Usuario no existe"->{
                                         runOnUiThread {
+                                            buttonLogin.isEnabled = false;
                                             Toast.makeText(applicationContext,"Usuario no existe",Toast.LENGTH_SHORT).show()
                                             val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
                                             startActivity(registerActivity)
@@ -123,7 +127,8 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     "Credenciales inválidas"->{
                                         runOnUiThread {
-                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verfique su información", Toast.LENGTH_LONG).show()
+                                            buttonLogin.isEnabled = false;
+                                            Toast.makeText(applicationContext,"Credenciales incorrectas, verifique su información", Toast.LENGTH_LONG).show()
                                         }
                                     }
                                     else->{
