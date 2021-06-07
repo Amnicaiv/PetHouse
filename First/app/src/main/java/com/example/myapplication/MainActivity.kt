@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
 
         buttonLogin.setOnClickListener {
-
             if(etUsername.text.isEmpty() || etPassword.text.isEmpty())
             {
                 if(etUsername.text.isEmpty())
@@ -152,7 +151,7 @@ class MainActivity : AppCompatActivity() {
                                                 prefs.edit().putString("id",user.id).commit()
                                                 prefs.edit().putString("name",user.name).commit()
 
-                                                //Save token on Shared Preferences
+                                                //Guardar en Internal DB
                                                 if(ldb.GetLoggedUser().isNotEmpty()){
                                                     val persona = ldb.GetLoggedUser()
                                                     //ldb.deletePerson(persona[0].id)
@@ -170,8 +169,6 @@ class MainActivity : AppCompatActivity() {
                                         })
                                     }
                                 }
-
-
                             }catch(e:JSONException){
                                 e.printStackTrace()
                             }
@@ -180,10 +177,6 @@ class MainActivity : AppCompatActivity() {
 
                 })
             }
-
-
-
-
         }
 
 

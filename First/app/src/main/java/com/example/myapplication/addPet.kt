@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
@@ -18,6 +19,8 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 
@@ -36,12 +39,21 @@ class addPet : AppCompatActivity(){
         val spinnerTipoMascotas = findViewById<Spinner>(R.id.spinner_tipo)
         val spinnerTamano = findViewById<Spinner>(R.id.spinner_tamano)
         val btnRegistrar = findViewById<Button>(R.id.btn_registrar_mascota)
+        val btnRegresar = findViewById<ImageView>(R.id.btn_addpet_regresar)
+        btnRegresar.setOnClickListener {
+            this.finish()
+        }
 
         val tbNombre = findViewById<TextView>(R.id.tv_nombre_mascota)
         val tbEdad = findViewById<TextView>(R.id.tv_edad_mascota)
 
-        val btnOpenCam =  findViewById<TextView>(R.id.btn_foto_mascota)
-        val btnOpenCamAlimento = findViewById<Button>(R.id.btn_foto_alimento)
+        val btnFotoMascota =  findViewById<Button>(R.id.btn_foto_mascota)
+        val btnFotoAlimento = findViewById<Button>(R.id.btn_foto_alimento)
+        val btnFotoCarnet = findViewById<Button>(R.id.btn_foto_carnet)
+
+        val imgMascota = findViewById<ImageView>(R.id.imagemascota)
+        val imgAlimento = findViewById<ImageView>(R.id.imgalimento)
+        val imgCarnet = findViewById<ImageView>(R.id.imagecarnet)
 
         ArrayAdapter.createFromResource(applicationContext,R.array.tipo_mascota_array,android.R.layout.simple_spinner_item).also {
             adapter ->
@@ -103,8 +115,8 @@ class addPet : AppCompatActivity(){
 
                 if(!error){
 
-                    val imagenPetIV = this.imageView25
-                    val imagenCarnet = this.imageView31
+                    val imagenPetIV = this.imagemascota
+                    val imagenCarnet = this.imagecarnet
                     val imagenAlimento = this.imgalimento
 
                     imagenPetIV.invalidate()
@@ -166,16 +178,16 @@ class addPet : AppCompatActivity(){
             }
         }
 
-        btnOpenCam.setOnClickListener{
+        btnFotoMascota.setOnClickListener{
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent, 1)
             } catch (e: ActivityNotFoundException) {
                 // display error state to the user
             }
-            }
+        }
 
-        btnOpenCamAlimento.setOnClickListener {
+        btnFotoAlimento.setOnClickListener {
             val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePicture,3)
@@ -184,29 +196,47 @@ class addPet : AppCompatActivity(){
             }
         }
 
-
-        btn_foto_carnet.setOnClickListener(){
+        btnFotoCarnet.setOnClickListener(){
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
 
+    }
 
-        }
+    fun resizeImg(image:Bitmap):Bitmap{
+        val width = image.width
+        val height = image.height
 
+        val scaleW  = width/2
+        val scaleH = width/2
+
+        return Bitmap.createScaledBitmap(image, scaleW, scaleH, true)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
-            findViewById<ImageView>(R.id.imageView25).setImageBitmap(imageBitmap)
-
+            val stream = ByteArrayOutputStream()
+            println("size: ${imageBitmap.byteCount}")
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,stream)
+            var compressedImg = BitmapFactory.decodeStream(ByteArrayInputStream(stream.toByteArray()))
+            compressedImg = resizeImg(compressedImg)
+            println("compress: ${compressedImg.byteCount}")
+            imagemascota.setImageBitmap(compressedImg)
         }
-        if (resultCode == RESULT_OK && requestCode == 100) {
+        else if (resultCode == RESULT_OK && requestCode == 100) {
             var imageUri: Uri? = data?.data
-            this.imageView31.setImageURI(imageUri)
+
+            this.imagecarnet.setImageURI(imageUri)
         }
-        if(requestCode == 3 && resultCode  == RESULT_OK){
+        else if(resultCode  == RESULT_OK && requestCode == 3){
             val imgbm = data?.extras?.get("data") as Bitmap
-            findViewById<ImageView>(R.id.imgalimento).setImageBitmap(imgbm)
+            val stream = ByteArrayOutputStream()
+
+            imgbm.compress(Bitmap.CompressFormat.JPEG,80,stream)
+
+            imgalimento.setImageBitmap(imgbm)
+            //findViewById<ImageView>(R.id.imgalimento).setImageBitmap(imgbm)
         }
     }
 

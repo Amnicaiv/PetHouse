@@ -9,13 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:background="#FF9800">
+        android:background="#72FF9800"
+        android:theme="@style/CardView.Light">
 
         <ImageView
             android:id="@+id/imagen"
             android:layout_width="103dp"
             android:layout_height="106dp"
             android:layout_margin="16dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/dog_dos" />
 
         <LinearLayout
