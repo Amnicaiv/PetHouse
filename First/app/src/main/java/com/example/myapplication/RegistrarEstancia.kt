@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Models.HouseModel
 import kotlinx.android.synthetic.main.layout_registroresidencia.*
@@ -20,8 +21,8 @@ class RegistrarEstancia :AppCompatActivity() {
 
         this.btn_enviar_solicitud.setOnClickListener(){
 
-            val userToken = this.getSharedPreferences("key",0)
-            val idString = userToken.getString("id","No id found")
+            val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+            val idString = prefs.getString("id","Unkown")
 
             val descripcion = this.editTextTextPersonName3.text.toString()
             val costoxNoche = this.editTextNumber.text.toString().toDouble()
@@ -37,12 +38,18 @@ class RegistrarEstancia :AppCompatActivity() {
 
             request.setHouse(url,casaNueva,object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    println("Failure to save pet")
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "Error al subir tu informacion a la nube, intentar de nuevo mas tarde.", Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     val responseData = response.body()?.string()
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "Exito al registrar su residencia.", Toast.LENGTH_LONG).show()
+                    }
                     Log.d("reqSuccess",responseData.toString())
+                    finish()
 
                 }
 

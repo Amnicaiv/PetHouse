@@ -23,11 +23,16 @@ class InformacionUsuario : AppCompatActivity() {
 
         val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
-        val userToken = this.getSharedPreferences("key",0)
+        /*val userToken = this.getSharedPreferences("key",0)
         val tokenString = userToken.getString("token","No token found")
-        val nick = userToken.getString("apodo","No nickname found")
+        val nick = userToken.getString("apodo","No nickname found")*/
+
+        val idString = prefs.getString("id","Unkown")
+        val nick = prefs.getString("nick","Unkown")
 
         val url = "https://patoparra.com/api/cliente/getfromusername?username=$nick"
+
+        Toast.makeText(applicationContext, nick.toString(), Toast.LENGTH_SHORT).show()
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
@@ -60,9 +65,6 @@ class InformacionUsuario : AppCompatActivity() {
                         emailTV.text = email
                         nameTV.text = username
                         nickTV.text= nick
-
-
-
 
 
                     }catch(e: JSONException){

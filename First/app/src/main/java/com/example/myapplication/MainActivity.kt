@@ -151,6 +151,7 @@ class MainActivity : AppCompatActivity() {
                                                 prefs.edit().putString("access_token",token).commit()
                                                 prefs.edit().putString("id",user.id).commit()
                                                 prefs.edit().putString("name",user.name).commit()
+                                                prefs.edit().putString("nick",etUsername.text.toString()).commit()
 
                                                 //Save token on Shared Preferences
                                                 if(ldb.GetLoggedUser().isNotEmpty()){

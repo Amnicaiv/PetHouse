@@ -201,11 +201,18 @@ class CheckOutActivity :AppCompatActivity() {
             request.setReservation(url,reservacionNueva,object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     println("Failure to save pet")
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "No se pudo contactar al servidor para completar su reservacion, intentar mas tarde.", Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     val responseData = response.body()?.string()
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "Se completo su reservacion.", Toast.LENGTH_LONG).show()
+                    }
                     Log.d("reqSuccess",responseData.toString())
+                    finish()
 
                 }
 
