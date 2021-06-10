@@ -3,7 +3,8 @@ package com.example.myapplication.Models
 data class PetModel(val nombre:String,
                     val tipo:String,
                     val tamano:String,
-                    val imagen: String?="")
+                    val imagen: String?="",
+                    val id:Int)
 
 data class FullPetModel(
         val ClienteId: String?,

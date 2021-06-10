@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
                         runOnUiThread {
                             loadingSpinnerLogin.visibility=View.GONE
                             Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                            buttonLogin.isEnabled = true;
                         }
                     }
 
@@ -118,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                                 when(token){
                                     "Usuario no existe"->{
                                         runOnUiThread {
-                                            buttonLogin.isEnabled = false;
+                                            buttonLogin.isEnabled = true;
                                             Toast.makeText(applicationContext,"Usuario no existe",Toast.LENGTH_SHORT).show()
                                             val registerActivity = Intent(applicationContext, SignUpActivity::class.java)
                                             startActivity(registerActivity)
@@ -126,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     "Credenciales inválidas"->{
                                         runOnUiThread {
-                                            buttonLogin.isEnabled = false;
+                                            buttonLogin.isEnabled = true;
                                             Toast.makeText(applicationContext,"Credenciales incorrectas, verifique su información", Toast.LENGTH_LONG).show()
                                         }
                                     }

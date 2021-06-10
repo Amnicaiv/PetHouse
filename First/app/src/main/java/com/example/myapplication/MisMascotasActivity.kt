@@ -36,6 +36,7 @@ class MisMascotasActivity : AppCompatActivity(){
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
+
         val url ="https://patoparra.com/api/cliente/getmascotas/?id=$idString"
 
 
@@ -56,7 +57,7 @@ class MisMascotasActivity : AppCompatActivity(){
                         val tipo = petsList[i].tipoMascotaId.toString()
                         val tamano = petsList[i].categoriaMascotaId.toString()
                         val img = petsList[i].imagen.toString()
-                        val mascota = PetModel(nombre,tipo,tamano, img)
+                        val mascota = PetModel(nombre,tipo,tamano, img,0)
 
                         listaMascotas.add(mascota)
                     }
@@ -95,7 +96,9 @@ class MisMascotasActivity : AppCompatActivity(){
                             val tipo = mascotasJson.getJSONObject(i).getString("tipo")
                             val tamano = mascotasJson.getJSONObject(i).getString("tamano")
                             val img = mascotasJson.getJSONObject(i).getString("imagen")
-                            val mascota = PetModel(nombre,tipo,tamano, img)
+                            val idPet = mascotasJson.getJSONObject(i).getString("id").toInt()
+                            val mascota = PetModel(nombre,tipo,tamano, img, idPet)
+
 
                             listaMascotas.add(mascota)
 
@@ -110,6 +113,7 @@ class MisMascotasActivity : AppCompatActivity(){
 
                             //Toast.makeText(applicationContext,listaMascotas.get(id.toInt()).nombre ,Toast.LENGTH_LONG).show()
                             val registerActivity = Intent(applicationContext, PetInfiActivity::class.java)
+                            registerActivity.putExtra("PET_ID", listaMascotas[id.toInt()].id)
                             registerActivity.putExtra("PET_NAME", listaMascotas[id.toInt()].nombre)
                             startActivity(registerActivity)
                             //intent.putExtra("EXTRA_SESSION_ID", sessionId);
