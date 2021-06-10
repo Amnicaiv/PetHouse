@@ -108,7 +108,7 @@ class MisMascotasActivity : AppCompatActivity(){
 
                         lista.onItemClickListener = AdapterView.OnItemClickListener{parent, view,  position, id ->
 
-                            Toast.makeText(applicationContext,listaMascotas.get(id.toInt()).nombre ,Toast.LENGTH_LONG).show()
+                            //Toast.makeText(applicationContext,listaMascotas.get(id.toInt()).nombre ,Toast.LENGTH_LONG).show()
                             val registerActivity = Intent(applicationContext, PetInfiActivity::class.java)
                             registerActivity.putExtra("PET_NAME", listaMascotas[id.toInt()].nombre)
                             startActivity(registerActivity)

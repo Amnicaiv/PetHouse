@@ -143,7 +143,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView25"
+                        android:id="@+id/imagemascota"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
@@ -174,7 +174,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView31"
+                        android:id="@+id/imagecarnet"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
