@@ -15,6 +15,6 @@ class HouseModel (
         val foto3:String?
 )
 
-class listaHogarModel(val descripcion:String, val costoPorNoche: Double, val capacidad: Int, val fotoLista:String?)
+class listaHogarModel(val id:Int, val descripcion:String, val costoPorNoche: Double, val capacidad: Int, val fotoLista:String?)
 
 class listaHogaresDisponiblesModel(val id:Int, val descripcion:String, val costoPorNoche:Double, val capacidad:Int, val nombreDueno:String, val fotoLista: String?)

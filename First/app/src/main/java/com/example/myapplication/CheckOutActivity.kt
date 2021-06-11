@@ -1,10 +1,14 @@
 package com.example.myapplication
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.CheckBox
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Models.ReservacionModel
 import kotlinx.android.synthetic.main.layout_reservacion_checkout.*
@@ -13,22 +17,29 @@ import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.time.Clock
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 
 class CheckOutActivity :AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_reservacion_checkout);
 
-        var diaE:String =""
-        var mesE:String =""
-        var anioE:String=""
-
-        var diaS:String=""
-        var mesS:String=""
-        var anioS:String=""
-
-
+        val nombrePropietario = intent.getStringExtra("OWNER_NAME")
         val houseId = intent.getStringExtra("HOUSE_ID").toString().toInt()
+        val priceByNight = intent?.getDoubleExtra("PRICE",0.00)
+
+        val tbNombrePropietario = findViewById<TextView>(R.id.tb_nombre_propietario)
+        val tbCostoPorNoche = findViewById<TextView>(R.id.tb_preview_costo_por_noche)
+        val cbDejarComida = findViewById<CheckBox>(R.id.cb_dejar_comida)
+        val tbComentariosComida = findViewById<TextView>(R.id.tb_descripcion_comida)
+        val tbComentarios = findViewById<TextView>(R.id.tb_comentarios)
+        val tbMontoTotal = findViewById<TextView>(R.id.tb_monto_final)
+
 
         val spinnerDiaEntrada = this.spinner_dia
         val spinnerDiaSalida = this.spinner_dia2
@@ -42,10 +53,55 @@ class CheckOutActivity :AppCompatActivity() {
 
 
 
+        var montoAPagar=0.00
+
+        tbNombrePropietario.setText(nombrePropietario)
+        tbCostoPorNoche.setText("$ $priceByNight MXN")
+
+
+        tbMontoTotal.isEnabled=false
+        tbMontoTotal.setText("$ $priceByNight MXN")
+
+
+        tbComentariosComida.isEnabled=false
+
+        cbDejarComida.setOnCheckedChangeListener { _, isChecked ->
+            tbComentariosComida.isEnabled = isChecked == true
+
+            if(!isChecked && !tbComentariosComida.text.isNullOrEmpty())
+                tbComentariosComida.setText("")
+        }
+
+        val fechaActual = LocalDateTime.now(Clock.systemDefaultZone())
+        spinnerDiaEntrada.setSelection(fechaActual.dayOfMonth.dec())
+        spinnerMesEntrada.setSelection(fechaActual.monthValue.dec())
+
+        spinnerDiaSalida.setSelection(fechaActual.dayOfMonth)
+        spinnerMesSalida.setSelection(fechaActual.monthValue.dec())
+
+        var diaE:String =fechaActual.dayOfMonth.dec().toString()
+        var mesE:String =fechaActual.monthValue.dec().toString()
+        var anioE:String=fechaActual.year.toString()
+
+        var diaS:String=fechaActual.dayOfMonth.toString()
+        var mesS:String=fechaActual.monthValue.dec().toString()
+        var anioS:String=fechaActual.year.toString()
+
+
+
         spinnerDiaEntrada.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val diaP = parent?.getItemAtPosition(position)
                 diaE = diaP.toString()
+
+
+                val format = SimpleDateFormat("dd-MM-yyyy",Locale.getDefault())
+                val fechaInicial = format.parse("$diaE-$mesE-$anioE")
+                val fechaFinal = format.parse("$diaS-$mesS-$anioS")
+                val monto = calcularMontoTotal(priceByNight!!,fechaInicial,fechaFinal)
+                Log.d("monto a pagar",monto.toString())
+                tb_monto_final.setText(monto.toString())
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -104,8 +160,6 @@ class CheckOutActivity :AppCompatActivity() {
             }
 
         }
-
-
 
         spinnerDiaSalida.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -188,28 +242,27 @@ class CheckOutActivity :AppCompatActivity() {
 
             val fechaSalida = anioS.toString()+"-"+mesS.toString()+"-"+diaS.toString()+"T00:00:00.000Z"
 
-            val montoPagar = this.editTextNumberSigned.text.toString().toInt()
-            val traeAlim = this.checkBox2.isChecked
+            val montoPagar = this.tb_monto_final.text.toString().toInt()
+            val traeAlim = this.cb_dejar_comida.isChecked
 
-            val descrpAlim = this.editTextTextPersonName4.text.toString()
+            val descrpAlim = this.tb_descripcion_comida.text.toString()
 
-            val especAlim = this.editTextTextPersonName.text.toString()
+            val especAlim = this.tb_comentarios.text.toString()
 
 
             val reservacionNueva = ReservacionModel(idString,houseId,1, fechaEntrada, fechaSalida, montoPagar, traeAlim,descrpAlim,especAlim)
 
             request.setReservation(url,reservacionNueva,object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    println("Failure to save pet")
                     runOnUiThread {
-                        Toast.makeText(applicationContext, "No se pudo contactar al servidor para completar su reservacion, intentar mas tarde.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread {
-                        Toast.makeText(applicationContext, "Se completo su reservacion.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, responseData, Toast.LENGTH_LONG).show()
                     }
                     Log.d("reqSuccess",responseData.toString())
                     finish()
@@ -219,6 +272,15 @@ class CheckOutActivity :AppCompatActivity() {
             })
 
         }
+
+
+
+    }
+
+    private fun calcularMontoTotal(costoPorNocheP:Double, fechaEntrada:Date, fechaSalida:Date):Double{
+
+        return ((((fechaSalida.time - fechaEntrada.time) / (1000*60*60*24))+1) * costoPorNocheP)
+
 
     }
 }

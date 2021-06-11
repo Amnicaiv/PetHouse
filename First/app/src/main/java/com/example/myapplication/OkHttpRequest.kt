@@ -151,9 +151,6 @@ class OkHttpRequest(client:OkHttpClient) {
         return call
     }
 
-
-
-
     fun setHouse(url:String, house: HouseModel, callback: Callback):Call{
         val builder=FormBody.Builder()
 
@@ -212,5 +209,17 @@ class OkHttpRequest(client:OkHttpClient) {
         call.enqueue(callback)
         return call
     }
+
+    fun getHogar(url:String,callback: Callback):Call{
+        val request = Request.Builder()
+                .url(url)
+                .build()
+
+        val call = client.newCall(request)
+        call.enqueue(callback)
+        return call
+    }
+
+
 
 }

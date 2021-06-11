@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Adapters.HogaresDisponiblesAdapter
 import com.example.myapplication.Models.listaHogaresDisponiblesModel
@@ -25,19 +22,19 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
         setContentView(R.layout.hogaresdisponibles);
 
         val spinnerHogares = findViewById<ProgressBar>(R.id.pb_loaing)
+        val btnRegresar = findViewById<ImageView>(R.id.btn_lista_hogares_regresar)
 
         val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
         val idString = prefs.getString("id","")
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
         val url ="https://patoparra.com/api/Hogar/Get?userId=$idString"
-        println(url)
 
         request.getHogares(url, object:Callback{
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     spinnerHogares.visibility=View.GONE
-                    Toast.makeText(applicationContext,"error con servidor",Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,e.message,Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -47,7 +44,6 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
                 runOnUiThread {
                     try{
                         val json = JSONArray(responseData)
-                        Log.d("jsonHogar",json.toString())
                         val hogaresDisponibles = json
                         var index=0
                         for(i in 0..hogaresDisponibles.length()-1){
@@ -63,7 +59,6 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
 
 
                             val hogar = listaHogaresDisponiblesModel(e.getInt("id"),e.getString("descripcion"),e.getDouble("costoPorNoche"), e.getInt("capacidad"), e.getString("nombreDueno"), e.getString("foto1"))
-                            println(hogar)
 
                             listaHogares.add(hogar)
                         }
@@ -77,6 +72,8 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
                             Toast.makeText(applicationContext, listaHogares[id.toInt()].id.toString() ,Toast.LENGTH_LONG).show()
                             val registerActivity = Intent(applicationContext, CheckOutActivity::class.java)
                             registerActivity.putExtra("HOUSE_ID", listaHogares[id.toInt()].id.toString())
+                            registerActivity.putExtra("OWNER_NAME", listaHogares[id.toInt()].nombreDueno)
+                            registerActivity.putExtra("PRICE",listaHogares[id.toInt()].costoPorNoche)
                             startActivity(registerActivity)
                             //intent.putExtra("EXTRA_SESSION_ID", sessionId);
                         }
@@ -94,6 +91,9 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
 
         })
 
+        btnRegresar.setOnClickListener {
+            finish()
+        }
 
 
 

@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onFailure(call: Call, e: IOException) {
                         runOnUiThread {
                             loadingSpinnerLogin.visibility=View.GONE
-                            Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext,e.message, Toast.LENGTH_LONG).show()
                             buttonLogin.isEnabled = true;
                         }
                     }
