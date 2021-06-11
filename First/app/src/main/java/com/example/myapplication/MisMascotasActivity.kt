@@ -40,18 +40,42 @@ class MisMascotasActivity : AppCompatActivity(){
 
         loadinSpinner.visibility = View.VISIBLE
 
+
+
+        val btnRegistrarMascota = findViewById<Button>(R.id.btn_registro_mascota)
+        btnRegistrarMascota.setOnClickListener {
+            val registerActivity = Intent(applicationContext, addPet::class.java)
+            startActivity(registerActivity)
+
+        }
+
+        btnRegresar.setOnClickListener {
+            finish()
+        }
+    }
+
+    fun refreshList(ldb:LocalDatabaseManager, loadinSpinner: ProgressBar, idString:String){
+        //Toast.makeText(applicationContext, "Se esta actualizando la lista de sus mascotas...", Toast.LENGTH_SHORT).show()
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
+
         val url ="https://patoparra.com/api/cliente/getmascotas/?id=$idString"
+
+
         request.getPets(url, object:Callback{
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
+
+                    //Toast.makeText(applicationContext,"no se pudo obtener informacion de las mascotas",Toast.LENGTH_LONG).show()
                     val petsList = ldb.GetUserPets()
                     var listaMascotas = ArrayList<PetModel>()
 
                     for(i in 0 until petsList.size){
-
+                        //Toast.makeText(applicationContext, "Hello there", Toast.LENGTH_SHORT).show()
                         val nombre = petsList[i].nombre
+                        /* val tipo = petsList[i].tipoMascotaId
+                         val tamano = petsList[i].categoriaMascotaId*/
+
                         val tipo = petsList[i].tipoMascotaId.toString()
                         val tamano = petsList[i].categoriaMascotaId.toString()
                         val img = petsList[i].imagen.toString()
@@ -71,10 +95,12 @@ class MisMascotasActivity : AppCompatActivity(){
                         val registerActivity = Intent(applicationContext, PetInfiActivity::class.java)
                         registerActivity.putExtra("PET_NAME", listaMascotas[id.toInt()].nombre)
                         startActivity(registerActivity)
+
+
                         //intent.putExtra("EXTRA_SESSION_ID", sessionId);
                     }
 
-                    
+
                 }
 
 
@@ -114,6 +140,8 @@ class MisMascotasActivity : AppCompatActivity(){
                             registerActivity.putExtra("PET_ID", listaMascotas[id.toInt()].id)
                             registerActivity.putExtra("PET_NAME", listaMascotas[id.toInt()].nombre)
                             startActivity(registerActivity)
+
+
                             //intent.putExtra("EXTRA_SESSION_ID", sessionId);
                         }
 
@@ -125,15 +153,22 @@ class MisMascotasActivity : AppCompatActivity(){
             }
 
         })
+    }
 
-        val btnRegistrarMascota = findViewById<Button>(R.id.btn_registro_mascota)
-        btnRegistrarMascota.setOnClickListener {
-            val registerActivity = Intent(applicationContext, addPet::class.java)
-            startActivity(registerActivity)
-        }
+    override fun onResume() {
+        super.onResume()
+        //Get Shared preferences
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+        val idString =  prefs.getString("id","Unknown")
 
-        btnRegresar.setOnClickListener {
-            finish()
+        //Get Local DB Ref
+        val ldb = LocalDatabaseManager(applicationContext)
+
+        val loadinSpinner = findViewById<ProgressBar>(R.id.progressBar_mismascotas)
+
+        if (idString != null) {
+            refreshList(ldb,loadinSpinner,idString)
         }
+        //Toast.makeText(applicationContext, "Im Back", Toast.LENGTH_SHORT).show()
     }
 }
