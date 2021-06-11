@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.myapplication.ImageParser
 import com.example.myapplication.Models.listaHogaresDisponiblesModel
 import com.example.myapplication.R
 
@@ -44,6 +46,9 @@ class HogaresDisponiblesAdapter(val context: Context, items:ArrayList<listaHogar
         holder?.descripcion?.text = item.descripcion
         holder?.costoPorNoche?.text = item.costoPorNoche.toString()
         holder?.nombreDueno?.text = item.nombreDueno
+        val encoder = ImageParser()
+        val img = item.fotoLista?.let { encoder.convert(it) }
+        holder?.imgLista?.setImageBitmap(img)
 
         return vista!!
     }
@@ -54,11 +59,13 @@ class HogaresDisponiblesAdapter(val context: Context, items:ArrayList<listaHogar
         var costoPorNoche: TextView?=null
         var capacidad: TextView?=null
         var nombreDueno:TextView?=null
+        var imgLista:ImageView?=null
         init{
             id = vista.findViewById(R.id.tv_id_hogar)
             descripcion = vista.findViewById(R.id.tv_desc)
             costoPorNoche = vista.findViewById(R.id.tv_cpn)
             nombreDueno = vista.findViewById(R.id.tv_prop)
+            imgLista = vista.findViewById(R.id.iv_img_lista)
         }
     }
 

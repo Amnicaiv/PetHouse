@@ -8,9 +8,10 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView8"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/lnk_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -88,44 +89,47 @@
                 android:textSize="14sp"
                 android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/bLogin"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="180dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="Iniciar sesión"
-                android:textSize="30sp"
-                app:backgroundTint="@color/teal_700"
-                app:elevation="0dp"
-                app:iconPadding="0dp" />
-
-            <TextView
-                android:id="@+id/lnk_signup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6pt"
-                android:layout_marginLeft="6pt"
-                android:layout_marginTop="12pt"
-                android:layout_marginBottom="12pt"
-                android:fontFamily="sans-serif-black"
-                android:text="Aún no estoy registrado"
-                android:textColor="#FAFAFA"
-                android:textSize="18sp" />
-
         </LinearLayout>
     </ScrollView>
 
     <ProgressBar
         android:id="@+id/progressBar_login"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lnk_signup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Aún no estoy registrado"
+        android:textColor="#FAFAFA"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/bLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Iniciar sesión"
+        android:textSize="30sp"
+        app:backgroundTint="@color/teal_700"
+        app:elevation="0dp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity() {
                         val responseData = response.body()?.string()
                         runOnUiThread {
                             loadingSpinnerLogin.visibility=View.GONE
+                            buttonLogin.isEnabled = true;
                             try{
                                 var token = responseData.toString()
                                 println("Request Succesful")

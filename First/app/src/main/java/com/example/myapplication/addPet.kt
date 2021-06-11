@@ -34,15 +34,12 @@ class addPet : AppCompatActivity(){
         val pickImage = 100
         var imageUri: Uri? = null
 
-        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
-
+        val pbAgregarMascota = findViewById<ProgressBar>(R.id.pb_agregar_mascota)
         val spinnerTipoMascotas = findViewById<Spinner>(R.id.spinner_tipo)
         val spinnerTamano = findViewById<Spinner>(R.id.spinner_tamano)
         val btnRegistrar = findViewById<Button>(R.id.btn_registrar_mascota)
         val btnRegresar = findViewById<ImageView>(R.id.btn_addpet_regresar)
-        btnRegresar.setOnClickListener {
-            this.finish()
-        }
+
 
         val tbNombre = findViewById<TextView>(R.id.tv_nombre_mascota)
         val tbEdad = findViewById<TextView>(R.id.tv_edad_mascota)
@@ -51,9 +48,7 @@ class addPet : AppCompatActivity(){
         val btnFotoAlimento = findViewById<Button>(R.id.btn_foto_alimento)
         val btnFotoCarnet = findViewById<Button>(R.id.btn_foto_carnet)
 
-        val imgMascota = findViewById<ImageView>(R.id.imagemascota)
-        val imgAlimento = findViewById<ImageView>(R.id.imgalimento)
-        val imgCarnet = findViewById<ImageView>(R.id.imagecarnet)
+        pbAgregarMascota.visibility=View.GONE
 
         ArrayAdapter.createFromResource(applicationContext,R.array.tipo_mascota_array,android.R.layout.simple_spinner_item).also {
             adapter ->
@@ -92,26 +87,40 @@ class addPet : AppCompatActivity(){
 
         }
 
-        var mLastClickTime = 0.0
+        spinnerTamano.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val tamano = parent?.getItemAtPosition(position)
+                if(tamano.toString() == "Tiny")
+                    tamanoMascotaResult = 1
+                else if(tamano.toString()=="Pequeño")
+                    tamanoMascotaResult = 2
+                else if(tamano.toString()=="Mediano")
+                    tamanoMascotaResult = 3
+                else if(tamano.toString()=="Grande")
+                    tamanoMascotaResult=4
+                else if(tamano.toString() == "Gigante")
+                    tamanoMascotaResult=5
+            }
 
-        var doublePressPrev = false
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.d("onNothing","Nothing selected")
+            }
+
+        }
 
         btnRegistrar.setOnClickListener {
 
-
-            doublePressPrev = SystemClock.elapsedRealtime() - mLastClickTime < 5000
-            mLastClickTime = SystemClock.elapsedRealtime().toDouble();
-
-
-            if(!doublePressPrev){
-
-                val userToken = this.getSharedPreferences("key",0)
+            runOnUiThread {
+                pbAgregarMascota.visibility=View.VISIBLE
+            }
                 val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
-                val idString = prefs.getString("id","Unkown")
+                val idString = prefs.getString("id","Unknown")
 
-                Toast.makeText(applicationContext, "Se esta subiendo a la nube su mascota, espere un momento...", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "Se esta subiendo a la nube su mascota, espere un momento...", Toast.LENGTH_SHORT).show()
 
                 var error=false;
+
+            //Validaciones
 
                 if(!error){
 
@@ -142,8 +151,8 @@ class addPet : AppCompatActivity(){
                         idString,
                         tbNombre.text.toString(),
                         tbEdad.text.toString().toInt(),
-                            tipoMascotaResult.toString().toInt(),
-                        2,
+                        tipoMascotaResult,
+                        tamanoMascotaResult,
                         imageString,
                         imageString2,
                         imgAlimento,
@@ -157,6 +166,7 @@ class addPet : AppCompatActivity(){
                             println("Failure to save pet")
 
                             runOnUiThread {
+                                pbAgregarMascota.visibility=View.GONE
                                 Toast.makeText(applicationContext,e.toString(), Toast.LENGTH_LONG).show()
                             }
                         }
@@ -166,7 +176,8 @@ class addPet : AppCompatActivity(){
                             Log.d("reqSuccess",responseData.toString())
                             ldb.InsertPet(mascotaNueva,true)
                             runOnUiThread {
-                                Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_LONG).show()
+                                pbAgregarMascota.visibility=View.GONE
+                                Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_SHORT).show()
                             }
                             val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
                             startActivity(registerActivity)
@@ -175,7 +186,7 @@ class addPet : AppCompatActivity(){
 
                     })
                 }
-            }
+
         }
 
         btnFotoMascota.setOnClickListener{
@@ -201,6 +212,9 @@ class addPet : AppCompatActivity(){
             startActivityForResult(gallery, pickImage)
         }
 
+        btnRegresar.setOnClickListener {
+            this.finish()
+        }
     }
 
     fun resizeImg(image:Bitmap):Bitmap{

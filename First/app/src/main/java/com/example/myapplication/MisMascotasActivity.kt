@@ -25,35 +25,33 @@ class MisMascotasActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_pet)
-        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
+        //Get Shared preferences
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+        val idString =  prefs.getString("id","Unknown")
+
+        //Get Local DB Ref
         val ldb = LocalDatabaseManager(applicationContext)
 
-        val userToken = this.getSharedPreferences("key",0)
-        val idString =  prefs.getString("id","Unknkown")
+        //Set Obj Refs
         val loadinSpinner = findViewById<ProgressBar>(R.id.progressBar_mismascotas)
+        val btnRegresar = findViewById<ImageView>(R.id.btn_addpet_regresar2)
+
+
         loadinSpinner.visibility = View.VISIBLE
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
-
         val url ="https://patoparra.com/api/cliente/getmascotas/?id=$idString"
-
-
         request.getPets(url, object:Callback{
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-
-                    //Toast.makeText(applicationContext,"no se pudo obtener informacion de las mascotas",Toast.LENGTH_LONG).show()
                     val petsList = ldb.GetUserPets()
                     var listaMascotas = ArrayList<PetModel>()
 
                     for(i in 0 until petsList.size){
-                        //Toast.makeText(applicationContext, "Hello there", Toast.LENGTH_SHORT).show()
-                        val nombre = petsList[i].nombre
-                       /* val tipo = petsList[i].tipoMascotaId
-                        val tamano = petsList[i].categoriaMascotaId*/
 
+                        val nombre = petsList[i].nombre
                         val tipo = petsList[i].tipoMascotaId.toString()
                         val tamano = petsList[i].categoriaMascotaId.toString()
                         val img = petsList[i].imagen.toString()
@@ -132,6 +130,10 @@ class MisMascotasActivity : AppCompatActivity(){
         btnRegistrarMascota.setOnClickListener {
             val registerActivity = Intent(applicationContext, addPet::class.java)
             startActivity(registerActivity)
+        }
+
+        btnRegresar.setOnClickListener {
+            finish()
         }
     }
 }

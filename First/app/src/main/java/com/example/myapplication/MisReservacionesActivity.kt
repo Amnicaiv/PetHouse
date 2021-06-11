@@ -28,7 +28,7 @@ class MisReservacionesActivity : AppCompatActivity() {
         val idString = prefs.getString("id","")
 
         val url = "https://patoparra.com/api/Reservacion/GetFromCliente/?clienteId=$idString"
-        println(url)
+
 
 
         var client = OkHttpClient()
@@ -47,8 +47,10 @@ class MisReservacionesActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val responseData = response.body()?.string()
                 var listaReservaciones = ArrayList<ReservacionLista>()
+
                 runOnUiThread {
                     try{
+
                         val json = JSONObject(responseData.toString())
                         val reservJson = json.getJSONArray("reservaciones")
                         var index=0;

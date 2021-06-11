@@ -9,9 +9,12 @@ class HouseModel (
         val publicado: Boolean,
         val disponible: Boolean,
         val pausado: Boolean,
-        val fechaAlta: String
+        val fechaAlta: String,
+        val foto1:String?,
+        val foto2:String?,
+        val foto3:String?
 )
 
-class listaHogarModel(val descripcion:String, val costoPorNoche: Double, val capacidad: Int)
+class listaHogarModel(val descripcion:String, val costoPorNoche: Double, val capacidad: Int, val fotoLista:String?)
 
-class listaHogaresDisponiblesModel(val id:Int, val descripcion:String, val costoPorNoche:Double, val capacidad:Int, val nombreDueno:String)
+class listaHogaresDisponiblesModel(val id:Int, val descripcion:String, val costoPorNoche:Double, val capacidad:Int, val nombreDueno:String, val fotoLista: String?)

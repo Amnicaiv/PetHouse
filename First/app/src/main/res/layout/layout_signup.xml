@@ -9,16 +9,34 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="799dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <Button
+        android:id="@+id/btn_signup"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="80dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Registrarme"
+        android:textSize="28sp"
+        app:backgroundTint="@color/teal_700"
+        app:cornerRadius="0dp"
+        app:elevation="0dp"
+        app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView9"
+        android:layout_width="414dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -65,83 +83,74 @@
                 android:textColor="#F44336"
                 tools:visibility="invisible" />
 
-            <ScrollView
+            <EditText
+                android:id="@+id/txt_apPaterno"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15pt">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:fontFamily="sans-serif-light"
+                android:hint="Apellido Paterno"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_error_apPaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10pt"
-                        android:layout_marginLeft="10pt"
-                        android:layout_weight="1">
+            <EditText
+                android:id="@+id/txt_apMaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:fontFamily="sans-serif-light"
+                android:hint="Apellido Materno"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_error_apMaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
 
-                            <EditText
-                                android:id="@+id/txt_apPaterno"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="10"
-                                android:fontFamily="sans-serif-light"
-                                android:hint="Apellido Paterno"
-                                android:inputType="textPersonName"
-                                android:textSize="24sp" />
 
-                            <TextView
-                                android:id="@+id/tv_error_apPaterno"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="#F44336"
-                                tools:visibility="invisible" />
-                        </LinearLayout>
-                    </ScrollView>
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10pt"
-                        android:layout_marginRight="10pt"
-                        android:layout_weight="1">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <EditText
-                                android:id="@+id/txt_apMaterno"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="10"
-                                android:fontFamily="sans-serif-light"
-                                android:hint="Apellido Materno"
-                                android:inputType="textPersonName"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:id="@+id/tv_error_apMaterno"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="#F44336"
-                                tools:visibility="invisible" />
-                        </LinearLayout>
-                    </ScrollView>
-                </LinearLayout>
-            </ScrollView>
-
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Fecha de Nacimiento"
+                android:textSize="18sp" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -154,7 +163,7 @@
 
                     <Spinner
                         android:id="@+id/spinner_dia"
-                        android:layout_width="match_parent"
+                        android:layout_width="318dp"
                         android:layout_height="36dp"
                         android:layout_margin="15dp"
                         android:layout_weight="1"
@@ -162,7 +171,7 @@
 
                     <Spinner
                         android:id="@+id/spinner_mes"
-                        android:layout_width="match_parent"
+                        android:layout_width="352dp"
                         android:layout_height="38dp"
                         android:layout_margin="15dp"
                         android:layout_weight="1"
@@ -170,7 +179,7 @@
 
                     <Spinner
                         android:id="@+id/spinner_anio"
-                        android:layout_width="match_parent"
+                        android:layout_width="341dp"
                         android:layout_height="39dp"
                         android:layout_margin="15dp"
                         android:layout_weight="1"
@@ -232,6 +241,8 @@
                         android:id="@+id/txt_noExt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="No. Ext"
@@ -242,6 +253,8 @@
                         android:id="@+id/txt_noInt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="No. Int"
@@ -275,11 +288,27 @@
                 android:textColor="#F44336"
                 tools:visibility="invisible" />
 
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Ciudad"
+                android:textSize="18sp" />
+
             <Spinner
                 android:id="@+id/spinner_ciudad"
                 android:layout_width="match_parent"
                 android:layout_height="63dp"
-                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:entries="@array/ciudades"
                 android:spinnerMode="dialog" />
 
@@ -369,80 +398,59 @@
                 android:textColor="#F44336"
                 tools:visibility="invisible" />
 
-            <ScrollView
+            <EditText
+                android:id="@+id/txt_contrasena"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10pt"
-                android:layout_marginLeft="10pt"
-                android:layout_marginTop="10pt"
-                android:layout_marginEnd="10pt"
-                android:layout_marginRight="10pt">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:textSize="24sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_error_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+            <EditText
+                android:id="@+id/txt_confirmacionContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Repetir Contraseña"
+                android:inputType="textPassword"
+                android:textSize="24sp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <EditText
-                                android:id="@+id/txt_contrasena"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="10"
-                                android:hint="Contraseña"
-                                android:inputType="textPassword"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:id="@+id/tv_error_contrasena"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="#F44336"
-                                tools:visibility="invisible" />
-                        </LinearLayout>
-                    </ScrollView>
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <EditText
-                                android:id="@+id/txt_confirmacionContrasena"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="10"
-                                android:hint="Repetir Contraseña"
-                                android:inputType="textPassword"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:id="@+id/tv_error_confirmacionContrasena"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="#F44336"
-                                tools:visibility="invisible" />
-                        </LinearLayout>
-                    </ScrollView>
-                </LinearLayout>
-            </ScrollView>
+            <TextView
+                android:id="@+id/tv_error_confirmacionContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -468,19 +476,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_signup"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10pt"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="Registrarme"
-                android:textSize="28sp"
-                app:backgroundTint="@color/teal_700"
-                app:cornerRadius="0dp"
-                app:elevation="0dp"
-                app:iconPadding="0dp" />
         </LinearLayout>
     </ScrollView>
 

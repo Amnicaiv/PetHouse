@@ -55,8 +55,9 @@ class MisEstancias : AppCompatActivity() {
                             val descripcion = hogaresJson.getJSONObject(i).getString("descripcion")
                             val costoPorNoche = hogaresJson.getJSONObject(i).getDouble("costoPorNoche")
                             val capacidad = hogaresJson.getJSONObject(i).getInt("capacidad")
+                            val img = hogaresJson.getJSONObject(i).getString("fotoLista")
 
-                            val hogar = listaHogarModel(descripcion, costoPorNoche, capacidad)
+                            val hogar = listaHogarModel(descripcion, costoPorNoche, capacidad, img)
                             listaHogares.add(hogar)
                         }
 

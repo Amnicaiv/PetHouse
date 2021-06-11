@@ -6,12 +6,38 @@
     android:layout_height="match_parent"
     android:background="#29708C">
 
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="right"
+        android:text="Agregar Mascota Nueva"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_addpet_regresar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_agregar_mascota"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_registrar_mascota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_addpet_regresar">
@@ -27,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
@@ -36,11 +62,14 @@
 
             <EditText
                 android:id="@+id/tv_edad_mascota"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:ems="10"
-                android:hint="Edad de tu mascota"
+                android:hint="Edad"
                 android:inputType="number" />
 
             <TextView
@@ -52,7 +81,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Categoría" />
+                android:text="Categoría"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spinner_tipo"
@@ -75,7 +105,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Tamaño" />
+                android:text="Tamaño"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spinner_tamano"
@@ -99,7 +130,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
-                android:text="Sube tres fotografías de tu mascota" />
+                android:text="Sube tres fotografías de tu mascota"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,10 +162,11 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_weight="1"
                         android:text="Seleccionar..."
                         android:textSize="11sp"
-                        app:backgroundTint="#FF9800" />
+                        app:backgroundTint="@color/teal_700" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -160,10 +193,11 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_weight="1"
                         android:text="Seleccionar..."
                         android:textSize="11sp"
-                        app:backgroundTint="#FF9800" />
+                        app:backgroundTint="@color/teal_700" />
 
                 </LinearLayout>
 
@@ -191,10 +225,11 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_weight="1"
                         android:text="Seleccionar..."
                         android:textSize="11sp"
-                        app:backgroundTint="#FF9800" />
+                        app:backgroundTint="@color/teal_700" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -205,16 +240,19 @@
     <Button
         android:id="@+id/btn_registrar_mascota"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="80dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="Registrar"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:backgroundTint="#FF9800"
+        app:backgroundTint="@color/teal_700"
         app:cornerRadius="0dp"
-        app:elevation="6dp"
+        app:elevation="10dp"
+        app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/btn_addpet_regresar"

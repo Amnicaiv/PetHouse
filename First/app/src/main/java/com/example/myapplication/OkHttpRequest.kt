@@ -50,9 +50,6 @@ class OkHttpRequest(client:OkHttpClient) {
         return call
     }
 
-
-
-
     fun signup(url:String, signup:SignupModel, callback: Callback):Call{
         val builder=FormBody.Builder()
 
@@ -138,6 +135,22 @@ class OkHttpRequest(client:OkHttpClient) {
         call.enqueue(callback)
         return call
     }
+
+    fun deletePet(url:String, callback: Callback):Call{
+        val builder=FormBody.Builder()
+
+        val request = Request.Builder()
+                .url(url)
+                .delete()
+                .build()
+
+        println(request)
+
+        val call = client.newCall(request)
+        call.enqueue(callback)
+        return call
+    }
+
 
 
 

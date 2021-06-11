@@ -6,6 +6,7 @@ import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,159 +23,56 @@ import org.json.JSONObject
 import java.io.IOException
 
 
-class DashboardActivity: AppCompatActivity(), View.OnClickListener {
+class DashboardActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dashboard);
 
-        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+        val btnBuscarEstancias = findViewById<Button>(R.id.btn_buscar_estancia)
+        val btnMisMascotas = findViewById<Button>(R.id.btn_mascotas)
+        val btnMisEstancias = findViewById<Button>(R.id.btn_estancias)
+        val btnMisReservaciones = findViewById<Button>(R.id.btn_reservaciones)
+        val btnMiPerfil = findViewById<ImageView>(R.id.iv_mi_perfil)
+        val btnCerrarSesion = findViewById<Button>(R.id.btn_salir)
 
-        val userToken = this.getSharedPreferences("key",0)
-        val tokenString = userToken.getString("token","No token found")
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
         val msjBienvenida = findViewById<TextView>(R.id.tv_mensaje_bienvenida)
 
         msjBienvenida.setText("Bienvenido, " + prefs.getString("name","Unknkown"))
 
-        Toast.makeText(this, prefs.getString("access_token","Unknkown"), Toast.LENGTH_SHORT).show()
-
-
        // val ldb = LocalDatabaseManager(this)
-        val nick = userToken.getString("apodo","No nickname found")
 
-        val url = "https://patoparra.com/api/cliente/getfromusername?username=$nick"
-
-
-        var client = OkHttpClient()
-        var request = OkHttpRequest(client)
-
-        //Send POST Request to server
-        request.getUserData(url, object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread {
-                    Toast.makeText(applicationContext,"Error al conectar con el servidor. Intente mas tarde.", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val responseData = response.body()?.string()
-                runOnUiThread {
-                    try{
-                        var token = responseData.toString()
-                        println("Request Succesful")
-                        Log.d("token",token)
-
-                        val json = JSONObject(responseData)
-                        val userid = json.getString("id")
-
-                        val sharedPref = this@DashboardActivity.getSharedPreferences("key",Context.MODE_PRIVATE) ?: return@runOnUiThread
-                        with(sharedPref.edit()){
-                            putString("token",tokenString)
-                            putString("apodo",nick)
-                            putString("id",userid)
-                            commit()
-                        }
-
-
-                    }catch(e: JSONException){
-                        e.printStackTrace()
-                    }
-                }
-            }
-
-        })
-
-
-
-
-
-
-        val sharedPref = applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)?: return
-
-        val token = sharedPref.getString("token","")
-        Log.d("tokenBearer",token.toString())
-
-
-        val ivPets = findViewById<ImageView>(R.id.iv_pets)
-        ivPets.setOnClickListener{
+        btnMisMascotas.setOnClickListener{
             val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
             startActivity(registerActivity)
         }
 
-        val ivHoteles = findViewById<ImageView>(R.id.iv_hotel)
-        ivHoteles.setOnClickListener{
+
+        btnMisEstancias.setOnClickListener{
             val estancias = Intent(applicationContext, MisEstancias::class.java)
             startActivity(estancias)
         }
 
-        val ivReservaciones = findViewById<ImageView>(R.id.imageView14)
-        ivReservaciones.setOnClickListener(){
+
+        btnMisReservaciones.setOnClickListener(){
             val check = Intent(applicationContext, MisReservacionesActivity::class.java)
             startActivity(check)
         }
 
-        this.imageView17.setOnClickListener(){
+        btnMiPerfil.setOnClickListener(){
             val userInfoActivity = Intent(applicationContext, InformacionUsuario::class.java)
             startActivity(userInfoActivity)
         }
 
-        this.imv_search.setOnClickListener(){
+        btnBuscarEstancias.setOnClickListener(){
             val hogaresDisponibles = Intent(applicationContext, HogaresDisponiblesActivity::class.java)
             startActivity(hogaresDisponibles)
         }
 
-        actionBar?.hide()
-        supportActionBar?.hide()
-
-
-
-
-        this.navView.setNavigationItemSelectedListener { item ->
-
-            when(item.itemId){
-                R.id.op1->{
-                    Log.i("OP1","Opcion 1")
-                    val userInfoActivity = Intent(applicationContext, InformacionUsuario::class.java)
-                    startActivity(userInfoActivity)
-                }
-                R.id.op2->{
-                    Log.i("OP2","Opcion 2")
-                    val mismascActivity = Intent(applicationContext, MisMascotasActivity::class.java)
-                    startActivity(mismascActivity)
-                }
-                R.id.op3->{
-                    Log.i("OP3","Opcion 3")
-                    val reservationActivity = Intent(applicationContext, MisReservacionesActivity::class.java)
-                    startActivity(reservationActivity)
-                }
-                R.id.op4->{
-                    Log.i("OP4","Opcion 4")
-                    val estanciasActivity = Intent(applicationContext, MisEstancias::class.java)
-                    startActivity(estanciasActivity)
-                }
-            }
-            false
-        }
-
-    }
-
-    override fun onClick(v: View?) {
-        Log.e("DA-btnSearch","Search Button pressed.");
-        when(v!!.id)
-        {
-          /*  R.id.btnSearch ->{
-                Log.e("SRActivity","Search Results Activity Called");
-                this.onSearch();
-            }*/
+        btnCerrarSesion.setOnClickListener {
+            prefs.edit().clear().commit()
+            this.finish()
         }
     }
-
-    private fun onSearch()
-    {
-        Log.e("DA-onSearch_f","Inside onSearch function");
-        val searchUpActivityIntent: Intent = Intent(this,SearchResultsActivity::class.java);
-        //searchUpActivityIntent.putExtra("data",this.tbEmailLogin.toString());
-        startActivity(searchUpActivityIntent);
-    }
-
 }

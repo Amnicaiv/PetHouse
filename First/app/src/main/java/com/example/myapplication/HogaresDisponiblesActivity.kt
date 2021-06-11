@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -46,6 +47,7 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
                 runOnUiThread {
                     try{
                         val json = JSONArray(responseData)
+                        Log.d("jsonHogar",json.toString())
                         val hogaresDisponibles = json
                         var index=0
                         for(i in 0..hogaresDisponibles.length()-1){
@@ -57,9 +59,10 @@ class HogaresDisponiblesActivity: AppCompatActivity() {
                             map.put("costoPorNoche",e.getString("costoPorNoche"))
                             map.put("capacidad",e.getString("capacidad"))
                             map.put("nombreDueno",e.getString("nombreDueno"))
+                            map.put("foto", e.getString("foto1"))
 
 
-                            val hogar = listaHogaresDisponiblesModel(e.getInt("id"),e.getString("descripcion"),e.getDouble("costoPorNoche"), e.getInt("capacidad"), e.getString("nombreDueno"))
+                            val hogar = listaHogaresDisponiblesModel(e.getInt("id"),e.getString("descripcion"),e.getDouble("costoPorNoche"), e.getInt("capacidad"), e.getString("nombreDueno"), e.getString("foto1"))
                             println(hogar)
 
                             listaHogares.add(hogar)
