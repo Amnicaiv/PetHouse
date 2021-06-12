@@ -1,9 +1,14 @@
 package com.example.myapplication
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.Selection
 import android.text.Spannable
@@ -14,12 +19,16 @@ import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import com.example.myapplication.Models.SignupModel
+import kotlinx.android.synthetic.main.layout_createpet.*
 import kotlinx.android.synthetic.main.layout_signup.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,6 +54,8 @@ class SignUpActivity: AppCompatActivity() {
         val tbCorreoElectronico = findViewById<TextView>(R.id.txt_correoElectronico)
         val tbContrasena = findViewById<TextView>(R.id.txt_contrasena)
         val tbConfirmacionContrasena = findViewById<TextView>(R.id.txt_confirmacionContrasena)
+        val imgPerfil = findViewById<ImageView>(R.id.profile_img)
+        val btnImgPerfil = findViewById<Button>(R.id.btn_profile_img)
 
         val spinnerDiaFechaNacimiento = findViewById<Spinner>(R.id.spinner_dia)
         val spinnerMesFechaNacimiento = findViewById<Spinner>(R.id.spinner_mes)
@@ -283,12 +294,21 @@ class SignUpActivity: AppCompatActivity() {
                 errorConfirmacionContrasena.visibility = TextView.INVISIBLE
             }
 
-            Log.d("error",error.toString());
-            if(error){
+
+            if(error) {
                 loadingSpinner.visibility = View.GONE
                 errorGeneral.text="Existen errores en la captura. Por favor verifique su información. 😅"
-            }else{
+            } else {
                 errorGeneral.visibility = TextView.INVISIBLE
+
+                imgPerfil.invalidate()
+                var bitmap = imgPerfil.drawable.toBitmap()
+
+                val encoder = ImageParser()
+                val imageString = encoder.convert(bitmap)
+                println(imageString)
+
+
                 var client = OkHttpClient()
                 var request = OkHttpRequest(client)
 
@@ -306,7 +326,8 @@ class SignUpActivity: AppCompatActivity() {
                     tbNombreUsuario.text.toString(),
                     tbCorreoElectronico.text.toString(),
                     tbTelefono.text.toString(),
-                    tbContrasena.text.toString()
+                    tbContrasena.text.toString(),
+                    imageString
                 )
 
                 Toast.makeText(applicationContext, "Contactando a la nube, espere un momento...", Toast.LENGTH_SHORT).show()
@@ -318,17 +339,15 @@ class SignUpActivity: AppCompatActivity() {
                         Log.d("onFailure",e.toString())
                         runOnUiThread {
                             loadingSpinner.visibility = View.GONE
-                            Toast.makeText(applicationContext,"Hubo un error al intentar crear su cuenta. Intente mas tarde.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext,e.message, Toast.LENGTH_LONG).show()
                         }
                     }
 
                     override fun onResponse(call: Call, response: Response) {
                         val responseData = response.body()?.string()
-                        Log.d("onSuccess",responseData.toString())
+                        println(response)
                         if(responseData == "Usuario creado correctamente")
                         {
-
-
                             var loggeduser = Persona(0,tbNombreUsuario.text.toString(), tbNombre.text.toString(),tbApellidoPaterno.text.toString(), tbApellidoMaterno.text.toString(),fechaNac,tbCorreoElectronico.text.toString(),tbContrasena.text.toString(),tbTelefono.text.toString(),0)
                             val success =ldb.InsertLoggedUser(loggeduser, true)
 
@@ -350,8 +369,28 @@ class SignUpActivity: AppCompatActivity() {
                 })
             }
         }
+
+        btnImgPerfil.setOnClickListener{
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                startActivityForResult(takePictureIntent, 1)
+            } catch (e: ActivityNotFoundException) {
+                // display error state to the user
+            }
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode  == RESULT_OK && requestCode == 1){
+            val imgbm = data?.extras?.get("data") as Bitmap
+            val stream = ByteArrayOutputStream()
+
+            imgbm.compress(Bitmap.CompressFormat.JPEG,80,stream)
+
+            profile_img.setImageBitmap(imgbm)
+        }
+    }
 
 
 

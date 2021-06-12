@@ -145,14 +145,13 @@ class MainActivity : AppCompatActivity() {
                                             override fun onResponse(call: Call,response: Response) {
                                                 val responseData =  response.body()?.string()
                                                 val user = Gson().fromJson<UserModel>(responseData, UserModel::class.java)
-                                                println(token)
-                                                println(user.id)
-                                                println(user.name)
+
                                                 //Actualizar prefs
                                                 prefs.edit().putString("access_token",token).commit()
                                                 prefs.edit().putString("id",user.id).commit()
                                                 prefs.edit().putString("name",user.name).commit()
                                                 prefs.edit().putString("nick",etUsername.text.toString()).commit()
+                                                prefs.edit().putString("img", user.imagenPerfil.toString()).commit()
 
                                                 //Guardar en Internal DB
                                                 if(ldb.GetLoggedUser().isNotEmpty()){

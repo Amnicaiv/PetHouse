@@ -8,5 +8,5 @@ data class UserModel(
         val city:Int,
         val blocked:Boolean,
         val accessToken:String?,
-        val imgProfile:String?
+        val imagenPerfil:String?
 )

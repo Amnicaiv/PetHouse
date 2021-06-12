@@ -28,18 +28,24 @@ class DashboardActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dashboard);
 
+        val encoder = ImageParser()
         val btnBuscarEstancias = findViewById<Button>(R.id.btn_buscar_estancia)
         val btnMisMascotas = findViewById<Button>(R.id.btn_mascotas)
         val btnMisEstancias = findViewById<Button>(R.id.btn_estancias)
         val btnMisReservaciones = findViewById<Button>(R.id.btn_reservaciones)
         val btnMiPerfil = findViewById<ImageView>(R.id.iv_mi_perfil)
         val btnCerrarSesion = findViewById<Button>(R.id.btn_salir)
+        val tbImgPerfil = findViewById<ImageView>(R.id.iv_mi_perfil)
 
         val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
 
         val msjBienvenida = findViewById<TextView>(R.id.tv_mensaje_bienvenida)
 
         msjBienvenida.setText("Bienvenido, " + prefs.getString("name","Unknkown"))
+
+        val imgPerfil = prefs.getString("img","")
+
+        tbImgPerfil.setImageBitmap(imgPerfil?.let { encoder.convert(it) })
 
        // val ldb = LocalDatabaseManager(this)
 

@@ -171,13 +171,15 @@
 
         <ImageView
             android:id="@+id/iv_mi_perfil"
-            android:layout_width="124dp"
-            android:layout_height="66dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="64dp"
             android:layout_marginLeft="64dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:adjustViewBounds="false"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView15"
             app:layout_constraintTop_toTopOf="parent"
