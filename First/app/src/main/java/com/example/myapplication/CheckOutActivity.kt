@@ -88,7 +88,6 @@ class CheckOutActivity :AppCompatActivity() {
         var anioS:String=fechaActual.year.toString()
 
 
-
         spinnerDiaEntrada.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val diaP = parent?.getItemAtPosition(position)
@@ -100,7 +99,13 @@ class CheckOutActivity :AppCompatActivity() {
                 val fechaFinal = format.parse("$diaS-$mesS-$anioS")
                 val monto = calcularMontoTotal(priceByNight!!,fechaInicial,fechaFinal)
                 Log.d("monto a pagar",monto.toString())
-                tb_monto_final.setText(monto.toString())
+
+
+                if(monto > 0){
+                    tbMontoTotal.setText("$monto")
+                }else{
+                    tbMontoTotal.setText("$priceByNight")
+                }
 
             }
 
@@ -165,6 +170,19 @@ class CheckOutActivity :AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val diaP = parent?.getItemAtPosition(position)
                 diaS = diaP.toString()
+
+                val format = SimpleDateFormat("dd-MM-yyyy",Locale.getDefault())
+                val fechaInicial = format.parse("$diaE-$mesE-$anioE")
+                val fechaFinal = format.parse("$diaS-$mesS-$anioS")
+                val monto = calcularMontoTotal(priceByNight!!,fechaInicial,fechaFinal)
+
+                Log.d("monto a pagar",monto.toString())
+                if(monto > 0){
+                    tbMontoTotal.setText("$monto")
+                }else{
+                    tbMontoTotal.setText("$priceByNight")
+                }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -242,7 +260,11 @@ class CheckOutActivity :AppCompatActivity() {
 
             val fechaSalida = anioS.toString()+"-"+mesS.toString()+"-"+diaS.toString()+"T00:00:00.000Z"
 
-            val montoPagar = this.tb_monto_final.text.toString().toInt()
+           // val montoPagarF = this.tb_monto_final.text.toString().toFloat()
+            //val montoPagar = montoPagarF.toInt()
+            val montoPagar = this.tb_monto_final.text.toString().toFloat().toInt()
+
+
             val traeAlim = this.cb_dejar_comida.isChecked
 
             val descrpAlim = this.tb_descripcion_comida.text.toString()

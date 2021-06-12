@@ -178,8 +178,7 @@ class addPet : AppCompatActivity(){
                                 pbAgregarMascota.visibility=View.GONE
                                 Toast.makeText(applicationContext,"Se agrego su mascota de forma exitosa!", Toast.LENGTH_SHORT).show()
                             }
-                            val registerActivity = Intent(applicationContext, MisMascotasActivity::class.java)
-                            startActivity(registerActivity)
+                           finish()
 
                         }
 

@@ -31,5 +31,7 @@ class ReservacionLista(
         val hogarNombre:String,
         val propietariaNombre:String,
         val montoTotal:Double,
-        val estatus:String
+        val estatus:String,
+        val fechaEntrada: String,
+        val fechaSalida: String
 )

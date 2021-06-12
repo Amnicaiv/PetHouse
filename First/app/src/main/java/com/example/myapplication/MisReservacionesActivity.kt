@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.AdapterView
@@ -8,6 +9,7 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Models.ReservacionLista
+import kotlinx.android.synthetic.main.layout_misreservaciones.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -60,9 +62,11 @@ class MisReservacionesActivity : AppCompatActivity() {
                             val propietariaNombre = reservJson.getJSONObject(i).getString("propietariaNombre")
                             val montoTotal = reservJson.getJSONObject(i).getDouble("montoTotal")
                             val estatus = reservJson.getJSONObject(i).getString("estatus")
+                            val fechaE = reservJson.getJSONObject(i).getString("fechaEntrada")
+                            val fechaS = reservJson.getJSONObject(i).getString("fechaSalida")
 
 
-                            val reservacion = ReservacionLista(id,hogarNombre,propietariaNombre,montoTotal,estatus)
+                            val reservacion = ReservacionLista(id,hogarNombre,propietariaNombre,montoTotal,estatus,fechaE,fechaS)
 
                             listaReservaciones.add(reservacion)
 
@@ -78,6 +82,14 @@ class MisReservacionesActivity : AppCompatActivity() {
 
                         lista.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
                             Toast.makeText(applicationContext,listaReservaciones.get(id.toInt()).toString(),Toast.LENGTH_LONG).show()
+
+                            val ticketActivity = Intent(applicationContext, Ticket::class.java)
+                            ticketActivity.putExtra("RES_DESC", listaReservaciones[id.toInt()].hogarNombre )
+                            ticketActivity.putExtra("RES_PROP", listaReservaciones[id.toInt()].propietariaNombre)
+                            ticketActivity.putExtra("RES_TOTAL", listaReservaciones[id.toInt()].montoTotal)
+                            ticketActivity.putExtra("RES_FECHAE", listaReservaciones[id.toInt()].fechaEntrada)
+                            ticketActivity.putExtra("RES_FECHAS", listaReservaciones[id.toInt()].fechaSalida)
+                            startActivity(ticketActivity)
                         }
 
                     }catch (e: Exception){
@@ -88,6 +100,9 @@ class MisReservacionesActivity : AppCompatActivity() {
 
         })
 
+        this.btn_addpet_regresar3.setOnClickListener{
+            finish()
+        }
 
     }
 }

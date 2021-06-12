@@ -32,7 +32,6 @@ class InformacionUsuario : AppCompatActivity() {
 
         val url = "https://patoparra.com/api/cliente/getfromusername?username=$nick"
 
-        Toast.makeText(applicationContext, nick.toString(), Toast.LENGTH_SHORT).show()
 
         var client = OkHttpClient()
         var request = OkHttpRequest(client)
