@@ -14,6 +14,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="32dp"
         android:text="Hogar #"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,10 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
         android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <TextView
         android:id="@+id/textView30"
@@ -48,6 +51,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
         android:text="TextView"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +66,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toTopOf="@+id/textView32" />
@@ -70,10 +75,11 @@
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="32dp"
         android:text="Costo por noche $"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView30"
         app:layout_constraintTop_toBottomOf="@+id/tv_prop" />
 
@@ -85,6 +91,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="32dp"
         android:text="Propietario"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_img_lista" />
 
@@ -97,6 +104,8 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView34"
         app:layout_constraintTop_toTopOf="@+id/textView34" />

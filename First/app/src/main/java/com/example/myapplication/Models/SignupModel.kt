@@ -16,3 +16,23 @@ data class SignupModel(
     var password:String? = null,
     var imagenPerfil:String?=null
 )
+
+data class UpdateModel(
+        var id:String?=null,
+        var name:String? = "",
+        var pLastName:String? = "",
+        var mLastName:String? = "",
+        var birthDate:String? = "",
+        var street:String? = "",
+        var noExt:String? = "",
+        var noInt:String? = "",
+        var postalCode:String? = "",
+        var ciudadId:Int = 3,
+        var userName:String? = "",
+        var email:String? = "",
+        var phoneNumber:String? = "",
+        var passwordHash:String? = "",
+        var imagenPerfil:String?=""
+)
+
+

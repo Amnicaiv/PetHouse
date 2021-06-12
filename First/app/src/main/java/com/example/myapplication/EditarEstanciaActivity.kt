@@ -9,7 +9,10 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
+import com.example.myapplication.Models.HouseModel
 import kotlinx.android.synthetic.main.layout_editar_residencia.*
+import kotlinx.android.synthetic.main.layout_petinfo.*
 import kotlinx.android.synthetic.main.layout_registroresidencia.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -26,6 +29,9 @@ class EditarEstanciaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_editar_residencia);
 
+        val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
+        val userId = prefs.getString("id","")
+
         val pbLoading = findViewById<ProgressBar>(R.id.pb_editar_hogar)
         val btnRegresar  = findViewById<ImageView>(R.id.btn_editar_hogar_regresar)
         val tbDescripcion = findViewById<TextView>(R.id.tb_descripcion_edit)
@@ -38,6 +44,7 @@ class EditarEstanciaActivity : AppCompatActivity() {
         val btnImg1 = findViewById<Button>(R.id.btn_editar_imagen)
         val btnImg2 = findViewById<Button>(R.id.btn_editar_imagen2)
         val btnImg3 = findViewById<Button>(R.id.btn_agregar_imagen3_edit)
+        val btnEditar = findViewById<Button>(R.id.btn_editar_solicitud)
 
         tbDescripcion.isEnabled =false
         tbCapacidad.isEnabled=false
@@ -104,7 +111,7 @@ class EditarEstanciaActivity : AppCompatActivity() {
         btnImg2.setOnClickListener{
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
-                startActivityForResult(takePictureIntent, 1)
+                startActivityForResult(takePictureIntent, 2)
             } catch (e: ActivityNotFoundException) {
                 // display error state to the user
             }
@@ -113,7 +120,7 @@ class EditarEstanciaActivity : AppCompatActivity() {
         btnImg3.setOnClickListener{
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
-                startActivityForResult(takePictureIntent, 1)
+                startActivityForResult(takePictureIntent, 3)
             } catch (e: ActivityNotFoundException) {
                 // display error state to the user
             }
@@ -121,6 +128,72 @@ class EditarEstanciaActivity : AppCompatActivity() {
 
         btnRegresar.setOnClickListener {
             finish()
+        }
+
+
+        var esEdicion=false;
+        btnEditar.setOnClickListener {
+            esEdicion = !esEdicion
+
+            if(esEdicion)
+            {
+                tbDescripcion.isEnabled =true
+                tbCapacidad.isEnabled=true
+                cbCuentaMascotas.isEnabled=true
+                tbPrecioPorNoche.isEnabled=true
+                btnImg1.isEnabled=true
+                btnImg2.isEnabled=true
+                btnImg3.isEnabled=true
+            }
+            else
+            {
+                pbLoading.visibility = View.VISIBLE
+
+
+                var url="https://patoparra.com/api/Hogar/Update/$homeId"
+
+                val encoder = ImageParser()
+                var bitmap = tbImg1.drawable.toBitmap()
+                var bitmap2 = tbImg2.drawable.toBitmap()
+                var bitmap3 = tbImg3.drawable.toBitmap()
+                val imageString = encoder.convert(bitmap)
+                val imageString2 = encoder.convert(bitmap2)
+                val imageString3 = encoder.convert(bitmap3)
+
+                val hogarNuevo = HouseModel(userId,
+                        tbDescripcion.text.toString(),
+                        tbPrecioPorNoche.text.toString().toDouble(),
+                        tbCapacidad.text.toString().toInt(),
+                        cbCuentaMascotas.isEnabled,true,true,false,
+                        "2021-06-03T18:30:40.299Z",imageString,imageString2,imageString3)
+
+
+                request.updateHome(url,hogarNuevo,object:Callback{
+                    override fun onFailure(call: Call, e: IOException) {
+                        runOnUiThread {
+                            pbLoading.visibility=View.GONE
+                            Toast.makeText(applicationContext,e.message,Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        runOnUiThread {
+                            pbLoading.visibility=View.GONE
+                            Toast.makeText(applicationContext,"Hogar actualizado",Toast.LENGTH_SHORT).show()
+                        }
+                        finish()
+                    }
+
+                })
+
+                tbDescripcion.isEnabled =false
+                tbCapacidad.isEnabled=false
+                cbCuentaMascotas.isEnabled=false
+                tbPrecioPorNoche.isEnabled=false
+                btnImg1.isEnabled=false
+                btnImg2.isEnabled=false
+                btnImg3.isEnabled=false
+            }
         }
 
     }

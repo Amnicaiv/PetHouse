@@ -6,123 +6,561 @@
     android:layout_height="match_parent"
     android:background="#29708C">
 
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="28dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Regresar"
-        android:textSize="24sp"
-        app:backgroundTint="#FF6161"
-        app:cornerRadius="0dp"
-        app:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/btn_editarusuario_regresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="right"
+        android:text="Mi Perfil"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btn_editarusuario_regresar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView9"
         android:layout_width="0dp"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView18"
-                android:layout_width="307dp"
-                android:layout_height="116dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/logo_largo2" />
+                android:id="@+id/iv_imagen_perfil_edit"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="12dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_baseline_person_24" />
 
-            <ImageView
-                android:id="@+id/imageView16"
-                android:layout_width="382dp"
-                android:layout_height="260dp"
-                android:layout_marginTop="70dp"
-                android:background="#D1D1D1"
-                android:baselineAlignBottom="false"
-                android:clickable="false"
-                android:src="@android:drawable/divider_horizontal_dark"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.551"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView18"
-                app:srcCompat="@android:drawable/divider_horizontal_dark"
-                tools:src="@android:drawable/divider_horizontal_dark"
-                tools:srcCompat="@android:drawable/divider_horizontal_dark" />
-
-            <TextView
-                android:id="@+id/tvDataGroup1"
+            <Button
+                android:id="@+id/btn_profile_img_edit"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:padding="5dp"
-                android:text="Informacion de Usuario"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView16" />
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:background="#009688"
+                android:text="Seleccionar..."
+                app:backgroundTint="#009685" />
 
             <TextView
-                android:id="@+id/tbEmailSignup"
-                android:layout_width="270dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
+                android:id="@+id/textView48"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Nombre"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txt_nombre_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
                 android:ems="10"
-                android:hint="@string/tb_templateEmail"
+                android:fontFamily="sans-serif-light"
+                android:hint="Nombre(s)"
                 android:inputType="textPersonName"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDataGroup1" />
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tbPasswordSignup"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="270dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="16dp"
-                android:background="#FFFFFF"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tbEmailSignup" />
+                android:id="@+id/tv_error_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
 
             <TextView
-                android:id="@+id/tbConfirmedPassword"
-                android:layout_width="270dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="16dp"
-                android:background="#FFFFFF"
-                android:ems="10"
-                android:hint="@string/tb_templateConfirmPassword"
-                android:inputType="text"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tbPasswordSignup" />
+                android:id="@+id/textView49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Apellido Paterno"
+                android:textSize="16sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/txt_apPaterno_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:fontFamily="sans-serif-light"
+                android:hint="Apellido Paterno"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_apPaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Apellido Materno"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txt_apMaterno_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:fontFamily="sans-serif-light"
+                android:hint="Apellido Materno"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_apMaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Fecha de Nacimiento"
+                android:textSize="18sp" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/spinner_dia_edit"
+                        android:layout_width="318dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:entries="@array/dias_array" />
+
+                    <Spinner
+                        android:id="@+id/spinner_mes_edit"
+                        android:layout_width="352dp"
+                        android:layout_height="38dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:entries="@array/meses" />
+
+                    <Spinner
+                        android:id="@+id/spinner_anio_edit"
+                        android:layout_width="341dp"
+                        android:layout_height="39dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:entries="@array/anios" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <TextView
+                android:id="@+id/tv_error_fechaNacimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Dirección"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txt_direccion_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="20pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:ems="10"
+                android:fontFamily="sans-serif-light"
+                android:hint="Dirección"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_direccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txt_noExt_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="No. Ext"
+                        android:inputType="textPersonName"
+                        android:textSize="24sp" />
+
+                    <EditText
+                        android:id="@+id/txt_noInt_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="No. Int"
+                        android:inputType="textPersonName"
+                        android:textSize="24sp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <EditText
+                android:id="@+id/txt_codigoPostal_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:ems="10"
+                android:hint="Código Postal"
+                android:inputType="number"
+                android:maxLength="5"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_codigoPostal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Ciudad"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinner_ciudad_edit"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:entries="@array/ciudades"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                android:id="@+id/tv_error_ciudad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/txt_telefono_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:ems="10"
+                android:hint="Telefóno Celular"
+                android:inputType="phone"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Nombre de usuario"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txt_nombreUsuario_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="20pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:ems="10"
+                android:hint="Nombre de Usuario"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_nombreUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/txt_correoElectronico_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:ems="10"
+                android:hint="Correo Electrónico"
+                android:inputType="textEmailAddress"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_correoElectronico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/txt_contrasena_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/txt_confirmacionContrasena_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Repetir Contraseña"
+                android:inputType="textPassword"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_error_confirmacionContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:textColor="#F44336"
+                tools:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="30pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:text='Al presionar el botón "Registrarme", usted acepta los terminos y condiciones especificados por la asociación de miembros Pethouse, así como nuestra política de privacidad' />
+
+            <TextView
+                android:id="@+id/txt_error_general"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="40pt"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:textColor="#F44336"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/pb_editar_info_usuario"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_signup2"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Editar"
+        android:textSize="28sp"
+        app:backgroundTint="@color/teal_700"
+        app:cornerRadius="0dp"
+        app:elevation="0dp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

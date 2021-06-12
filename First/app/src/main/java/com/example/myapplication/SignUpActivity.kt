@@ -3,16 +3,9 @@ package com.example.myapplication
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Looper
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.Selection
-import android.text.Spannable
-import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -27,10 +20,8 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 
 

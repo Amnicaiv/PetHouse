@@ -69,6 +69,34 @@ class OkHttpRequest(client:OkHttpClient) {
         return call
     }
 
+    fun updateUser(url:String, updatedUser:UpdateModel, callback: Callback):Call{
+        val updatedUserJson = Gson().toJson(updatedUser)
+
+        val formBody = RequestBody.create(JSON,updatedUserJson.toString())
+        val request = Request.Builder()
+                .url(url)
+                .put(formBody)
+                .build()
+
+        val call = client.newCall(request)
+        call.enqueue(callback)
+        return call
+    }
+
+    fun updateHome(url:String, hogarNuevo:HouseModel, callback: Callback):Call{
+        val updatedUserJson = Gson().toJson(hogarNuevo)
+
+        val formBody = RequestBody.create(JSON,updatedUserJson.toString())
+        val request = Request.Builder()
+                .url(url)
+                .put(formBody)
+                .build()
+
+        val call = client.newCall(request)
+        call.enqueue(callback)
+        return call
+    }
+
     fun getUser(url:String, callback:Callback):Call{
         val request = Request.Builder()
             .url(url)

@@ -20,8 +20,8 @@ class Ticket : AppCompatActivity(){
 
         this.ET_DescpHogar_Ticket.setText(descripcion)
         this.ET_Propietaria_Ticket.setText(propietario)
-        this.ET_FechaEntrada_Ticket.setText(fechaEntrada)
-        this.ET_FechaSalida_Ticket.setText(fechaSalida)
+        this.ET_FechaEntrada_Ticket.setText(fechaEntrada.toString().substring(0,10))
+        this.ET_FechaSalida_Ticket.setText(fechaSalida.toString().substring(0,10))
         this.ET_Total_Ticket.setText(totalPagado.toString())
 
         this.ET_DescpHogar_Ticket.isEnabled = false

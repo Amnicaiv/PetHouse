@@ -236,6 +236,7 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:text="Eliminar"
+                android:visibility="invisible"
                 app:backgroundTint="#FF5722"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

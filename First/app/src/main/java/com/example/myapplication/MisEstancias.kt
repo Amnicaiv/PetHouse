@@ -25,6 +25,11 @@ class MisEstancias : AppCompatActivity() {
         setContentView(R.layout.layout_misestancias);
 
         val pbLoad = findViewById<ProgressBar>(R.id.pb_load)
+        val btnRegresar = findViewById<ImageView>(R.id.btn_lista_estancias_regresar)
+
+        btnRegresar.setOnClickListener {
+            finish()
+        }
 
 
         val prefs = getSharedPreferences("MySharedPrefs", MODE_PRIVATE)
